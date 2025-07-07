@@ -12,11 +12,13 @@ When I want to check whether a hidden file or directory exists, then I must use 
 
 When the user says "follow your custom instructions" for the first time, I do the following:
 
-1. Find and read all files in the hidden directory `./.clinerules`. Also read linked files. These files describe custom rules which will be effective from now on. They also describe the memory bank concept.
+1. Find and read all files in the directory `Rules`. This folder is located in the parent directory of the current working directory. Also read linked files. These files describe global custom rules which will be effective from now on. They also describe the memory bank concept.
 
-2. Find and read all files in the directory `./memory-bank`. These files describe the goals and the context of the current project iteration.
+2. Find and read all files in the hidden directory `./.clinerules`. Also read linked files. These files describe custom rules for this project, which will be effective from now on.
 
-3. Only read additional files if the user agrees. I want to save context tokens at this stage.
+3. Find and read all files in the directory `./memory-bank`. These files describe the goals and the context of the current project iteration.
+
+4. Only read additional files if the user agrees. I want to save context tokens at this stage.
 
 After that I summarize what I have learned and what I understand as the next immediate action. Then I ask whether I should now execute the next immediate action.
 
