@@ -8,7 +8,7 @@ Dieser Ordner entspricht dem `Cline` Ordner aus (1).
 
 Hier werden die allgemein gültigen Regeln für diverse Coding Agents definiert.
 
-Meine aktiven Projekte sind git Subrepositories in diesem Ordner.
+Meine aktiven Projekte sind git Submodules in diesem Ordner.
 
 ## Referenzen
 
