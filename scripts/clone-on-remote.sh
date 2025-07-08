@@ -12,8 +12,6 @@ ln -s $HOME/Documents/ai-agent-workspace Cline
 echo ""
 
 # Clone the remaining repositories into the AI Agent Workspace
-
-# Walk through all repositories in the AI Agent Workspace and clone them
 for SOURCE in $HOME/Documents/*.git; do
     echo "===== $SOURCE ====="
     

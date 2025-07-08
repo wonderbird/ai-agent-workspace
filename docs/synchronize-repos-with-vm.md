@@ -6,12 +6,12 @@ This allows making changes remotely and getting them back to the working reposit
 
 ## On your desktop computer: Copy the working repository to a remote server
 
-Configure the exported environment variables in the script [/scripts/create-remote-repositories.sh](../scripts/create-remote-repositories.sh)
+Configure the exported environment variables in the script [/scripts/sync-repositories-to-remote.sh](../scripts/sync-repositories-to-remote.sh)
 
 Copy the workspace to the remote:
 
 ```shell
-./scripts/create-remote-repositories.sh
+./scripts/sync-repositories-to-remote.sh
 ```
 
 ## On the remote computer: Make changes to the repository

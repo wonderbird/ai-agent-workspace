@@ -11,15 +11,18 @@
 #
 # ./create-remote-repository.sh
 #
+#
+#
 set -eEufo pipefail
 
+SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
+
+REMOTE_HOST_NAME="lorien"
 REMOTE_USER=galadriel
-REMOTE_HOST=$(tart ip lorien)
+REMOTE_HOST=$(tart ip "$REMOTE_HOST_NAME")
 REMOTE_TARGET="/home/galadriel/Documents"
 
 # List of repositories to be cloned
-# - $HOME/source/ai-agent-workspace
-# - $HOME/source/ansible-all-my-things
 REPOSITORIES=(
     "$HOME/source/ai-agent-workspace"
 )
@@ -53,8 +56,16 @@ done
 
 echo "===== Cloning working directories on remote ====="
 echo "Copying clone-on-remote.sh script to remote ..."
-rsync -az --delete --delete-during "$(dirname "$0")/clone-on-remote.sh" "$REMOTE_USER@$REMOTE_HOST:$REMOTE_TARGET"
-echo ""
+rsync -az --delete --delete-during "$SCRIPT_DIR/clone-on-remote.sh" "$REMOTE_USER@$REMOTE_HOST:$REMOTE_TARGET"
 
 echo "Running clone-on-remote.sh script on remote ..."
+echo ""
 ssh "$REMOTE_USER@$REMOTE_HOST" "cd $REMOTE_TARGET && ./clone-on-remote.sh"
+echo ""
+
+echo "===== Configuring remote $REMOTE_HOST_NAME ====="
+for REPO in "${REPOSITORIES[@]}"; do
+    REPOSITORY_NAME=$(basename "$REPO")
+    cd "$REPO"
+    git remote add "$REMOTE_HOST_NAME" "ssh://$REMOTE_USER@$REMOTE_HOST:$REMOTE_TARGET/$REPOSITORY_NAME.git"
+done
