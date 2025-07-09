@@ -7,14 +7,16 @@ shopt -s failglob
 
 # Setup the AI Agent Workspace and configure Cline Bot to use it
 echo "===== Setting up AI Agent Workspace ====="
-git clone $HOME/Documents/ai-agent-workspace.git $HOME/Documents/ai-agent-workspace > /dev/null 2>&1
+echo "Cloning bare repository ..."
+git clone $HOME/Documents/ai-agent-workspace.git $HOME/Documents/ai-agent-workspace >/dev/null 2>&1
+echo "Creating Cline Bot workspace symlink ..."
 ln -s $HOME/Documents/ai-agent-workspace Cline
 echo ""
 
 # Clone the remaining repositories into the AI Agent Workspace
 for SOURCE in $HOME/Documents/*.git; do
-    echo "===== $SOURCE ====="
-    
+    echo "===== $(basename $SOURCE .git) ====="
+
     # Skip if the source is not a directory, does not exist or is ai-agent-workspace.git
     if [ ! -d "$SOURCE" ] || [ ! -e "$SOURCE" ] || [ "$SOURCE" == "$HOME/Documents/ai-agent-workspace.git" ]; then
         echo "Skipping this repository ..."
@@ -29,7 +31,7 @@ for SOURCE in $HOME/Documents/*.git; do
     fi
 
     echo "Cloning bare repository ..."
-    git clone "$SOURCE" "$TARGET" > /dev/null 2>&1
+    git clone "$SOURCE" "$TARGET" >/dev/null 2>&1
 
     echo ""
 

@@ -22,6 +22,9 @@ REMOTE_USER=galadriel
 REMOTE_HOST=$(tart ip "$REMOTE_HOST_NAME")
 REMOTE_TARGET="/home/galadriel/Documents"
 
+# Ensure the remote target directory exists
+ssh "$REMOTE_USER@$REMOTE_HOST" "mkdir -p $REMOTE_TARGET"
+
 # List of repositories to be cloned
 REPOSITORIES=(
     "$HOME/source/ai-agent-workspace"
@@ -43,7 +46,7 @@ for REPO in "${REPOSITORIES[@]}"; do
 
     echo "Creating temporary bare repository ..."
     TEMP_BARE_REPO=$(mktemp -d)/$REPOSITORY_NAME.git
-    git clone --bare "$REPO" "$TEMP_BARE_REPO" > /dev/null 2>&1
+    git clone --bare "$REPO" "$TEMP_BARE_REPO" >/dev/null 2>&1
 
     echo "Copying bare repository to remote ..."
     rsync -az --delete --delete-during "$TEMP_BARE_REPO" "$REMOTE_USER@$REMOTE_HOST:$REMOTE_TARGET"
@@ -61,11 +64,19 @@ rsync -az --delete --delete-during "$SCRIPT_DIR/clone-on-remote.sh" "$REMOTE_USE
 echo "Running clone-on-remote.sh script on remote ..."
 echo ""
 ssh "$REMOTE_USER@$REMOTE_HOST" "cd $REMOTE_TARGET && ./clone-on-remote.sh"
-echo ""
 
 echo "===== Configuring remote $REMOTE_HOST_NAME ====="
 for REPO in "${REPOSITORIES[@]}"; do
     REPOSITORY_NAME=$(basename "$REPO")
-    cd "$REPO"
-    git remote add "$REMOTE_HOST_NAME" "ssh://$REMOTE_USER@$REMOTE_HOST:$REMOTE_TARGET/$REPOSITORY_NAME.git"
+
+    echo "Configuring remote for $REPOSITORY_NAME ..."
+
+    echo "  Checking if remote already exists ..."
+    if git -C "$REPO" remote get-url "$REMOTE_HOST_NAME" &>/dev/null; then
+        echo "  Removing remote ..."
+        git -C "$REPO" remote remove "$REMOTE_HOST_NAME"
+    fi
+
+    echo "  Configuring new remote ..."
+    git -C "$REPO" remote add "$REMOTE_HOST_NAME" "ssh://$REMOTE_USER@$REMOTE_HOST:$REMOTE_TARGET/$REPOSITORY_NAME.git"
 done

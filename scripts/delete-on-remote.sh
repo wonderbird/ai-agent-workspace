@@ -6,13 +6,21 @@ set -eEuo pipefail
 shopt -s failglob
 
 # Remove the AI Agent Workspace
-rm -f $HOME/Documents/Cline
-rm -rf $HOME/Documents/ai-agent-workspace
+echo "===== Removing AI Agent Workspace ====="
+
+echo "Removing Cline Bot workspace symlink ..."
+rm -f "$HOME/Documents/Cline"
+
+echo "Removing actual workspace ..."
+rm -rf "$HOME/Documents/ai-agent-workspace"
+
+echo ""
 
 # Remove all remaining repositories
-for SOURCE in $HOME/Documents/*.git; do
-    echo "===== $SOURCE ====="
-    
+echo "===== Removing bare repositories ====="
+for SOURCE in "$HOME/Documents/"*.git; do
+    basename "$SOURCE"
+
     # Skip if the source is not a directory or does not exist
     if [ ! -d "$SOURCE" ] || [ ! -e "$SOURCE" ]; then
         echo "Skipping this repository ..."
@@ -20,8 +28,8 @@ for SOURCE in $HOME/Documents/*.git; do
         continue
     fi
 
-    echo "Removing bare repository ..."
+    echo "  Removing bare repository ..."
     rm -rf "$SOURCE"
-
-    echo ""
 done
+
+echo ""

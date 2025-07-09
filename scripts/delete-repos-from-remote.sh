@@ -34,17 +34,17 @@ while IFS= read -r line; do
 done < ".gitmodules"
 
 # Remove remote entries in local repositories
+echo "===== Removing remote entries in local repositories ====="
 for REPO in "${REPOSITORIES[@]}"; do
     REPOSITORY_NAME=$(basename "$REPO")
 
-    echo "===== $REPOSITORY_NAME ====="
+    echo "$REPOSITORY_NAME"
 
-    echo "Removing remote entry from local repository ..."
+    echo "  Removing remote entry ..."
     if [ -d "$REPO" ]; then
-        cd "$REPO" || continue
-        git remote remove "$REMOTE_HOST_NAME"
+        git -C "$REPO" remote remove "$REMOTE_HOST_NAME"
     else
-        echo "Repository does not exist. Skipping."
+        echo "  Repository does not exist. Skipping ..."
     fi
 
     echo ""
@@ -57,12 +57,7 @@ rsync -az --delete --delete-during "$SCRIPT_DIR/delete-on-remote.sh" "$REMOTE_US
 echo "Running delete-on-remote.sh script on remote ..."
 echo ""
 ssh "$REMOTE_USER@$REMOTE_HOST" "cd $REMOTE_TARGET && ./delete-on-remote.sh"
-echo ""
 
-echo "===== Deleting scripts from remote ====="
-ssh "$REMOTE_USER@$REMOTE_HOST" "rm -f $REMOTE_TARGET/clone-on-remote.sh"
-ssh "$REMOTE_USER@$REMOTE_HOST" "rm -f $REMOTE_TARGET/delete-on-remote.sh"
-echo ""
-
-echo "===== Deleting remote ai-agent-workspace ====="
-ssh "$REMOTE_USER@$REMOTE_HOST" "rm -rf $REMOTE_TARGET/ai-agent-workspace"
+echo "===== Cleaning up on remote ====="
+echo "Removing shell scripts ..."
+ssh "$REMOTE_USER@$REMOTE_HOST" "rm -vf $REMOTE_TARGET/clone-on-remote.sh $REMOTE_TARGET/delete-on-remote.sh"

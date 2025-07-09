@@ -1,4 +1,0 @@
-build
-hatch
-pytest
-pytest-watcher
