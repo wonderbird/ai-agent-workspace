@@ -63,4 +63,6 @@ I use the `--no-pager` flag before any other parameter when requesting git histo
 
 ## Code style
 
+**Linebreak at end of file:** I always make sure that every file I change has a linebreak at its end.
+
 **Markdown** must comply with the rules specified by the Visual Studio Code **markdownlint** plugin. These rules are maintained here: https://raw.githubusercontent.com/DavidAnson/markdownlint/refs/heads/main/doc/Rules.md
