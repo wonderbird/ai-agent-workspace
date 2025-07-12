@@ -11,13 +11,24 @@
 #
 # Usage
 #
-# ./delete-repos-from-remote.sh
+# ./delete-repos-from-remote.sh HOST_IP_ADDRESS
+#
+# Parameters
+#
+#   HOST_IP_ADDRESS  The IP address of the remote host on which the repositories
+#                    should be deleted.
 #
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
 
+# Get remote host IP from command line
+if [ -z "$1" ]; then
+    echo "Usage: $0 HOST_IP_ADDRESS"
+    exit 1
+fi
+
+REMOTE_HOST="$1"
 REMOTE_HOST_NAME="lorien"
 REMOTE_USER=galadriel
-REMOTE_HOST=$(tart ip "$REMOTE_HOST_NAME")
 REMOTE_TARGET="/home/galadriel/Documents"
 
 # List of repositories to be deleted

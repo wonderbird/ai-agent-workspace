@@ -9,17 +9,26 @@
 #
 # Usage
 #
-# ./create-remote-repository.sh
+# ./create-remote-repository.sh HOST_IP_ADDRESS
 #
+# Parameters
 #
+#   HOST_IP_ADDRESS  The IP address of the remote host to which the repositories
+#                    are synced.
 #
 set -eEufo pipefail
 
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
 
+# Get remote host IP from command line
+if [ -z "$1" ]; then
+    echo "Usage: $0 HOST_IP_ADDRESS"
+    exit 1
+fi
+
+REMOTE_HOST="$1"
 REMOTE_HOST_NAME="lorien"
 REMOTE_USER=galadriel
-REMOTE_HOST=$(tart ip "$REMOTE_HOST_NAME")
 REMOTE_TARGET="/home/galadriel/Documents"
 
 # Ensure the remote target directory exists
