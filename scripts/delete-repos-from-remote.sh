@@ -18,7 +18,12 @@
 #   HOST_IP_ADDRESS  The IP address of the remote host on which the repositories
 #                    should be deleted.
 #
+# Example
+#
+#   pushd ~/source/ai-agent-workspace/scripts && ./delete-repos-from-remote.sh "$IPV4_ADDRESS"; popd
+#
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
+PARENT_DIR=$(dirname "$SCRIPT_DIR")
 
 # Get remote host IP from command line
 if [ -z "$1" ]; then
@@ -33,27 +38,30 @@ REMOTE_TARGET="/home/galadriel/Documents"
 
 # List of repositories to be deleted
 REPOSITORIES=(
-    "$HOME/source/ai-agent-workspace"
+    "$PARENT_DIR"
 )
 
+# TODO: Scripts in this directory should become a python program, e.g. `agents up`, `agents down`, `agents sync` (or `agents clone`), `agents delete`
+# TODO: Cure duplication here and in the corresponding script (but consider the previous todo first)
 # Add git submodules to the list of repositories
 while IFS= read -r line; do
     if [[ $line == \[submodule* ]]; then
-        REPO_NAME=$(echo "$line" | sed 's/\[submodule "\(.*\)"\]/\1/')
-        REPOSITORIES+=("$REPO_NAME")
+        REPOSITORY_NAME=$(echo "$line" | sed 's/\[submodule "\(.*\)"\]/\1/')
+        REPOSITORY_PATH="$PARENT_DIR/$REPOSITORY_NAME"
+        REPOSITORIES+=("$REPOSITORY_PATH")
     fi
-done < ".gitmodules"
+done < "$PARENT_DIR/.gitmodules"
 
 # Remove remote entries in local repositories
 echo "===== Removing remote entries in local repositories ====="
-for REPO in "${REPOSITORIES[@]}"; do
-    REPOSITORY_NAME=$(basename "$REPO")
+for REPOSITORY_PATH in "${REPOSITORIES[@]}"; do
+    REPOSITORY_NAME=$(basename "$REPOSITORY_PATH")
 
     echo "$REPOSITORY_NAME"
 
     echo "  Removing remote entry ..."
-    if [ -d "$REPO" ]; then
-        git -C "$REPO" remote remove "$REMOTE_HOST_NAME"
+    if [ -d "$REPOSITORY_PATH" ]; then
+        git -C "$REPOSITORY_PATH" remote remove "$REMOTE_HOST_NAME"
     else
         echo "  Repository does not exist. Skipping ..."
     fi
