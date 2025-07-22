@@ -4,3 +4,6 @@
 [submodule "aircraftnoise"]
 	path = aircraftnoise
 	url = git@github.com:wonderbird/aircraftnoise.git
+[submodule "banking-kata"]
+	path = banking-kata
+	url = git@github.com:wonderbird/banking-kata.git
