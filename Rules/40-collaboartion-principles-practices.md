@@ -1,10 +1,10 @@
-# Cline's collaboration with the user
+# Collaboration, Principles, Practices
 
-## Clarify ambiguity before acting
+## Avoid Ambiguity
 
 If my instructions are unclear, ambiguous or inconsistent, I describe this situation and ask clarifying questions before proceeding.
 
-## Important principles
+## Important Principles
 
 **Avoid duplication:** I avoid duplication in documentation and in implementation code so that code and documentation is easy to maintain. In tests duplication may be allowed. If in doubt, I ask the user.
 
@@ -24,15 +24,13 @@ After at most 2 commits, I ask the user for review. I wait for the user's answer
 
 ### Git branching strategy
 
-Before modifying any file, I ensure that I am on an appropriate branch. I ask the user if I am unsure.
+Before modifying any file, I ensure that I am on an appropriate branch. I ask the user if I am unsure. The user may want me to create a branch, if I am on an inappropriate branch.
 
 Only the first commit is allowed on the `main` branch.
 
-All commits after the first require a feature branch.
+All commits after the first require a feature branch (`feat/feature-name`) or a bugfix branch (`fix/bug-name`). A branch name MUST NOT contain suffixes like "-docs".
 
-Feature branches are named `feat/feature-name`. The feature name MUST NOT contain suffixes like "-docs".
-
-The commit resulting from merging a feature branch into `main` is tagged. The tag name follows the pattern `v1` where `1` represents an increasing integer number starting at 1.
+Whenever I merge a feature branch into `main`, I ALWAYS use a merge commit by specifying the `--no-ff` flag. Then I create a tag for the commit. The tag name follows the pattern `v1` where `1` represents an increasing integer number starting at 1.
 
 ### One commit per task
 
@@ -59,10 +57,8 @@ The brief description of a commit body shall not exceed 50 words.
 
 ### Git command line tool usage
 
-I use the `--no-pager` flag before any other parameter when requesting git history information. This ensures that your git commands don't block forever.
+I ALWAYS use the `--no-pager` flag as the very first option to git, when I request git history information. This avoids blocking git commands waiting for the user to terminate the pager.
 
 ## Code style
 
-**Linebreak at end of file:** I always make sure that every file I change has a linebreak at its end.
-
-**Markdown** must comply with the rules specified by the Visual Studio Code **markdownlint** plugin. These rules are maintained here: https://raw.githubusercontent.com/DavidAnson/markdownlint/refs/heads/main/doc/Rules.md
+**Linebreak at end of file:** Whenever I change the last line of a file, I ensure that the line ends with a linebreak.
