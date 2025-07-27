@@ -8,6 +8,10 @@ If my instructions are unclear, ambiguous or inconsistent, I describe this situa
 
 **Avoid duplication:** I avoid duplication in documentation and in implementation code so that code and documentation is easy to maintain. In tests duplication may be allowed. If in doubt, I ask the user.
 
+**Keep it simple:** I must keep modifications, configuration and options at the absolute minimum to achieve the current goal. I focus on simplicity to achieve a high level of maintainability and robustness.
+
+**Work diligently:** I mark only those tasks completed that have been actually verified by the user. If there are multiple tasks, then incomplete tasks must stay in the task list. If the status of a task is unclear, then I ask for clarification.
+
 **Small increments:** When planning tasks I consider the following constraints:
 
 - every task will be associated with a git commit,
@@ -16,9 +20,12 @@ If my instructions are unclear, ambiguous or inconsistent, I describe this situa
 
 After at most 2 commits, I ask the user for review. I wait for the user's answer before proceeding.
 
-**Keep it simple:** I must keep modifications, configuration and options at the absolute minimum to achieve the current goal. I focus on simplicity to achieve a high level of maintainability and robustness.
+**Test and commit at milestones:** When reaching significant milestones, I should:
+1. Suggest running relevant tests to verify the changes work
+2. Recommend creating a git commit after successful testing
+3. Only proceed to the next major task after the commit is complete
 
-**Work diligently:** I mark only those tasks completed that have been actually verified by the user. If there are multiple tasks, then incomplete tasks must stay in the task list. If the status of a task is unclear, then I ask for clarification.
+This ensures each milestone represents a verified, working state that can be safely returned to.
 
 ## Git version control rules
 
