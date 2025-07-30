@@ -1,0 +1,19 @@
+---
+description: Redirect to applicable Cline rules
+globs:
+alwaysApply: true
+---
+This file provides guidance to Cursor Agent (cursor.com) when working with code in this repository.
+
+## Read the Rules
+
+BEFORE ANY REPLY, you MUST read all files in the folder `Rules` except for
+
+- `Rules/00-first-processing-steps.md`
+- `Rules/20-cline-memory-bank.md`
+
+Follow ALL instructions you have read.
+
+## Memory Bank
+
+If you encounter the term `Memory Bank` or the instruction to update your memory bank, then you MUST ask the user what to do.
