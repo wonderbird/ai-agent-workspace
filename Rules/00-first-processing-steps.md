@@ -12,13 +12,13 @@ You will ONLY read files inside the other projects, if the user explicitly asks 
 
 ### Project Specific Rules
 
-Next, you search for and read all files in the hidden directory `./.clinerules`. You read also linked files. These files describe custom rules for the project. You MUST consider these rules.
+Next, you search the hidden subdirectory `./clinerules` within the selected project folder. If it exists, you read all contained files and linked files. These files describe custom rules for the project. You MUST consider these rules.
 
 If the rules contain contradications or ambiguities, you MUST inform the user and ask whether you should help clarifying the contradictions or ambiguities.
 
 ### Memory Bank of Current Project
 
-Next, you process the Memory Bank inside the selected project. For this, you search for and read all files in the directory `./memory-bank`. These files describe the goals and the context of the current project iteration.
+Next, you process the Memory Bank inside the selected project. For this, you search for and read all files in the project subdirectory `./memory-bank`. These files describe the goals and the context of the current project iteration.
 
 At this stage, you NEVER read and process more files. You MUST save context tokens at this stage. However, if you have encountered interesting files up to now, then you ask the user whether to read them.
 
