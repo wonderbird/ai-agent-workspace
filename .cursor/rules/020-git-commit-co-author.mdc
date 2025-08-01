@@ -1,0 +1,12 @@
+---
+description: Git Co-Author
+globs:
+alwaysApply: true
+---
+# Git Co-Author
+
+Whenever you create a git commit, you MUST add the following commit footer:
+
+```
+Co-authored-by: Cursor Agent <cursoragent@cursor.com>
+```
