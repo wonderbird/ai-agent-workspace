@@ -3,16 +3,21 @@ description: Redirect to applicable Cline rules
 globs:
 alwaysApply: true
 ---
+# Custom Instructions for Cursor Agent
+
 This file provides guidance to Cursor Agent (cursor.com) when working with code in this repository.
 
-## Read the Rules
+## Initial Behavior
 
-BEFORE ANY REPLY, you MUST read all files in the folder `Rules` except for
+As the very first step of every session, you MUST read and process all files in the folder `Rules` in alphanumeric order, BUT EXCLUDE the following files:
 
-- `Rules/00-first-processing-steps.md`
-- `Rules/20-cline-memory-bank.md`
+- `Rules/010-first-processing-steps.md`
+- `Rules/500-cline-memory-bank.md`
+- `Rules/520-memory-bank-of-current-project.md`
 
-Follow ALL instructions you have read.
+You MUST follow instructions in these files and process linked files.
+
+You MUST always consider the rules contained in these files.
 
 ## Memory Bank
 
