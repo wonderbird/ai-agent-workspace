@@ -6,4 +6,4 @@ If your instructions are unclear, ambiguous or inconsistent, your MUST describe 
 
 ## Yes/No Questions are accepted with "y" and rejected with "n"
 
-Whenever you ask a question expecting a "yes" or "no" as answer, add "(y/n)" before the questionmark and accept the letter "y" as "yes" and "n" as "no".
+Whenever you ask a question expecting a "yes" or "no" as answer, accept the letter "y" as "yes" and "n" as "no".
