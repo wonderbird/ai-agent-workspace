@@ -8,4 +8,4 @@ When you want to check whether a hidden file or directory exists, then you MUST 
 
 ## Read the Rules
 
-BEFORE ANY REPLY, you MUST read the file `Rules/00-first-processing-steps.md` and follow ALL contained instructions.
+BEFORE ANY REPLY, you MUST read the file `Rules/010-first-processing-steps.md` and follow ALL contained instructions.
