@@ -20,6 +20,8 @@ The headline of a `feat:` commit explains the new capability of the project in s
 
 The headline of a `fix:` commit describes the most important symptom of the problem in past tense. The commit message body describes the problem and its root cause. It may also contain the major steps required to fix the problem.
 
+A commit changing only documentation files is always a `docs:` commit, never a `refactor:` commit.
+
 The brief description of a commit body shall not exceed 50 words.
 
 ## One commit per task
