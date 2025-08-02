@@ -32,7 +32,7 @@ if [ -z "$1" ]; then
 fi
 
 REMOTE_HOST="$1"
-REMOTE_HOST_NAME="lorien"
+REMOTE_HOST_NAME="agent"
 REMOTE_USER=galadriel
 REMOTE_TARGET="/home/galadriel/Documents"
 
