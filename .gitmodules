@@ -10,3 +10,6 @@
 [submodule "textual-game-of-life"]
 	path = textual-game-of-life
 	url = git@github.com:wonderbird/textual-game-of-life.git
+[submodule "git-gamble"]
+	path = git-gamble
+	url = git@gitlab.com:wonderbird/git-gamble.git
