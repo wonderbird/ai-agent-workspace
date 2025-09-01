@@ -12,6 +12,14 @@ Whenever you merge a feature branch into `main`, you MUST ALWAYS use a merge com
 
 ## Commit conventions
 
+You must add the following commit footer to all your commits (replace captialized placeholders appropriately):
+
+```
+🤖 Generated with [YOUR_MODEL_NAME](URL_OF_MODEL_VENDOR)
+
+Co-Authored-By: YOUR_MODEL_NAME <NOREPLY_MAIL_ADDRESS_OF_MODEL_VENDOR>
+```
+
 Your commits MUST use one of the following conventional commit prefixes: `feat:`, `fix:`, `refactor:`, `docs:`. If the correct prefix is unclear, ask the user.
 
 All your commits MUST represent a small, coherent and working increment. If these criteria are not met, ask the user how to proceed.
