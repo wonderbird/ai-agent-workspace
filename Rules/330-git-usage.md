@@ -1,5 +1,9 @@
 # Git version control rules
 
+## Git is the source of version and author information
+
+NEVER add version history related information to documents, because git is the trusted source of such information.
+
 ## Git branching strategy
 
 Before modifying any file, you MUST ensure that the current branch is appropriate. You MUST ask the user if you are unsure. The user may want you to create a branch, if you are on an inappropriate branch.
