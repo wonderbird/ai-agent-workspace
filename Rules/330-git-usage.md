@@ -14,15 +14,40 @@ All commits after the first require a feature branch (`feat/feature-name`) or a 
 
 Whenever you merge a feature branch into `main`, you MUST ALWAYS use a merge commit by specifying the `--no-ff` flag.
 
-## Commit conventions
+## Mandatory structure of a commit message
 
-You must add the following commit footer to all your commits (replace captialized placeholders appropriately):
+Commit messages consist of the subject line, the body and the trailers. Trailers are also known as footers.
 
+Only the subject is mandatory. Body and trailers are optional.
+
+Subject, body and trailers MUST be separated by an empty line.
+
+If the commit message consists of only subject and trailers, then the trailers MUST be separated from the subject by two empty lines.
+
+## Name the Coding Agent as Co-Author for commits
+
+If you helped creating the commit, then the Co-Authored-By trailer MUST be added to the commit message. The trailer MUST comply to the format
+
+```text
+Co-authored-by: YOUR_MODEL_NAME <YOUR_EMAIL>
 ```
+
+If a commit body is present, then you MUST add the following line at the end of the body:
+
+```text
 🤖 Generated with [YOUR_MODEL_NAME](URL_OF_MODEL_VENDOR)
-
-Co-Authored-By: YOUR_MODEL_NAME <NOREPLY_MAIL_ADDRESS_OF_MODEL_VENDOR>
 ```
+
+The following valid combinations have been established for the placeholders:
+
+| YOUR_AGENT_NAME | YOUR_VENDOR_URL | YOUR_EMAIL |
+| --- | --- | --- |
+| Cursor Agent (automatic mode) | https://cursor.com/home | cursoragent@cursor.com |
+| Claude Code | https://claude.ai/code | noreply@anthropic.com |
+
+If you are not contained in the valid combinations, then you MUST suggest appropriate values for YOUR_AGENT_NAME, YOUR_VENDOR_URL and YOUR_EMAIL. Show the suggested commit message and ask whether your should proceed.
+
+## Commit conventions
 
 Your commits MUST use one of the following conventional commit prefixes: `feat:`, `fix:`, `refactor:`, `docs:`. If the correct prefix is unclear, ask the user.
 
