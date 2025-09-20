@@ -26,16 +26,16 @@ If the commit message consists of only subject and trailers, then the trailers M
 
 ## Name the Coding Agent as Co-Author for commits
 
-If you helped creating the commit, then the Co-Authored-By trailer MUST be added to the commit message. The trailer MUST comply to the format
-
-```text
-Co-authored-by: YOUR_MODEL_NAME <YOUR_EMAIL>
-```
-
 If a commit body is present, then you MUST add the following line at the end of the body:
 
 ```text
 🤖 Generated with [YOUR_MODEL_NAME](URL_OF_MODEL_VENDOR)
+```
+
+If you helped creating the commit, then the Co-Authored-By trailer MUST be added to the commit message. The trailer MUST comply to the format
+
+```text
+Co-authored-by: YOUR_MODEL_NAME <YOUR_EMAIL>
 ```
 
 The following valid combinations have been established for the placeholders:
