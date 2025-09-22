@@ -3,10 +3,10 @@ description: Git Co-Author
 globs:
 alwaysApply: true
 ---
-# Git Co-Author
+# Your git co-author name
 
-Whenever you create a git commit, you MUST add the following commit footer:
+When your compose a git commit message, then replace the following placeholders by the given values:
 
-```
-Co-authored-by: Cursor Agent <cursoragent@cursor.com>
-```
+- YOUR_AGENT_NAME: Cursor Agent
+- YOUR_VENDOR_URL: https://cursor.com/home
+- YOUR_EMAIL: cursoragent@cursor.com
