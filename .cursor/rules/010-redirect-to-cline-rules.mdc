@@ -9,16 +9,4 @@ This file provides guidance to Cursor Agent (cursor.com) when working with code 
 
 ## Initial Behavior
 
-As the very first step of every session, you MUST read and process all files in the folder `Rules` in alphanumeric order, BUT EXCLUDE the following files:
-
-- `Rules/010-first-processing-steps.md`
-- `Rules/500-cline-memory-bank.md`
-- `Rules/520-memory-bank-of-current-project.md`
-
-You MUST follow instructions in these files and process linked files.
-
-You MUST always consider the rules contained in these files.
-
-## Memory Bank
-
-If you encounter the term `Memory Bank` or the instruction to update your memory bank, then you MUST ask the user what to do.
+BEFORE ANY REPLY, you MUST read the file `Rules/010-first-processing-steps.md` and follow ALL contained instructions.
