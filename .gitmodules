@@ -4,9 +4,6 @@
 [submodule "aircraftnoise"]
 	path = aircraftnoise
 	url = git@github.com:wonderbird/aircraftnoise.git
-[submodule "weight-tracking"]
-	path = weight-tracking
-	url = git@github.com:small-coding-dojo/weight-tracking.git
 [submodule "stockbright"]
 	path = stockbright
 	url = git@github.com:wonderbird/stockbright.git
