@@ -4,7 +4,16 @@
 
 Projects use structured documentation following specialized templates and patterns. This rule defines the general documentation strategy that encompasses multiple specialized approaches.
 
-## Documentation Folder Structure
+## Documentation Structure
+
+### `README.md` - Developer Onboarding
+
+- **Purpose**: Minimal document for developers to get started quickly
+- **Pattern**: Concise, action-oriented, no documentation duplication
+- **Content**: Quick start, prerequisites, basic usage, development commands
+- **References**: May include links to detailed documentation in `memory-bank/` and `docs/` when appropriate
+- **Lifecycle**: Updated when setup/usage changes, kept minimal
+- **Reading**: First file to read for new developers
 
 ### `memory-bank/` - Working Memory
 
@@ -22,29 +31,11 @@ Projects use structured documentation following specialized templates and patter
 - **Lifecycle**: Created when stable, updated when architecture changes
 - **Reading**: Read as needed for specific context
 
-## Future Documentation Patterns
+## Usage Guidelines
 
-### `requirements/` - Business Requirements (Future)
-
-- **Purpose**: Business requirements and stakeholder needs
-- **Pattern**: Follows req42 requirements template
-- **Content**: Requirements specifications, stakeholder analysis, business rules
-
-## Documentation Guidelines
-
-### When to Use `memory-bank/`
-
-- Current milestone context and decisions
-- Active development insights and learnings
-- Progress tracking and task management
-- Working memory for coding agents
-
-### When to Use `docs/`
-
-- Interface specifications (e.g., API documentation)
-- Architecture decisions and patterns
-- Long-term technical references
-- Stable documentation that won't change frequently
+- **README.md**: Always present, minimal developer onboarding
+- **memory-bank/**: Current milestone context, active development insights, progress tracking
+- **docs/**: Stable interface specifications, architecture decisions, long-term references
 
 ### Migration Strategy
 
@@ -61,5 +52,4 @@ Projects use structured documentation following specialized templates and patter
 ## References
 
 - [arc42 Architecture Documentation](https://docs.arc42.org/)
-- [req42 Requirements Template](https://req42.de/)
 - [Cline Memory Bank Pattern](500-cline-memory-bank.md)
