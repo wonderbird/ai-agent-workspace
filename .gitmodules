@@ -7,3 +7,6 @@
 [submodule "stockbright"]
 	path = stockbright
 	url = git@github.com:wonderbird/stockbright.git
+[submodule "aircraftnoise-backend"]
+	path = aircraftnoise-backend
+	url = ssh://git@192.168.171.35:/volume1/shared/git-repositories/aircraftnoise-backend.git
