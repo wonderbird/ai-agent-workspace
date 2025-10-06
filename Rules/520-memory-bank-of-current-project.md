@@ -4,6 +4,8 @@
 
 The entry `./memory-bank` inside the selected project represents the memory bank associated with the current iteration.
 
+If neither the entry `./memory-bank` nor a folder `./memory-bank-branches` exists, then you MUST ask the user whether they would like to explore a product vision in order to create a memory bank. If they confirm, then ask the user for a business analyst persona prompt which tailors your answers to their need.
+
 If that entry does not exist, but a folder `./memory-bank-branches` exists, then it contains different memory banks, each associated with a different product increment. In this situation, you MUST ask the user on which increment they want to work. After the user has selected an increment, you MUST:
 
 1. **Remove existing memory-bank entry**: Delete any existing `./memory-bank` (file, directory, or symlink)
