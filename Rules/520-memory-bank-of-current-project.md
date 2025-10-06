@@ -28,9 +28,36 @@ Then you MUST:
 2. Remove the problematic `./memory-bank` entry
 3. Recreate the correct symbolic link to the selected increment
 
+## Documentation Folder Strategy
+
+### Memory Bank vs. Documentation Folders
+
+The project uses two distinct documentation folders with specific purposes:
+
+**`./memory-bank/` - Working Memory**
+- **Purpose**: Milestone-focused working memory for current iteration
+- **Content**: Active context, progress tracking, current decisions
+- **Lifecycle**: Updated frequently, reviewed at milestone completion
+- **Processing**: MUST read ALL files in sequence defined in 500-cline-memory-bank.md
+
+**`./docs/` - Architecture Documentation**  
+- **Purpose**: Long-term stable reference materials
+- **Content**: Interface specifications, architecture decisions, stable patterns
+- **Lifecycle**: Created when stable, updated when architecture changes
+- **Processing**: Read as needed for specific context
+
+### Documentation Guidelines
+
+- **Use `./memory-bank/`** for: Current milestone context, active decisions, progress tracking
+- **Use `./docs/`** for: Interface specs, architecture patterns, long-term references
+- **Migration**: Content moves from `./memory-bank/` to `./docs/` when stable
+- **Reference**: See `./docs/README.md` for detailed documentation strategy
+
 ## Process the Memory Bank
 
 If the `./memory-bank` entry exists for the selected project or after the corresponding symbolic link has been created, you MUST process the memory bank inside the selected project. For this, you search for and read all files in the project subdirectory or symbolic link `./memory-bank`. These files describe the goals and the context of the current project iteration.
+
+**CRITICAL**: You MUST read ALL memory bank files in the exact sequence defined in 500-cline-memory-bank.md to ensure optimal understanding. This sequence allows each file to build upon the understanding gained from previous files.
 
 At this stage, you NEVER read and process more files. You MUST save context tokens at this stage. However, if you have encountered interesting files up to now, then you ask the user whether to read them.
 
