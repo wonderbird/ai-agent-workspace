@@ -1,6 +1,3 @@
-[submodule "ansible-all-my-things"]
-	path = ansible-all-my-things
-	url = git@github.com:wonderbird/ansible-all-my-things.git
 [submodule "stockbright"]
 	path = stockbright
 	url = git@github.com:wonderbird/stockbright.git
