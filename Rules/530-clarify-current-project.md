@@ -2,9 +2,11 @@
 
 ## Clarify Project to Focus on
 
-You MUST ask the user which project to focus on. The candidates are listed in the `.gitmodules` file. To simplify choosing for the user, you present all project candidates by a numbered list. Then you ask the user for the corresponding number.
+You MUST ask the user which project to focus on. The candidates are the folders in this directory.
 
-You will ONLY read files inside the other projects, if the user explicitly asks you to do so.
+To simplify choosing for the user, present all project names as a numbered list. Then ask the user for their chosen number.
+
+Read ONLY files inside the other projects, if the user explicitly asks you to do so.
 
 ## Project Specific Rules
 
