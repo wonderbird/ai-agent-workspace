@@ -1,6 +1,3 @@
 [submodule "stockbright"]
 	path = stockbright
 	url = git@github.com:wonderbird/stockbright.git
-[submodule "aoc_test_runner"]
-	path = aoc_test_runner
-	url = git@github.com:wonderbird/aoc_test_runner.git
