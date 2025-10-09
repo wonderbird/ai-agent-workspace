@@ -65,9 +65,13 @@ The brief description of a commit body shall not exceed 50 words.
 
 Whenever you intend to mark a task as done, you MUST create a git commit to document the finished work.
 
-Whenver you have commited finished work, you MUST update your memory bank.
+## Memory bank updates are part of a task
 
-Whenever you have updated your memory bank, you MUST commit the updated memory bank to git using the `docs: ` conventional commit prefix.
+Before you commit a completed task, you MUST update the memory bank.
+
+You MUST commit memory bank updates together with the task. Memory bank updates are part of a task. The completed task determines the conventional commit prefix.
+
+However, if a commit only contains memory bank, it uses the `docs: ` conventional commit prefix.
 
 ## Git command line tool usage
 
