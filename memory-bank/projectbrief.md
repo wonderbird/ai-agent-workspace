@@ -37,4 +37,4 @@ AI agents exhibit rule degradation over extended sessions, particularly forgetti
 
 ## Project Scope
 
-This increment focuses on creating a memory bank and analyzing solution approaches for rule reliability improvement. Future increments will implement the chosen solution approach.
+This increment focuses on formalizing the decision-making process for the AI rule adherence problem. It culminates in the creation of an Architecture Decision Record (ADR) that outlines the context, drivers, and potential solutions. Future increments will implement the chosen solution approach.
