@@ -49,6 +49,9 @@ The selection of a solution will be guided by the following key principles, prio
 - **Cons**:
     - ❌ May not prevent 100% of violations if the timing of the reminder isn't perfect.
     - ❌ A naive implementation could become noisy if not tuned correctly.
+- **Mitigations**:
+    - To improve accuracy, the simple reminder can be combined with a lightweight, non-blocking validation check for critical tasks.
+    - To reduce noise, the system can use adaptive timing for reminders based on session complexity or allow the developer to tune the frequency.
 
 ### 2. Hybrid Memory Architecture
 
@@ -59,6 +62,9 @@ The selection of a solution will be guided by the following key principles, prio
     - ❌ Violates **Rapid Implementation**: Requires significant architectural work.
     - ❌ Violates **Low Maintenance**: Such a system would be complex to build and maintain.
     - ❌ Could be overkill for a solo developer context.
+- **Mitigations**:
+    - The implementation complexity can be reduced by starting with a simple key-value store and focusing the MVP on storing only the most critical rules.
+    - Using existing libraries (e.g., LangChain memory modules) can abstract away some of the maintenance burden.
 
 ### 3. Intelligent Rule Validation Pipeline
 
@@ -69,6 +75,9 @@ The selection of a solution will be guided by the following key principles, prio
     - ❌ Violates **Minimal Disruption**: Inherently blocking and can cause workflow friction.
     - ❌ Violates **Rapid Implementation**: Building a reliable and non-annoying validation pipeline is complex.
     - ❌ Can lead to "fighting the linter" scenarios, which is a poor user experience.
+- **Mitigations**:
+    - To minimize disruption, the pipeline can be configured to be non-blocking by default, showing warnings instead of errors for most violations.
+    - The user experience can be improved by providing clear, actionable feedback and allowing developers to easily disable specific rules.
 
 ### 4. AI-Assisted Memory Bank Enforcement
 
@@ -78,6 +87,9 @@ The selection of a solution will be guided by the following key principles, prio
 - **Cons**:
     - ❌ Shares the same "disruption" and "complexity" cons as the general validation pipeline.
     - ❌ Only solves part of the problem, as it doesn't address rule-breaking in other areas like commit messages.
+- **Mitigations**:
+    - To reduce disruption, this can be implemented as a background process that provides suggestions rather than a blocking pre-commit hook.
+    - The limited scope can be addressed by integrating it as one component of a larger, more comprehensive solution.
 
 ### 5. Session-Aware Workflow Integration
 
@@ -86,6 +98,9 @@ The selection of a solution will be guided by the following key principles, prio
     - ✅ Potentially offers the most seamless and intelligent user experience.
 - **Cons**:
     - ❌ Violates all three decision drivers: it is extremely complex, slow to implement, and would require significant maintenance. This is a large-scale project, not a targeted solution.
+- **Mitigations**:
+    - The complexity can be managed by scoping the MVP down to a single, small integration point (e.g., providing rule hints in the IDE for `.md` files).
+    - The system can be built as a series of independent micro-tools rather than a monolithic system to reduce the maintenance burden.
 
 ### 6. Do Nothing (Accept the Status Quo)
 
@@ -98,6 +113,8 @@ The selection of a solution will be guided by the following key principles, prio
     - ❌ **High Cognitive Load**: Places a constant burden on the developer to act as the "rule enforcer," especially at the end of sessions when focus is low.
     - ❌ **Inconsistent Quality**: The quality of the output will continue to vary depending on the agent's state and the developer's diligence in catching errors.
     - ❌ **Higher Long-Term Cost**: The cumulative time spent on manual correction and rework will likely exceed the up-front investment of an automated solution.
+- **Mitigations**:
+    - By definition, this option has no mitigations, as implementing them would mean choosing a different option. The negative consequences are inherent to this choice.
 
 ### 7. Structured Manual Workarounds
 
@@ -111,6 +128,8 @@ The selection of a solution will be guided by the following key principles, prio
     - ❌ **High Cognitive Load**: It replaces the cognitive load of "reviewing and correcting" with that of "remembering and applying workarounds."
     - ❌ **Inconsistent and Error-Prone**: The effectiveness depends entirely on the developer's consistency. Forgetting to apply a workaround leads back to the original problem.
     - ❌ **Does Not Scale**: This is not a sustainable long-term solution and does not address the root cause of AI rule degradation.
+- **Mitigations**:
+    - The cognitive load and error rate can be reduced by using templates, editor snippets, and physical checklists to make the workarounds easier to apply.
 
 ### 8. Buy a Commercial Off-The-Shelf (COTS) Product
 
@@ -123,6 +142,9 @@ The selection of a solution will be guided by the following key principles, prio
     - ❌ **High Cost**: Commercial AI solutions often involve subscription fees that may not be justifiable for a solo developer.
     - ❌ **Lack of Customization**: A commercial product may not be flexible enough to integrate with a highly customized workflow.
     - ❌ **No Obvious Candidates**: A preliminary search reveals no ready-to-buy products that solve this specific problem for an individual developer.
+- **Mitigations**:
+    - The lack of a direct solution can be mitigated by exploring adjacent markets (e.g., developer productivity tools) or open-source alternatives.
+    - High costs and lack of customization can be addressed by using a free trial to thoroughly evaluate the product's flexibility before purchase.
 
 ## Links
 
