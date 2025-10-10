@@ -19,8 +19,8 @@ This architectural decision record (ADR) explores potential solutions to ensure 
 The selection of a solution will be guided by the following key principles, prioritized for a solo developer workflow:
 
 - 🚀 **Rapid Implementation**: The solution must be simple enough to implement and provide value in under two weeks.
-- 🧘 **Minimal Workflow Disruption**: The solution should integrate seamlessly into the existing workflow without imposing blocking interruptions or significant friction.
 - 🛠️ **Low Maintenance Overhead**: Once configured, the solution should require minimal ongoing tuning, management, or manual intervention.
+- 🧘 **Minimal Workflow Disruption**: The solution should integrate seamlessly into the existing workflow without imposing blocking interruptions or significant friction.
 
 ## Considered Options
 
