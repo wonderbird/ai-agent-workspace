@@ -7,10 +7,7 @@
 
 AI agents exhibit rule degradation over extended development sessions. As session context grows, agents tend to "forget" foundational rules, particularly during critical phases like implementation (e.g., TDD principles) and version control (e.g., commit message formatting, memory bank updates). This leads to inconsistent quality, workflow disruptions, and increased cognitive load for the developer who must manually review and correct these lapses.
 
-The root causes stem from fundamental limitations in current AI architecture:
-- **Context Window Exhaustion**: Earlier instructions are pushed out of the model's limited context window.
-- **Attention Dilution**: The agent's focus gets distributed across too many tokens, weakening the signal of the original rules.
-- **Lack of Persistent Memory**: Agents are stateless and do not retain memory of rules across sessions without external mechanisms.
+The root causes stem from fundamental limitations in current AI architecture, which are detailed in the appendix.
 
 This architectural decision record (ADR) explores potential solutions to ensure AI agents reliably adhere to predefined rules throughout their operational lifecycle.
 
@@ -181,7 +178,15 @@ The following table provides a high-level comparison of the considered options a
 - [Project Brief (Memory Bank)](../memory-bank/projectbrief.md)
 - [System Patterns (Memory Bank)](../memory-bank/systemPatterns.md)
 
-## Appendix: Detailed Option Analysis
+## Appendix: Detailed Option Analysis and Root Causes
+
+### Root Cause Analysis
+
+The core problem of AI rule degradation stems from three fundamental limitations in current AI architecture:
+
+- **Context Window Exhaustion**: Earlier instructions are pushed out of the model's limited context window as the conversation grows.
+- **Attention Dilution**: The agent's focus gets distributed across too many tokens, weakening the signal of the original rules compared to more recent instructions.
+- **Lack of Persistent Memory**: Agents are stateless and do not retain memory of rules across sessions without external mechanisms.
 
 ### 1. Context-Aware Rule Reinforcement
 
