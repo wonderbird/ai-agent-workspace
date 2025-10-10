@@ -3,13 +3,17 @@
 - Status: Proposed
 - Date: 2025-10-10
 
+## Executive Summary
+
+This document records the decision-making process for a strategy to solve the problem of "AI rule degradation," where AI coding agents forget foundational rules during long sessions. The goal is to choose a solution that improves the agent's reliability, reduces the developer's cognitive load, and maintains a smooth workflow. This ADR analyzes eight potential solutions and evaluates them against three key decision drivers to arrive at a well-reasoned architectural choice.
+
 ## Context and Problem Statement
 
 AI agents exhibit rule degradation over extended development sessions. As session context grows, agents tend to "forget" foundational rules, particularly during critical phases like implementation (e.g., TDD principles) and version control (e.g., commit message formatting, memory bank updates). This leads to inconsistent quality, workflow disruptions, and increased cognitive load for the developer who must manually review and correct these lapses.
 
 The root causes stem from fundamental limitations in current AI architecture, which are detailed in the appendix.
 
-This architectural decision record (ADR) explores potential solutions to ensure AI agents reliably adhere to predefined rules throughout their operational lifecycle.
+This architectural decision record (ADR) is intended for project stakeholders, including the developer (Stefan) and any future contributors. It explores potential solutions to ensure AI agents reliably adhere to predefined rules throughout their operational lifecycle.
 
 ## Decision Drivers
 
@@ -294,3 +298,10 @@ The core problem of AI rule degradation stems from three fundamental limitations
 - **Mitigations**:
     - The lack of a direct solution can be mitigated by exploring adjacent markets (e.g., developer productivity tools) or open-source alternatives.
     - High costs and lack of customization can be addressed by using a free trial to thoroughly evaluate the product's flexibility before purchase.
+
+### Glossary
+
+- **ADR (Architectural Decision Record)**: A document that captures an important architectural decision, including its context, drivers, and consequences.
+- **Context Window**: The limited amount of text an AI model can "see" at one time to generate a response.
+- **TDD (Test-Driven Development)**: A software development process where tests are written before the code that they are intended to validate.
+- **LangChain**: A framework for developing applications powered by language models.
