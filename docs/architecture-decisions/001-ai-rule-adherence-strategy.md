@@ -177,6 +177,20 @@ The following table provides a high-level comparison of the considered options a
     - The lack of a direct solution can be mitigated by exploring adjacent markets (e.g., developer productivity tools) or open-source alternatives.
     - High costs and lack of customization can be addressed by using a free trial to thoroughly evaluate the product's flexibility before purchase.
 
+#### 8.1. Specific Option: Adopt Cursor IDE
+
+- **Description**: This sub-option involves adopting the [Cursor IDE](https://cursor.com/), an AI-native code editor. Cursor has a built-in "Rules" feature that automatically injects user-defined instructions into the AI's context before every request. It specifically includes an "always apply" setting, which directly addresses the problem of rule degradation by ensuring foundational rules are never forgotten.
+- **Pros**:
+    - ✅ **Directly Solves the Core Problem**: The "always apply" feature is a purpose-built solution for rule degradation.
+    - ✅ **Excellent Alignment with Decision Drivers**: It offers a very **Rapid Implementation** (install and configure), requires **Low Maintenance** (vendor-supported feature), and has **Minimal Disruption** once the initial IDE switch is made.
+    - ✅ **Portable Rule Content**: The rules are written in standard Markdown, making them easy to migrate to or from other systems if needed.
+- **Cons**:
+    - ❌ **Vendor Lock-in for Enforcement**: While the rule *content* is portable, the automated *enforcement mechanism* is exclusive to the Cursor IDE. Using other AI tools would still require manual rule application.
+    - ❌ **Requires Workflow Migration**: Adopting this solution necessitates switching the primary development environment to Cursor, which could involve a learning curve and configuration effort.
+- **Mitigations**:
+    - The vendor lock-in is mitigated by the user's acceptance of having one primary automated tool and a manual process for others.
+    - The workflow migration effort can be minimized by leveraging Cursor's compatibility with VS Code extensions and settings.
+
 ## Links
 
 - [Project Brief (Memory Bank)](../memory-bank/projectbrief.md)
@@ -298,6 +312,20 @@ The core problem of AI rule degradation stems from three fundamental limitations
 - **Mitigations**:
     - The lack of a direct solution can be mitigated by exploring adjacent markets (e.g., developer productivity tools) or open-source alternatives.
     - High costs and lack of customization can be addressed by using a free trial to thoroughly evaluate the product's flexibility before purchase.
+
+#### 8.1. Specific Option: Adopt Cursor IDE
+
+- **Description**: This sub-option involves adopting the [Cursor IDE](https://cursor.com/), an AI-native code editor. Cursor has a built-in "Rules" feature that automatically injects user-defined instructions into the AI's context before every request. It specifically includes an "always apply" setting, which directly addresses the problem of rule degradation by ensuring foundational rules are never forgotten.
+- **Pros**:
+    - ✅ **Directly Solves the Core Problem**: The "always apply" feature is a purpose-built solution for rule degradation.
+    - ✅ **Excellent Alignment with Decision Drivers**: It offers a very **Rapid Implementation** (install and configure), requires **Low Maintenance** (vendor-supported feature), and has **Minimal Disruption** once the initial IDE switch is made.
+    - ✅ **Portable Rule Content**: The rules are written in standard Markdown, making them easy to migrate to or from other systems if needed.
+- **Cons**:
+    - ❌ **Vendor Lock-in for Enforcement**: While the rule *content* is portable, the automated *enforcement mechanism* is exclusive to the Cursor IDE. Using other AI tools would still require manual rule application.
+    - ❌ **Requires Workflow Migration**: Adopting this solution necessitates switching the primary development environment to Cursor, which could involve a learning curve and configuration effort.
+- **Mitigations**:
+    - The vendor lock-in is mitigated by the user's acceptance of having one primary automated tool and a manual process for others.
+    - The workflow migration effort can be minimized by leveraging Cursor's compatibility with VS Code extensions and settings.
 
 ### Glossary
 
