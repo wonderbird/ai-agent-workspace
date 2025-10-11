@@ -3,16 +3,16 @@
 ## Technology Stack
 
 ### Current Technologies
-- **Cursor IDE**: Primary development environment with native rule management
+- **Cursor IDE**: Primary development environment with built-in rule enforcement
 - **Git**: Version control with pre-commit hooks capability
 - **Markdown**: Documentation format for rules and memory bank
 - **Bash/Shell**: Scripting for automation and validation
 
-### Proposed Technologies
-- **LangChain Memory Systems**: For persistent context management
-- **Pre-commit Hooks**: For automated rule validation
-- **GitHub Actions**: For CI/CD pipeline validation
-- **Python/Node.js**: For custom validation scripts
+### Chosen Technologies
+- **Cursor IDE Rules System**: Built-in "always apply" rule enforcement
+- **VS Code Extensions**: Compatibility layer for familiar development experience
+- **Git Integration**: Native git support within Cursor IDE
+- **Markdown Rules**: Portable rule content in standard format
 
 ## Development Setup
 
@@ -23,10 +23,10 @@
 - Individual developer workflow
 
 ### Required Setup Changes
-- Memory bank directory structure
-- Validation script installation
-- Pre-commit hook configuration
-- Rule reinforcement system setup
+- Cursor IDE installation and configuration
+- Rule migration from Rules/ directory to Cursor's rules system
+- Workflow adaptation to Cursor IDE
+- VS Code extension compatibility setup
 
 ## Technical Constraints
 
@@ -51,10 +51,10 @@
 - Cursor IDE compatibility
 
 ### External Dependencies
-- LangChain (for memory systems)
-- Pre-commit framework
-- GitHub Actions (optional)
-- Python/Node.js runtime
+- Cursor IDE (commercial license)
+- VS Code extensions (for compatibility)
+- Git (for version control)
+- Markdown (for rule content)
 
 ## Tool Usage Patterns
 
@@ -64,11 +64,11 @@
 - Manual commit message formatting
 - Manual review and correction
 
-### Target Patterns
-- Automatic rule reinforcement
-- Automatic memory bank validation
-- Automatic commit compliance
-- Minimal manual intervention
+### Target Patterns (Cursor IDE)
+- Automatic rule injection before every AI request
+- Built-in rule enforcement via "always apply" feature
+- Seamless integration with development workflow
+- Minimal manual intervention required
 
 ## Performance Considerations
 

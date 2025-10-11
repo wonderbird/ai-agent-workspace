@@ -4,17 +4,17 @@
 
 The rule reliability system follows a layered architecture with three main components:
 
-1. **Rule Definition Layer**: Centralized Rules directory with structured rule files
-2. **Enforcement Layer**: Automated mechanisms for rule compliance
-3. **Memory Layer**: Persistent context management across sessions
+1. **Rule Definition Layer**: Cursor IDE's built-in rules system with "always apply" functionality
+2. **Enforcement Layer**: Cursor IDE's automatic rule injection before every AI request
+3. **Memory Layer**: Persistent context management across sessions via Cursor's native capabilities
 
 ## Key Design Patterns
 
-### Rule Degradation Prevention Pattern
+### Cursor IDE Rule Enforcement Pattern
 - **Problem**: AI agents forget rules over extended sessions
-- **Solution**: Context-aware rule reinforcement with adaptive timing
-- **Implementation**: Session length triggers + context analysis
-- **Benefits**: Proactive prevention rather than reactive correction
+- **Solution**: Cursor IDE's "always apply" rules feature
+- **Implementation**: Built-in rule injection before every AI request
+- **Benefits**: Automatic, reliable rule enforcement without manual intervention
 
 ### Memory Bank Structure Pattern
 - **Problem**: Content duplication and unauthorized file creation
@@ -30,30 +30,30 @@ The rule reliability system follows a layered architecture with three main compo
 
 ## Critical Implementation Paths
 
-### Path 1: Context-Aware Rule Reinforcement
-1. Monitor session length and context usage
-2. Detect rule degradation patterns
-3. Trigger rule refresh at optimal moments
-4. Validate reinforcement effectiveness
+### Path 1: Cursor IDE Migration
+1. Install and configure Cursor IDE
+2. Transfer existing rules to Cursor's rules system
+3. Test rule enforcement with development tasks
+4. Optimize rule content for Cursor's format
 
-### Path 2: Memory Bank Structure Enforcement
-1. Analyze content semantics across files
-2. Detect duplication patterns
-3. Validate file hierarchy compliance
-4. Enforce timing requirements
+### Path 2: Rule Content Optimization
+1. Adapt rule content for Cursor's context injection
+2. Test rule effectiveness across different scenarios
+3. Refine rules based on real-world usage
+4. Document Cursor-specific patterns
 
 ### Path 3: Workflow Integration
-1. Embed compliance checks in natural workflow
-2. Learn developer patterns and preferences
-3. Adapt timing to individual behavior
-4. Provide seamless user experience
+1. Adapt development workflow to Cursor IDE
+2. Leverage Cursor's VS Code compatibility
+3. Integrate with existing git and memory bank processes
+4. Validate seamless user experience
 
 ## Component Relationships
 
 ```
-Rules Directory → Rule Reinforcement System → Memory Bank Validation → Workflow Integration
+Cursor IDE Rules → Automatic Rule Injection → AI Context Enhancement → Developer Experience
      ↓                      ↓                        ↓                      ↓
-Rule Definitions    Context Monitoring      Content Analysis      Developer Experience
+Rule Definitions    Built-in Enforcement    Context Management      Seamless Workflow
 ```
 
 ## Design Decisions
@@ -63,10 +63,10 @@ Rule Definitions    Context Monitoring      Content Analysis      Developer Expe
 - **Impact**: Simpler implementation, faster delivery
 - **Trade-offs**: No team knowledge sharing, individual maintenance
 
-### Decision 2: Context-Aware Reinforcement
-- **Rationale**: Based on observed effectiveness of rule re-reading
-- **Impact**: Addresses core degradation problem
-- **Trade-offs**: Requires sophisticated context monitoring
+### Decision 2: Cursor IDE Adoption
+- **Rationale**: Commercial solution provides built-in rule enforcement with "always apply" feature
+- **Impact**: Directly solves rule degradation problem with minimal implementation effort
+- **Trade-offs**: Vendor lock-in for enforcement mechanism, requires IDE migration
 
 ### Decision 3: Memory Bank Structure Validation
 - **Rationale**: Prevents most painful problems (duplication, unauthorized files)
