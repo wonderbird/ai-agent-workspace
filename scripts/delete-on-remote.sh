@@ -5,18 +5,13 @@
 set -eEuo pipefail
 shopt -s failglob
 
-# Remove the AI Agent Workspace
-echo "===== Removing AI Agent Workspace ====="
+echo "===== Removing Cline Bot Workspace ====="
 
-echo "Removing Cline Bot workspace symlink ..."
-rm -f "$HOME/Documents/Cline"
-
-echo "Removing actual workspace ..."
-rm -rf "$HOME/Documents/ai-agent-workspace"
+echo "Removing Cline Bot workspace ..."
+rm -rf "$HOME/Documents/Cline"
 
 echo ""
 
-# Remove all remaining repositories
 echo "===== Removing bare repositories ====="
 for SOURCE in "$HOME/Documents/"*.git; do
     basename "$SOURCE"

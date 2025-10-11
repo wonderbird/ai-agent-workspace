@@ -39,21 +39,11 @@ REMOTE_TARGET="/home/galadriel/Documents"
 # Ensure the remote target directory exists
 ssh "$REMOTE_USER@$REMOTE_HOST" "mkdir -p $REMOTE_TARGET"
 
+# TODO: The list of repository should be configuration shared among the scripts dele-repos-from-remote.sh and sync-repos-to-remote.sh
 # List of repositories to be cloned
 REPOSITORIES=(
     "$PARENT_DIR"
 )
-
-# TODO: Scripts in this directory should become a python program, e.g. `agents up`, `agents down`, `agents sync` (or `agents clone`), `agents delete`
-# TODO: Cure duplication here and in the corresponding script (but consider the previous todo first)
-# Add git submodules to the list of repositories
-while IFS= read -r line; do
-    if [[ $line == \[submodule* ]]; then
-        REPOSITORY_NAME=$(echo "$line" | sed 's/\[submodule "\(.*\)"\]/\1/')
-        REPOSITORY_PATH="$PARENT_DIR/$REPOSITORY_NAME"
-        REPOSITORIES+=("$REPOSITORY_PATH")
-    fi
-done < "$PARENT_DIR/.gitmodules"
 
 # Clone all repositories to the remote
 for REPOSITORY_PATH in "${REPOSITORIES[@]}"; do

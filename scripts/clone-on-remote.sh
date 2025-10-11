@@ -5,26 +5,23 @@
 set -eEuo pipefail
 shopt -s failglob
 
-# Setup the AI Agent Workspace and configure Cline Bot to use it
-echo "===== Setting up AI Agent Workspace ====="
-echo "Cloning bare repository ..."
-git clone $HOME/Documents/ai-agent-workspace.git $HOME/Documents/ai-agent-workspace >/dev/null 2>&1
-echo "Creating Cline Bot workspace symlink ..."
-ln -s $HOME/Documents/ai-agent-workspace Cline
+echo "===== Setting up Cline Bot Workspace ====="
+echo "Creating Cline Bot workspace ..."
+mkdir "$HOME/Documents/Cline"
 echo ""
 
 # Clone the remaining repositories into the AI Agent Workspace
 for SOURCE in $HOME/Documents/*.git; do
     echo "===== $(basename $SOURCE .git) ====="
 
-    # Skip if the source is not a directory, does not exist or is ai-agent-workspace.git
-    if [ ! -d "$SOURCE" ] || [ ! -e "$SOURCE" ] || [ "$SOURCE" == "$HOME/Documents/ai-agent-workspace.git" ]; then
+    # Skip if the source is not a directory or does not exist
+    if [ ! -d "$SOURCE" ] || [ ! -e "$SOURCE" ]; then
         echo "Skipping this repository ..."
         echo ""
         continue
     fi
 
-    TARGET="$HOME/Documents/ai-agent-workspace/$(basename "$SOURCE" .git)"
+    TARGET="$HOME/Documents/Cline/$(basename "$SOURCE" .git)"
     if [ -d "$TARGET" ]; then
         echo "Removing existing folder ..."
         rm -rf "$TARGET"
