@@ -5,7 +5,7 @@
 
 ## Executive Summary
 
-This document records the decision-making process for a strategy to solve the problem of "AI rule degradation," where AI coding agents forget foundational rules during long sessions. The goal is to choose a solution that improves the agent's reliability, reduces the developer's cognitive load, and maintains a smooth workflow. This ADR analyzes eight potential solutions and evaluates them against three key decision drivers to arrive at a well-reasoned architectural choice.
+This document records the decision-making process for a strategy to solve the problem of "AI rule degradation," where AI coding agents forget foundational rules during long sessions. The goal is to choose a solution that improves the agent's reliability, reduces the developer's cognitive load, and maintains a smooth workflow. This ADR analyzes potential solutions and evaluates them against the key decision drivers to arrive at a well-reasoned architectural choice.
 
 ## Context and Problem Statement
 
