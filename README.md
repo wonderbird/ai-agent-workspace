@@ -1,12 +1,12 @@
 # AI Agent Workspace
 
-This project acts as the `Cline` folder explained in (1).
+This project provides rules for coding agents similar to the Cline Rules (1).
 
 ## Usage
 
 Clone this project next to your project folders.
 
-Then create a file named AGENTS.md in the parent folder containing the following text:
+Then instruct your coding agent to read the rules by creating the file AGENTS.md in the parent folder:
 
 ```markdown
 # AGENTS.md
@@ -17,6 +17,14 @@ This file provides guidance to coding agents when working with projects in this 
 
 BEFORE ANY REPLY, you MUST read the file `ai-agent-workspace/Rules/010-first-processing-steps.md` and follow ALL contained instructions.
 ```
+
+Finally, start your coding agent and say:
+
+```text
+follow your custom instructions
+```
+
+For more usage instructions, read (1).
 
 ## References
 
