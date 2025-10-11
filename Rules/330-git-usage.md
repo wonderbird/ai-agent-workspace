@@ -4,16 +4,6 @@
 
 NEVER add version history related information to documents, because git is the trusted source of such information.
 
-## Git branching strategy
-
-Before modifying any file, you MUST ensure that the current branch is appropriate. You MUST ask the user if you are unsure. The user may want you to create a branch, if you are on an inappropriate branch.
-
-Only the first commit is allowed on the `main` branch.
-
-All commits after the first require a feature branch (`feat/feature-name`) or a bugfix branch (`fix/bug-name`). A branch name MUST NOT contain suffixes like "-docs".
-
-Whenever you merge a feature branch into `main`, you MUST ALWAYS use a merge commit by specifying the `--no-ff` flag.
-
 ## Mandatory structure of a commit message
 
 Commit messages consist of the subject line, the body and the trailers. Trailers are also known as footers.
@@ -44,6 +34,7 @@ The following valid combinations have been established for the placeholders:
 | --- | --- | --- |
 | Cursor Agent (automatic mode) | https://cursor.com/home | cursoragent@cursor.com |
 | Claude Code | https://claude.ai/code | noreply@anthropic.com |
+| GitHub Copilot | https://github.com/copilot | 175728472+Copilot@users.noreply.github.com |
 
 If you are not contained in the valid combinations, then you MUST suggest appropriate values for YOUR_AGENT_NAME, YOUR_VENDOR_URL and YOUR_EMAIL. Show the suggested commit message and ask whether your should proceed.
 
@@ -61,17 +52,13 @@ A commit changing only documentation files is always a `docs:` commit, never a `
 
 The brief description of a commit body shall not exceed 50 words.
 
-## One commit per task
-
-Whenever you intend to mark a task as done, you MUST create a git commit to document the finished work.
-
 ## Memory bank updates are part of a task
 
-Before you commit a completed task, you MUST update the memory bank.
+Before you actually commit, you MUST update the memory bank. If that has not been done yet, ask the user whether you should update the memory bank considering the structure described in 500-cline-memory-bank.md.
 
-You MUST commit memory bank updates together with the task. Memory bank updates are part of a task. The completed task determines the conventional commit prefix.
+You MUST commit memory bank updates together with the task. Memory bank updates are part of a task. The changes outside the memory bank determine the conventional commit prefix.
 
-However, if a commit only contains memory bank, it uses the `docs: ` conventional commit prefix.
+However, if a commit only contains files inside the memory bank, it uses the `docs: ` conventional commit prefix.
 
 ## Git command line tool usage
 
