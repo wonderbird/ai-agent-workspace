@@ -4,9 +4,9 @@ This project provides rules for coding agents similar to the Cline Rules (1).
 
 ## Usage
 
-Clone this project next to your project folders.
+Clone this project next to your project folders. For example, if your projects are in `~/dev/project-a` and `~/dev/project-b`, clone this repository to `~/dev/ai-agent-workspace`.
 
-Then instruct your coding agent to read the rules by creating the file AGENTS.md in the parent folder:
+Then instruct your coding agent to read the rules by creating the file `AGENTS.md` in the parent directory (`~/dev/AGENTS.md`) with the following content:
 
 ```markdown
 # AGENTS.md
@@ -25,6 +25,18 @@ follow your custom instructions
 ```
 
 For more usage instructions, read (1).
+
+## DevContainer Setup
+
+You can isolate the AI agent from your computer by running the project in a DevContainer. The [configuration](./.devcontainer/devcontainer.json) supports both Visual Studio Code and the Cursor IDE.
+
+For running the DevContainer in Cursor, install the Anysphere DevContainer Plugin and ensure that the configuration `"remoteUser": "vscode"` is present.
+
+To verify that the LLM is running in a DevContainer you can use the following prompt:
+
+```text
+Verify your sandbox: report user and current directory. You should be user 'vscode' inside '/workspaces/'.
+```
 
 ## References
 
