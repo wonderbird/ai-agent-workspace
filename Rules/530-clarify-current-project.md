@@ -10,7 +10,6 @@ Read ONLY files inside the other projects, if the user explicitly asks you to do
 
 ## Project Specific Rules
 
-Once the user has selected the project to focus on, you MUST search the hidden subdirectory `./clinerules` within the selected project folder. If it exists, you MUST read all contained files and linked files. These files describe custom rules for the project. You MUST consider these rules.
+Once the user has selected the project to focus on, you MUST check for project-specific rules. To do this, you MUST attempt to list the contents of the **hidden** subdirectories `./.clinerules` and `./.cursor/rules`. If these directories exist and contain files, you MUST read all contained files and linked files. These files describe custom rules for the project that you MUST consider.
 
 If the rules contain contradications or ambiguities, you MUST inform the user and ask whether you should help clarifying the contradictions or ambiguities.
-
