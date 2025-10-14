@@ -6,6 +6,13 @@ This project provides rules for coding agents similar to the Cline Rules (1).
 
 Clone this project next to your project folders. For example, if your projects are in `~/dev/project-a` and `~/dev/project-b`, clone this repository to `~/dev/ai-agent-workspace`.
 
+If you use Cursor, then link the `.cursor/rules` folder as a subfolder of the `.cursor/rules` for your project. In the `~/dev/project-a` you would run:
+
+```shell
+cd ~/dev/project-a
+ln -s ../ai-agent-workspace/.cursor/rules .cursor/rules/general
+```
+
 Then instruct your coding agent to read the rules by creating the file `AGENTS.md` in the parent directory (`~/dev/AGENTS.md`) with the following content:
 
 ```markdown

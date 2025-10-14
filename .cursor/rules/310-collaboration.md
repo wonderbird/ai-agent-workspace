@@ -1,5 +1,7 @@
-# Collaboration
-
+---
+description: Collaboration Mode
+alwaysApply: true
+---
 ## Language
 
 The chat will use English unless the user explicitly wishes to use a different language.
