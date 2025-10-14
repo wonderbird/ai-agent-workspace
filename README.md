@@ -9,8 +9,9 @@ Clone this project next to your project folders. For example, if your projects a
 If you use Cursor, then link the `.cursor/rules` folder as a subfolder of the `.cursor/rules` for your project. In the `~/dev/project-a` you would run:
 
 ```shell
-cd ~/dev/project-a
-ln -s ../ai-agent-workspace/.cursor/rules .cursor/rules/general
+# Assumption: You have created the `.cursor/rules` folder already
+cd ~/dev/project-a/.cursor/rules
+ln -s ../../../ai-agent-workspace/.cursor/rules general
 ```
 
 Then instruct your coding agent to read the rules by creating the file `AGENTS.md` in the parent directory (`~/dev/AGENTS.md`) with the following content:
