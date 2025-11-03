@@ -37,6 +37,7 @@ The following valid combinations have been established for the placeholders:
 | YOUR_AGENT_NAME | YOUR_VENDOR_URL | YOUR_EMAIL |
 | --- | --- | --- |
 | Cursor Agent (automatic mode) | https://cursor.com/home | cursoragent@cursor.com |
+| Cursor Agent (Gemini 2.5 Pro) | https://cursor.com/home | cursoragent@cursor.com |
 | Claude Code | https://claude.ai/code | noreply@anthropic.com |
 | GitHub Copilot | https://github.com/copilot | 175728472+Copilot@users.noreply.github.com |
 
