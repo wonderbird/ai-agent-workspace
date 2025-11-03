@@ -1,3 +1,7 @@
+---
+description: Git rules
+alwaysApply: false
+---
 # Git version control rules
 
 ## Git is the source of version and author information
