@@ -47,13 +47,15 @@ Co-authored-by: YOUR_MODEL_NAME <YOUR_EMAIL>
 
 ## Commit conventions
 
-Your commits MUST use one of the following conventional commit prefixes: `feat:`, `fix:`, `refactor:`, `docs:`. If the correct prefix is unclear, ask the user.
+Your commits MUST use one of the following conventional commit prefixes: `feat:`, `fix:`, `refactor:`, `test`, `docs:`. If the correct prefix is unclear, ask the user.
 
 All your commits MUST represent a small, coherent and working increment. If these criteria are not met, ask the user how to proceed.
 
 The headline of a `feat:` commit explains the new capability of the project in short. The headline of such a commit does not tell what you have done to achieve this. Example: You would write "feat: show hello message on startup" instead of "feat: implement printing hello on startup".
 
 The headline of a `fix:` commit describes the most important symptom of the problem in past tense. The commit message body describes the problem and its root cause. It may also contain the major steps required to fix the problem.
+
+The headline of a `test:` commit describes the capability under test in short. Formulate the headline like a requirement using how the subject under test should behave (as in behavior driven development).
 
 A commit changing only documentation files is always a `docs:` commit, never a `refactor:` commit.
 
