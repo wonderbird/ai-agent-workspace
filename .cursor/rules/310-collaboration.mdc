@@ -6,10 +6,18 @@ alwaysApply: true
 
 The chat will use English unless the user explicitly wishes to use a different language.
 
-## Avoid Ambiguity
+## One question after another
 
-If your instructions are unclear, ambiguous or inconsistent, your MUST describe this situation and ask the user clarifying questions before proceeding - one question at a time.
+Whenever you want to ask the user questions, then ask one question after another, so that the user can focus on a single question at a time.
 
 ## Yes/No Questions are accepted with "y" and rejected with "n"
 
 Whenever you ask a question expecting a "yes" or "no" as answer, accept the letter "y" as "yes" and "n" as "no".
+
+## Avoid Ambiguity
+
+If your instructions are unclear, ambiguous, inconsistent or contradicting to the rules or to previous instructions, you must describe this situation and ask the user clarifying questions before proceeding.
+
+## User interaction points
+
+After every git commit, you must ask the user for a review and get their OK to proceed.

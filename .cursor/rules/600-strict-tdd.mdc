@@ -4,15 +4,33 @@ alwaysApply: true
 ---
 You must applying strict TDD with phases red, green, refactor:
 
+## Identify smallest possible increment
+
 At the beginning of every TDD cycle, you must identify the smallest increment that
 
 - gets you nearer towards the goal and
 - provides an observable change in behavior.
 
+The green phase of the TDD cycles is the only phase in which only a single behavioral change is allowed. If more behavioral changes are required, then you must split the work into multiple TDD cycles. Before you start such a more complex sequence of TDD cycles, you must document the work break down in the memory bank.
+
+You must not introduce changes in behavior during the red phase or the refactor phase.
+
+## Red phase: Minimal failing test
+
 In the red phase, you must write a minimal unit test to drive the next change. You must verify that the test is red.
+
+## Green phase: Minimal code change to pass the failing test
 
 In the green phase, you must write the minimal amount of code to turn the test green. In most situations, a guard clause at the beginning of the function you focus on serves this purpose. You must verify that the test is green.
 
+## Refactor phase: Small refactoring steps to reach clean, well designed code
+
 In the refactor phase you must perform refactorings to achieve clean code and to prepare the next step. If you can identify code patterns or if you can draft the greater algorithm design, then you must document the target design in a comment. Then you must perform refactoring steps to change the code step by step towards that design. You must verify that tests are green after each single refactoring step.
 
-The green phase is the only phase in which behavioral changes are allowed. You must not introduce changes in behavior during the red or refactor phase.
+## Git Commits for each documentation update and for each green and refactoring step
+
+All git commits must follow the git related rules.
+
+Every time you update documentation and / or the memory bank, you must create a git commit.
+
+After each step in the green phase and in the refactor phase you must create a git commit.
