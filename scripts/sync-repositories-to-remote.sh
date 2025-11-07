@@ -23,7 +23,11 @@
 set -eEufo pipefail
 
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
-PARENT_DIR=$(dirname "$SCRIPT_DIR")
+
+# Read configuration
+# shellcheck disable=SC1091
+#   (shellcheck is not able to read the file for some reason and the recommended workaround does not work)
+. "$SCRIPT_DIR/configuration.sh"
 
 # Get remote host IP from command line
 if [ -z "$1" ]; then
@@ -39,12 +43,6 @@ REMOTE_TARGET="/home/galadriel/Documents"
 # Ensure the remote target directory exists
 ssh "$REMOTE_USER@$REMOTE_HOST" "mkdir -p $REMOTE_TARGET"
 
-# TODO: The list of repository should be configuration shared among the scripts dele-repos-from-remote.sh and sync-repos-to-remote.sh
-# List of repositories to be cloned
-REPOSITORIES=(
-    "$PARENT_DIR"
-)
-
 # Clone all repositories to the remote
 for REPOSITORY_PATH in "${REPOSITORIES[@]}"; do
     REPOSITORY_NAME=$(basename "$REPOSITORY_PATH")
@@ -53,7 +51,7 @@ for REPOSITORY_PATH in "${REPOSITORIES[@]}"; do
 
     echo "Creating temporary bare repository ..."
     TEMP_BARE_REPO=$(mktemp -d)/$REPOSITORY_NAME.git
-    git clone --bare "$REPOSITORY_PATH" "$TEMP_BARE_REPO" >/dev/null 2>&1
+    git clone --bare "$REPOSITORY_PATH" "$TEMP_BARE_REPO" # >/dev/null 2>&1
 
     echo "Copying bare repository to remote ..."
     rsync -az --delete --delete-during "$TEMP_BARE_REPO" "$REMOTE_USER@$REMOTE_HOST:$REMOTE_TARGET"

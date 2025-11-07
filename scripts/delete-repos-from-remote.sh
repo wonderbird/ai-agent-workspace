@@ -23,7 +23,11 @@
 #   pushd ~/source/ai-agent-workspace/scripts && ./delete-repos-from-remote.sh "$IPV4_ADDRESS"; popd
 #
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
-PARENT_DIR=$(dirname "$SCRIPT_DIR")
+
+# Read configuration
+# shellcheck disable=SC1091
+#   (shellcheck is not able to read the file for some reason and the recommended workaround does not work)
+. "$SCRIPT_DIR/configuration.sh"
 
 # Get remote host IP from command line
 if [ -z "$1" ]; then
@@ -35,12 +39,6 @@ REMOTE_HOST="$1"
 REMOTE_HOST_NAME="agent"
 REMOTE_USER=galadriel
 REMOTE_TARGET="/home/galadriel/Documents"
-
-# TODO: The list of repository should be configuration shared among the scripts dele-repos-from-remote.sh and sync-repos-to-remote.sh
-# List of repositories to be deleted
-REPOSITORIES=(
-    "$PARENT_DIR"
-)
 
 # Remove remote entries in local repositories
 echo "===== Removing remote entries in local repositories ====="
