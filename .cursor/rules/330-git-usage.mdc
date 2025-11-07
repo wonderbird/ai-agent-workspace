@@ -1,5 +1,4 @@
 ---
-description: Git rules
 alwaysApply: false
 ---
 # Git version control rules

@@ -1,5 +1,4 @@
 ---
-description: Strict TDD
 alwaysApply: true
 ---
 You must applying strict TDD with phases red, green, refactor:
