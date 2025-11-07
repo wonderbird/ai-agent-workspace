@@ -1,0 +1,18 @@
+---
+description: Strict TDD
+alwaysApply: true
+---
+You must applying strict TDD with phases red, green, refactor:
+
+At the beginning of every TDD cycle, you must identify the smallest increment that
+
+- gets you nearer towards the goal and
+- provides an observable change in behavior.
+
+In the red phase, you must write a minimal unit test to drive the next change. You must verify that the test is red.
+
+In the green phase, you must write the minimal amount of code to turn the test green. In most situations, a guard clause at the beginning of the function you focus on serves this purpose. You must verify that the test is green.
+
+In the refactor phase you must perform refactorings to achieve clean code and to prepare the next step. If you can identify code patterns or if you can draft the greater algorithm design, then you must document the target design in a comment. Then you must perform refactoring steps to change the code step by step towards that design. You must verify that tests are green after each single refactoring step.
+
+The green phase is the only phase in which behavioral changes are allowed. You must not introduce changes in behavior during the red or refactor phase.
