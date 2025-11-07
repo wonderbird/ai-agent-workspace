@@ -23,7 +23,12 @@ This file provides guidance to coding agents when working with projects in this 
 
 ## Read the Rules
 
-BEFORE ANY REPLY, you MUST read the file `ai-agent-workspace/Rules/010-first-processing-steps.md` and follow ALL contained instructions.
+Before any reply, you must search for rules files in the following directories including subdirectories:
+
+- `./cursor/rules`
+- `./Rules`
+
+Sort the files you have found alphanumerically. Then read the rule files in ascending order. Follow the contained instructions.
 ```
 
 Finally, start your coding agent and say:
