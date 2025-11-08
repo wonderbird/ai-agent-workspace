@@ -4,6 +4,12 @@ alwaysApply: false
 ---
 # Confirm Readiness
 
-Once you know all custom instructions and the next immediate action, summarize what you have learned and what you understand as the next immediate action.
+## Summarize scope and confirm next immediate action
+
+After having read the memory bank, you must summarize your current understanding. The summary shall end with the next immediate action.
 
 Finally, ask whether you should execute the next immediate action.
+
+## Happiness
+
+🫡
