@@ -1,0 +1,11 @@
+---
+alwaysApply: true
+---
+# Confirm applied rules
+
+Whenever you respond in a chat, you must identify the rules you considered in the response in the following format:
+
+Happiness: <SEQUENCE OF EMOJIS>
+
+Each rule specifies a happiness emoji. Replace the <SEQUENCE OF EMOJIS> placeholder by the concatenated happiness emojis of all rules you considered in your response.
+Report this Happiness metric at the end of your response. Separate it from the original response by an empty line.
