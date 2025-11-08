@@ -24,7 +24,7 @@ In the green phase, you must write the minimal amount of code to turn the test g
 
 ## Refactor phase: Small refactoring steps to reach clean, well designed code
 
-In the refactor phase you must perform refactorings to achieve clean code and to prepare the next step. If you can identify code patterns or if you can draft the greater algorithm design, then you must document the target design in a comment. Then you must perform refactoring steps to change the code step by step towards that design. You must verify that tests are green after each single refactoring step.
+In the refactor phase you must perform refactorings to achieve clean code and to prepare the next step. If you can identify code patterns or if you can draft the greater algorithm design, then you must document the target design in a comment. Then you must perform refactoring steps to change the code step by step towards that design. You must verify that tests are green after each single refactoring step. One refactoring step is a complete, self-contained code improvement (e.g., Extract Method including updating all call sites, or Rename Variable throughout).
 
 ## Git Commits for each documentation update and for each green and refactoring step
 
