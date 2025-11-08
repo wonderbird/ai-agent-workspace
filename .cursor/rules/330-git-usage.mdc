@@ -72,3 +72,7 @@ However, if a commit only contains files inside the memory bank, it uses the `do
 ## Git command line tool usage
 
 If you request git history information, you MUST ALWAYS use the `--no-pager` flag as the very first option to git. This avoids blocking git commands waiting for the user to terminate the pager.
+
+## Happiness
+
+📜

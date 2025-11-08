@@ -1,6 +1,8 @@
 ---
 alwaysApply: true
 ---
+# Collaboration between you and the user
+
 ## Language
 
 The chat will use English unless the user explicitly wishes to use a different language.
@@ -20,3 +22,7 @@ If your instructions are unclear, ambiguous, inconsistent or contradicting to th
 ## User interaction points
 
 After every git commit, you must ask the user for a review and get their OK to proceed.
+
+## Happiness
+
+🪢
