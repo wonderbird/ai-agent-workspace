@@ -1,4 +1,5 @@
 ---
+description: Use when creating a git commit
 alwaysApply: false
 ---
 # Git version control rules
