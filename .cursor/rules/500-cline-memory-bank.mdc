@@ -1,6 +1,5 @@
 ---
 description: Use before each commit to update the memory bank
-alwaysApply: false
 ---
 # Memory Bank
 

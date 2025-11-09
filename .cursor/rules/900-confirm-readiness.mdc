@@ -1,6 +1,5 @@
 ---
 description: Use when responding to the "follow your custom instructions" command
-alwaysApply: false
 ---
 # Confirm Readiness
 

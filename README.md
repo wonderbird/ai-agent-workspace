@@ -37,7 +37,23 @@ Finally, start your coding agent and say:
 follow your custom instructions
 ```
 
-For more usage instructions, read (1).
+For more usage instructions, read the documents cited in the references section below.
+
+## Adding custom projectspecific rules
+
+For project specific rules, I recommend the following prefix scheme:
+
+```text
+A10-desired-effect.mdc
+A20-other-desired-effect.mdc
+B10-one-more-desired-effect.mdc
+```
+
+An alphanumeric schema allows to specify an order in which rules are read. This might have a positive influence on a consistent understanding by the LLM.
+
+The first character allows to group rules together by category.
+
+Using a step size of 10 in the remaining two digits allows to insert more rules later.
 
 ## DevContainer Setup
 
@@ -56,3 +72,5 @@ Verify your sandbox: report user and current directory. You should be user 'vsco
 (1) Cline Bot, Inc., “Cline rules,” Cline. Accessed: Jun. 09, 2025. [Online]. Available: [https://docs.cline.bot/features/cline-rules](https://docs.cline.bot/features/cline-rules)
 
 (2) Open AI, "AGENTS.md". Accessed: Oct. 09, 2025. [Online]. Available: [https://agents.md/](https://agents.md/)
+
+(3) Anysphere, “Cursor Documentation: Core / Rules,” Cursor Documentation. Accessed: Nov. 09, 2025. [Online]. Available: [https://cursor.com/docs/context/rules](https://cursor.com/docs/context/rules)

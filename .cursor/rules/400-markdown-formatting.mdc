@@ -1,3 +1,6 @@
+---
+globs: *.md,*.mdc
+---
 # Markdown formatting rules
 
 ## Heading Structure

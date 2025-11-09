@@ -1,6 +1,5 @@
 ---
-description: Use when creating a git commit
-alwaysApply: false
+description: Use when creating a git commit, e.g. after each green TDD step and after each individual refactoring step
 ---
 # Git version control rules
 
