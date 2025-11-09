@@ -2,11 +2,6 @@
 
 This file provides guidance to coding agents when working with projects in this folder.
 
-## Read the Rules
+## How to follow your custom instructions
 
-Before any reply, you must search for rules files in the following directories including subdirectories:
-
-- `./cursor/rules`
-- `./Rules`
-
-Sort the files you have found alphanumerically. Then read the rule files in ascending order. Follow the contained instructions.
+Whenever the user says "follow your custom instructions", then you must read .cursor/rules/500-cline-memory-bank.mdc. Then read the memory bank and confirm readiness as described in .cursor/rules/900-confirm-readiness.mdc.
