@@ -68,6 +68,10 @@ You MUST commit memory bank updates together with the task. Memory bank updates 
 
 However, if a commit only contains files inside the memory bank, it uses the `docs: ` conventional commit prefix.
 
+## Follow rules before memory bank update and commit
+
+Before updating the memory bank or before making a commit, you MUST check whether other custom rules need to be followed.
+
 ## Git command line tool usage
 
 If you request git history information, you MUST ALWAYS use the `--no-pager` flag as the very first option to git. This avoids blocking git commands waiting for the user to terminate the pager.

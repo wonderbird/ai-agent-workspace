@@ -1,38 +1,48 @@
 ---
 alwaysApply: true
 ---
-You must applying strict TDD with phases red, green, refactor:
+You must apply strict TDD with red, green, refactor phases.
 
-## Identify smallest possible increment
+## TDD Cycle
 
-At the beginning of every TDD cycle, you must identify the smallest increment that
+1.  **Identify Smallest Increment**: Before each cycle, find the smallest step that provides an observable behavior change towards the goal.
+    - Only the green phase may introduce behavior changes.
+    - For complex features, break them into multiple TDD cycles and document the plan in the memory bank.
 
-- gets you nearer towards the goal and
-- provides an observable change in behavior.
+2.  **Red Phase**: Write a minimal failing unit test. Verify it fails.
 
-The green phase of the TDD cycles is the only phase in which only a single behavioral change is allowed. If more behavioral changes are required, then you must split the work into multiple TDD cycles. Before you start such a more complex sequence of TDD cycles, you must document the work break down in the memory bank.
+3.  **Green Phase**: Write the minimum code to make the test pass (e.g., a guard clause). Verify it passes.
 
-You must not introduce changes in behavior during the red phase or the refactor phase.
+4.  **Refactor Phase**: Improve code design with small, incremental refactoring steps.
+    - Verify tests pass after *each* refactoring step.
+    - If you see a larger design pattern, document it in a comment before refactoring towards it.
 
-## Red phase: Minimal failing test
+## One Refactoring Step
 
-In the red phase, you must write a minimal unit test to drive the next change. You must verify that the test is red.
+A refactoring step is a complete, self-contained code improvement that applies a **single refactoring technique or pattern**.
 
-## Green phase: Minimal code change to pass the failing test
+### Examples of a single step
 
-In the green phase, you must write the minimal amount of code to turn the test green. In most situations, a guard clause at the beginning of the function you focus on serves this purpose. You must verify that the test is green.
+- Extract Method (including updating all call sites)
+- Rename Variable (throughout the codebase)
+- Inline Variable
+- Extract Guard Clause
+- Inline Nested Conditional
 
-## Refactor phase: Small refactoring steps to reach clean, well designed code
+### Recognizing when a step is too large
 
-In the refactor phase you must perform refactorings to achieve clean code and to prepare the next step. If you can identify code patterns or if you can draft the greater algorithm design, then you must document the target design in a comment. Then you must perform refactoring steps to change the code step by step towards that design. You must verify that tests are green after each single refactoring step. One refactoring step is a complete, self-contained code improvement (e.g., Extract Method including updating all call sites, or Rename Variable throughout).
+If you find yourself combining multiple refactoring techniques in one commit, **STOP** and split it. Each step should be easily described with a single refactoring name. If you need "AND" to describe what you're doing, it's likely too large.
 
-## Git Commits for each documentation update and for each green and refactoring step
+- **TOO LARGE**: Extract guard clause AND inline nested conditionals.
+- **CORRECT SIZE**:
+    1.  Commit 1: Extract guard clause for special case.
+    2.  Commit 2: Inline nested conditional.
 
-All git commits must follow the git related rules.
+## Commits
 
-Every time you update documentation and / or the memory bank, you must create a git commit.
-
-After each step in the green phase and in the refactor phase you must create a git commit.
+- Create a git commit after each green step and each refactoring step.
+- Create a git commit for every documentation or memory bank update.
+- All commits must follow the git usage rules.
 
 ## Happiness
 
