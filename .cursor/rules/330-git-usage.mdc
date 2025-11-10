@@ -1,5 +1,4 @@
 ---
-description: Use when creating a git commit, e.g. after each green TDD step and after each individual refactoring step
 alwaysApply: false
 ---
 # Git version control rules
@@ -60,18 +59,6 @@ The headline of a `test:` commit describes the capability under test in short. F
 A commit changing only documentation files is always a `docs:` commit, never a `refactor:` commit.
 
 The brief description of a commit body shall not exceed 50 words.
-
-## Memory bank updates are part of a task
-
-Before you actually commit, you MUST update the memory bank. If that has not been done yet, ask the user whether you should update the memory bank considering the structure described in 500-cline-memory-bank.md.
-
-You MUST commit memory bank updates together with the task. Memory bank updates are part of a task. The changes outside the memory bank determine the conventional commit prefix.
-
-However, if a commit only contains files inside the memory bank, it uses the `docs: ` conventional commit prefix.
-
-## Follow rules before memory bank update and commit
-
-Before updating the memory bank or before making a commit, you MUST check whether other custom rules need to be followed.
 
 ## Git command line tool usage
 
