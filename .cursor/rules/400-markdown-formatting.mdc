@@ -1,5 +1,6 @@
 ---
 globs: *.md,*.mdc
+alwaysApply: false
 ---
 # Markdown formatting rules
 

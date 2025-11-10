@@ -1,5 +1,6 @@
 ---
 description: Use to understand the memory bank concept, e.g. before each commit
+alwaysApply: false
 ---
 # Memory Bank
 
