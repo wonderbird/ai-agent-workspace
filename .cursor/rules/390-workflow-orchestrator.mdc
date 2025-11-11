@@ -1,0 +1,27 @@
+---
+description: Use before every git commit
+alwaysApply: false
+---
+# Project Workflow Orchestrator
+
+This file defines the primary workflows for this project.
+
+## Pre-Commit Workflow
+
+Before every git commit, you MUST follow these steps in this exact order:
+
+1.  **Run Unit Tests**: Ensure all tests pass.
+    ```shell
+    dotnet test
+    ```
+2.  **Run Mutation Tests**: Get the latest mutation score.
+    - Get the mutation score and mutant statistics (per `general/340-mutation-testing.mdc`).
+3.  **Commit with Memory Bank Update**:
+    - First, update the memory bank (per `general/500-cline-memory-bank.mdc`) with the results from the steps above.
+    - Then, create a single git commit (per `general/330-git-usage.mdc`) that includes the changes to the code, tests, and memory bank.
+
+Before you start, you must read the linked rule files.
+
+## Happiness
+
+🤹

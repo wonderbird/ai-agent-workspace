@@ -14,6 +14,7 @@ You must apply strict TDD with red, green, refactor phases.
 3.  **Green Phase**: Write the minimum code to make the test pass (e.g., a guard clause). Verify it passes.
 
 4.  **Refactor Phase**: Improve code design with small, incremental refactoring steps.
+    - Select refactorings according to the absolute priority premise (as per `.cursor/rules/A00-absolute-priority-premise.mdc`)
     - Verify tests pass after *each* refactoring step.
     - If you see a larger design pattern, document it in a comment before refactoring towards it.
 
