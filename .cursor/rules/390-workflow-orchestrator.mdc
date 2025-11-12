@@ -1,6 +1,5 @@
 ---
-description: Use before every git commit
-alwaysApply: false
+alwaysApply: true
 ---
 # Project Workflow Orchestrator
 
