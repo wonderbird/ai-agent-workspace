@@ -36,18 +36,24 @@ The selection of a solution will be guided by the following key principles, prio
 
 ## Options Comparison Matrix
 
-The following table provides a high-level comparison of the considered options against the prioritized decision drivers.
+The following table provides a high-level comparison of the considered options against the prioritized decision drivers. It also includes an "Effectiveness" score that rates how well each option solves the core problem of AI rule degradation on a scale of 0 to 4:
 
-| 🚀 Rapid Implementation | 🛠️ Low Maintenance | 🧘 Minimal Disruption |
-| :--- | :---: | :---: | :---: |
-| -> **Context-Aware Rule Reinforcement** | ✅ | ✅ | ✅ |
-| **Hybrid Memory Architecture** | ❌ | ❌ | ✅ |
-| **Intelligent Rule Validation Pipeline** | ❌ | ⚠️ | ❌ |
-| **AI-Assisted Memory Bank Enforcement** | ⚠️ | ⚠️ | ❌ |
-| **Session-Aware Workflow Integration** | ❌ | ❌ | ⚠️ |
-| **Do Nothing** | ✅ | ✅ | ✅ |
-| **Structured Manual Workarounds** | ✅ | ✅ | ⚠️ |
-| **Buy a COTS Product** | ⚠️ | ✅ | ⚠️ |
+- **0**: No solution at all
+- **1**: Barely addresses the problem
+- **2**: A partial solution or a component of a larger solution
+- **3**: An effective solution that solves the core problem
+- **4**: An ideal, fully-automated solution
+
+| | Effectiveness | 🚀 Rapid Implementation | 🛠️ Low Maintenance | 🧘 Minimal Disruption |
+| :--- | :---: | :---: | :---: | :---: |
+| -> **Context-Aware Rule Reinforcement** | 3 | ✅ | ✅ | ✅ |
+| **Hybrid Memory Architecture** | 4 | ❌ | ❌ | ✅ |
+| **Intelligent Rule Validation Pipeline** | 3 | ❌ | ⚠️ | ❌ |
+| **AI-Assisted Memory Bank Enforcement** | 2 | ⚠️ | ⚠️ | ❌ |
+| **Session-Aware Workflow Integration** | 4 | ❌ | ❌ | ⚠️ |
+| **Do Nothing** | 0 | ✅ | ✅ | ✅ |
+| **Structured Manual Workarounds** | 2 | ✅ | ✅ | ⚠️ |
+| **Buy a COTS Product** | 2 | ⚠️ | ✅ | ⚠️ |
 
 **Legend**: ✅ = Positive Alignment, ⚠️ = Neutral/Mixed Alignment, ❌ = Negative Alignment
 
