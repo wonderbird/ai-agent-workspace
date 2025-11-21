@@ -13,8 +13,14 @@ The rule reliability system follows a layered architecture with three main compo
 ### Cursor IDE Rule Enforcement Pattern
 - **Problem**: AI agents forget rules over extended sessions
 - **Solution**: Cursor IDE's "always apply" rules feature
-- **Implementation**: Built-in rule injection before every AI request
-- **Benefits**: Automatic, reliable rule enforcement without manual intervention
+- **Implementation**: Built-in rule injection before every AI request. **Note:** This is insufficient on its own, as rules are only loaded at the start of a session.
+- **Benefits**: Provides a baseline level of rule awareness.
+
+### Prompt-Driven Rule Re-Enforcement Pattern
+- **Problem**: AI agents still exhibit rule degradation even with `always_apply` rules because the rules are not re-loaded during a session.
+- **Solution**: Use a structured sequence of prompts from a prompt library to explicitly instruct the agent to read and apply relevant rules at critical stages of the development workflow (e.g., analysis, implementation, review).
+- **Implementation**: A well-maintained library of prompts that are used in a defined sequence for development tasks.
+- **Benefits**: Effectively counteracts rule degradation, increases agent autonomy, and ensures consistent compliance throughout a session.
 
 ### Memory Bank Structure Pattern
 - **Problem**: Content duplication and unauthorized file creation
@@ -65,8 +71,8 @@ Rule Definitions    Built-in Enforcement    Context Management      Seamless Wor
 
 ### Decision 2: Cursor IDE Adoption
 - **Rationale**: Commercial solution provides built-in rule enforcement with "always apply" feature
-- **Impact**: Directly solves rule degradation problem with minimal implementation effort
-- **Trade-offs**: Vendor lock-in for enforcement mechanism, requires IDE migration
+- **Impact**: Directly solves rule degradation problem with minimal implementation effort. **Note:** This was the initial assumption, but validation proved it is an incomplete solution.
+- **Trade-offs**: Vendor lock-in for enforcement mechanism, requires IDE migration.
 
 ### Decision 3: Memory Bank Structure Validation
 - **Rationale**: Prevents most painful problems (duplication, unauthorized files)

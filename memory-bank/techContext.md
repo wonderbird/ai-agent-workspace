@@ -52,11 +52,11 @@
 
 ## Tool Usage Patterns
 
-### Target Patterns (Cursor IDE)
-- Automatic rule injection before every AI request
-- Built-in rule enforcement via "always apply" feature
-- Seamless integration with development workflow
-- Minimal manual intervention required
+### Current Workflow
+- **Prompt Library**: A curated set of prompts is used to guide the AI agent through analysis, implementation, and review cycles.
+- **Rule Re-enforcement**: Prompts explicitly instruct the agent to read and apply rules at the start of each major task.
+- **Visual Feedback**: An emoji-based system in agent output is used to visually confirm which rules have been applied.
+- **Baseline Rule Loading**: Cursor's `always_apply` feature provides an initial set of rules at the beginning of a session.
 
 ## Performance Considerations
 

@@ -1,39 +1,39 @@
-# Active Context: Post-Migration Validation
+# Active Context: Refining Prompt-Driven Workflow
 
 ## Current Work Focus
 
-**Session Goal**: To validate the effectiveness of the Cursor IDE migration in solving the AI agent rule reliability problem. The implementation is complete, and the focus now shifts to testing and verifying compliance.
+**Session Goal**: To document and refine the newly developed prompt-driven workflow that counteracts AI rule degradation. The focus is on capturing the lessons learned from the initial validation and optimizing the process for better autonomy and reliability.
 
 ## Recent Changes
 
 ### Completed in This Session
-1.  **Cursor IDE Migration**: The project has been fully migrated to Cursor IDE.
-2.  **Rule Transfer**: All existing rules have been moved to Cursor's native rule system.
-3.  **Workflow Adaptation**: The development workflow has been updated to leverage Cursor's features.
+1.  **Initial Validation**: Completed the initial testing of the Cursor IDE setup.
+2.  **Identified Rule Degradation**: Discovered that `always_apply` rules in Cursor are insufficient to prevent rule degradation over a session.
+3.  **Developed New Workflow**: Created a prompt-driven workflow to re-introduce and enforce rules at critical stages.
 
 ### Key Insights Discovered
-- The migration process was straightforward due to VS Code compatibility.
-- "Always apply" rules appear to be functioning as expected in initial tests.
-- The streamlined workflow has the potential to significantly reduce cognitive load.
+- **Rule Degradation Persists**: `always_apply` rules are only loaded at the start of a session, leading to the same degradation pattern observed previously.
+- **Prompting is Key**: Explicitly instructing the agent to read and apply rules via a structured prompt sequence is an effective countermeasure.
+- **Visual Feedback Works**: The emoji-based system for tracking rule application is a simple and effective way to monitor compliance.
 
 ## Next Steps
 
 ### Immediate Actions (This Session)
-1.  **Rule Enforcement Validation**: Systematically test rule compliance across different scenarios.
-2.  **Measure Effectiveness**: Quantify improvements in rule adherence and developer experience.
-3.  **Document Findings**: Record lessons learned and identify any necessary optimizations.
+1.  **Document New Workflow**: Update the memory bank to reflect the new prompt-driven development process.
+2.  **Refine Prompt Library**: Begin optimizing the prompts used in the workflow for clarity and effectiveness.
+3.  **Identify Automation Opportunities**: Explore ways to automate the sequencing of prompts to reduce manual effort.
 
 ### Short-term Goals (1-2 weeks)
-1.  Complete a comprehensive validation of the new rule enforcement system.
-2.  Refine rule content and IDE configuration based on test results.
-3.  Update project documentation to reflect the new workflow and best practices.
+1.  Fully document the prompt-driven workflow and best practices.
+2.  Expand the prompt library to cover a wider range of development tasks.
+3.  Implement any identified automation improvements.
 
 ## Active Decisions and Considerations
 
-### Decision 1: Validation Strategy
-- **Approach**: Use a combination of simulated tasks and real development work to test rule compliance.
-- **Priority**: Focus on the most frequently forgotten rules (TDD, commits, memory bank updates).
-- **Status**: Ready to begin validation.
+### Decision 1: Workflow Refinement Strategy
+- **Approach**: Iteratively improve the prompt library based on real-world usage and feedback.
+- **Priority**: Focus on prompts that increase agent autonomy and reduce the need for manual correction.
+- **Status**: In progress.
 
 ## Important Patterns and Preferences
 
@@ -46,3 +46,4 @@
 
 ### Process Learnings
 - **ADR Value**: Using ADRs provides structure and clarity for critical decisions, ensuring they are well-documented and transparent.
+- **Limitations of `always_apply`**: The `always_apply` feature in Cursor is not a complete solution for long-term rule adherence; it must be supplemented with active rule re-enforcement.

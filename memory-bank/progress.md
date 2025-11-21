@@ -15,21 +15,16 @@
 - **Context-Aware Triggers**: Session length and context usage predict degradation.
 - **Memory Bank Structure**: Hierarchical file organization prevents duplication.
 - **Individual Developer Focus**: Self-contained solutions work better than team coordination.
+- **Prompt-Driven Rule Enforcement**: A structured prompt library effectively counteracts rule degradation by re-introducing rules at critical workflow stages.
+- **Visual Rule Tracking**: Using emojis as a feedback mechanism provides a simple and effective way to detect when rules are being ignored.
 
 ## What's Left to Build
 
 ### Short-term Development (1-2 weeks)
 
-1.  **Rule Enforcement Validation**
-    - Test rule compliance across different scenarios
-    - Measure improvement in developer experience
-    - Document lessons learned
-    - Optimize rule content based on results
-
-2.  **Documentation and Knowledge Transfer**
-    - Update all project documentation
-    - Create migration guide for future reference
-    - Document Cursor-specific patterns and best practices
+1.  **Refine Prompt Library**: Optimize and expand the prompt library to cover more scenarios and improve the autonomy of the agent.
+2.  **Document New Workflow**: Create comprehensive documentation for the prompt-driven development workflow.
+3.  **Explore Automation**: Investigate opportunities to automate parts of the prompt sequence to further reduce manual intervention.
 
 ### Medium-term Goals (1-3 months)
 
