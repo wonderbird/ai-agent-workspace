@@ -1,39 +1,37 @@
-# Active Context: Refining Prompt-Driven Workflow
+# Active Context: Formalizing the Prompt-Driven Workflow
 
 ## Current Work Focus
 
-**Session Goal**: To document and refine the newly developed prompt-driven workflow that counteracts AI rule degradation. The focus is on capturing the lessons learned from the initial validation and optimizing the process for better autonomy and reliability.
+**Session Goal**: To formalize the prompt-driven workflow by creating a user manual and a structured prompt library in the `docs/` directory. The focus is on establishing the foundational documentation that will support the next iteration of refining and expanding the prompts.
 
 ## Recent Changes
 
 ### Completed in This Session
-1.  **Initial Validation**: Completed the initial testing of the Cursor IDE setup.
-2.  **Identified Rule Degradation**: Discovered that `always_apply` rules in Cursor are insufficient to prevent rule degradation over a session.
-3.  **Developed New Workflow**: Created a prompt-driven workflow to re-introduce and enforce rules at critical stages.
+1.  **Workflow Formalized**: Created the initial user manual and placeholder prompt library in `docs/prompt-workflow/`.
+2.  **ADR Revised**: Updated the project ADR to reflect that the prompt-driven workflow is the true solution to rule degradation.
+3.  **Documentation Strategy Aligned**: Placed the new, stable documentation in the `docs/` directory, adhering to the project's documentation rules.
 
 ### Key Insights Discovered
-- **Rule Degradation Persists**: `always_apply` rules are only loaded at the start of a session, leading to the same degradation pattern observed previously.
-- **Prompting is Key**: Explicitly instructing the agent to read and apply rules via a structured prompt sequence is an effective countermeasure.
-- **Visual Feedback Works**: The emoji-based system for tracking rule application is a simple and effective way to monitor compliance.
+- A formal documentation structure for the workflow is essential for its long-term maintenance and usability.
+- Placing stable documentation in `docs/` and working memory in `memory-bank/` creates a clear and effective separation of concerns.
 
 ## Next Steps
 
 ### Immediate Actions (This Session)
-1.  **Document New Workflow**: Update the memory bank to reflect the new prompt-driven development process.
-2.  **Refine Prompt Library**: Begin optimizing the prompts used in the workflow for clarity and effectiveness.
-3.  **Identify Automation Opportunities**: Explore ways to automate the sequencing of prompts to reduce manual effort.
+1.  **Update Memory Bank**: Align the memory bank's goals with the new focus on formalizing the workflow.
+2.  **Refine Prompt Library**: Begin the process of replacing the placeholder prompts with detailed, effective content.
 
 ### Short-term Goals (1-2 weeks)
-1.  Fully document the prompt-driven workflow and best practices.
-2.  Expand the prompt library to cover a wider range of development tasks.
-3.  Implement any identified automation improvements.
+1.  Complete the first draft of all prompts in the prompt library.
+2.  Expand the user manual with more detailed examples and best practices.
+3.  Begin exploring opportunities to automate the prompt workflow.
 
 ## Active Decisions and Considerations
 
-### Decision 1: Workflow Refinement Strategy
-- **Approach**: Iteratively improve the prompt library based on real-world usage and feedback.
-- **Priority**: Focus on prompts that increase agent autonomy and reduce the need for manual correction.
-- **Status**: In progress.
+### Decision 1: Documentation-First Approach
+- **Approach**: Establish the structure and documentation for the workflow before diving deep into refining the prompt content.
+- **Priority**: Ensure the project has a solid, maintainable foundation for the new workflow.
+- **Status**: Complete.
 
 ## Important Patterns and Preferences
 

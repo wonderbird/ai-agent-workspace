@@ -22,8 +22,8 @@
 
 ### Short-term Development (1-2 weeks)
 
-1.  **Refine Prompt Library**: Optimize and expand the prompt library to cover more scenarios and improve the autonomy of the agent.
-2.  **Document New Workflow**: Create comprehensive documentation for the prompt-driven development workflow.
+1.  **Refine Prompt Library**: Flesh out the placeholder prompts in `docs/prompt-workflow/prompts/` with detailed, effective content.
+2.  **Enhance User Manual**: Expand the user manual in `docs/prompt-workflow/README.md` with best practices and examples.
 3.  **Explore Automation**: Investigate opportunities to automate parts of the prompt sequence to further reduce manual intervention.
 
 ### Medium-term Goals (1-3 months)
@@ -42,28 +42,28 @@
 
 ## Current Status
 
-### Project Phase: Validation
+### Project Phase: Refinement
 
 - **Problem Definition**: ✅ Complete
 - **Solution Research**: ✅ Complete
 - **Decision Framework**: ✅ Formalized and polished in ADR
-- **Decision Making**: ✅ Cursor IDE selected and documented
+- **Decision Making**: ✅ Prompt-driven workflow selected and documented
 - **Memory Bank**: ✅ Updated to reflect current status
-- **Implementation**: ✅ Complete
-- **Validation**: ⏳ In Progress
+- **Implementation**: ✅ Foundational documentation complete
+- **Refinement**: ⏳ In Progress
 
 ### Technical Readiness
 
-- **Architecture Design**: ✅ Cursor IDE approach documented in ADR
-- **Technology Selection**: ✅ Cursor IDE chosen
+- **Architecture Design**: ✅ Prompt-driven workflow documented in ADR
+- **Technology Selection**: ✅ Prompt library and manual triggers
 - **Implementation Plan**: ✅ Executed
 - **Testing Strategy**: ⏳ Pending
 
 ### Resource Status
 
-- **Time Investment**: ~5 hours analysis, research, and decision making
-- **Next Session Focus**: Rule enforcement validation
-- **Estimated Implementation**: 1-2 weeks for complete migration
+- **Time Investment**: ~6 hours analysis, research, and documentation
+- **Next Session Focus**: Refine prompt library content
+- **Estimated Implementation**: 1-2 weeks for prompt refinement
 - **Success Metrics**: Defined and measurable
 
 ## Known Issues
