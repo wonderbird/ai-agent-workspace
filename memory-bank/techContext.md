@@ -17,16 +17,11 @@
 ## Development Setup
 
 ### Current Setup
-- AI Agent Workspace with Rules directory
-- Multiple project submodules
-- Centralized rule management
-- Individual developer workflow
-
-### Required Setup Changes
-- Cursor IDE installation and configuration
-- Rule migration from Rules/ directory to Cursor's rules system
-- Workflow adaptation to Cursor IDE
-- VS Code extension compatibility setup
+- **Cursor IDE**: Primary development environment
+- **Cursor Rules**: Centralized rule management with "always apply" enforcement
+- **Git**: Version control integrated into the IDE
+- **Markdown**: Documentation format for memory bank
+- **Individual Developer Workflow**: Optimized for solo work
 
 ## Technical Constraints
 
@@ -34,18 +29,17 @@
 - **No Team Infrastructure**: Solutions must work without shared systems
 - **Minimal Dependencies**: Avoid complex external services
 - **Personal Customization**: Allow individual preferences
-- **Self-Contained**: Complete solution in workspace
+- **Self-contained**: Complete solution in workspace
 
 ### Technical Limitations
 - **Context Window Limits**: AI models have fixed context windows
-- **Session Memory**: No persistent memory across sessions
+- **Session Memory**: No persistent memory across sessions, reliant on Cursor's implementation
 - **Rule Complexity**: Multiple rules can overwhelm AI processing
 - **Validation Overhead**: Automated checks may slow workflow
 
 ## Dependencies
 
 ### Internal Dependencies
-- Rules directory structure
 - Memory bank file hierarchy
 - Git workflow integration
 - Cursor IDE compatibility
@@ -57,12 +51,6 @@
 - Markdown (for rule content)
 
 ## Tool Usage Patterns
-
-### Current Patterns
-- Manual rule reference during sessions
-- Manual memory bank updates
-- Manual commit message formatting
-- Manual review and correction
 
 ### Target Patterns (Cursor IDE)
 - Automatic rule injection before every AI request
