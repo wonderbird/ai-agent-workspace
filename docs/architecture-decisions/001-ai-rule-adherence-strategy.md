@@ -40,7 +40,7 @@ The following table provides a high-level comparison of the considered options a
 
 | 🚀 Rapid Implementation | 🛠️ Low Maintenance | 🧘 Minimal Disruption |
 | :--- | :---: | :---: | :---: |
-| **Context-Aware Rule Reinforcement** | ✅ | ✅ | ✅ |
+| -> **Context-Aware Rule Reinforcement** | ✅ | ✅ | ✅ |
 | **Hybrid Memory Architecture** | ❌ | ❌ | ✅ |
 | **Intelligent Rule Validation Pipeline** | ❌ | ⚠️ | ❌ |
 | **AI-Assisted Memory Bank Enforcement** | ⚠️ | ⚠️ | ❌ |
@@ -53,29 +53,31 @@ The following table provides a high-level comparison of the considered options a
 
 ## Decision Outcome and Consequences
 
-**Chosen Option:** [8.1. Specific Option: Adopt Cursor IDE](#81-specific-option-adopt-cursor-ide)
+**Chosen Option:** [1. Context-Aware Rule Reinforcement](#1-context-aware-rule-reinforcement)
 
 ### Rationale
 
-The decision to adopt the Cursor IDE was driven by its direct and robust solution to the core problem of AI rule degradation, combined with its strong alignment with all key decision drivers. The built-in "Rules" feature, with its "always apply" setting, provides a purpose-built mechanism to ensure foundational rules are never forgotten.
+Initial trials with a Commercial Off-The-Shelf (COTS) product (Cursor IDE) revealed that its "always apply" feature was insufficient to prevent AI rule degradation over long sessions. While the IDE provides a useful baseline context, the core problem of the agent "forgetting" rules persisted as the session context grew.
+The truly effective solution was found to be a manual implementation of **Context-Aware Rule Reinforcement**. This approach uses a structured, prompt-driven workflow where the developer explicitly instructs the agent to read and apply the relevant rules at critical junctures of the development process (e.g., analysis, implementation, review).
 
-This choice excels in the following areas:
-- 🚀 **Rapid Implementation**: The solution is available out-of-the-box, requiring only installation and configuration, which is significantly faster than any custom-built alternative.
-- 🛠️ **Low Maintenance Overhead**: As a core feature of a commercial product, the rule enforcement mechanism is maintained by the vendor, eliminating the burden of building and managing a custom system.
-- 🧘 **Minimal Workflow Disruption**: While it requires a one-time migration to a new IDE, the long-term benefit of eliminating the constant need for manual rule correction represents a significant reduction in workflow friction and cognitive load. The IDE's compatibility with VS Code extensions further smooths this transition.
+This strategy directly and effectively addresses the root causes of rule degradation by:
+- ✅ **Refreshing the Context**: Systematically re-introducing the rules into the agent's active context window.
+- ✅ **Focusing Attention**: Directing the agent's attention to the rules when it matters most.
+
+The Cursor IDE remains a valuable component of the workflow, providing a good development environment and initial rule loading, but the prompt-driven reinforcement is the key to maintaining long-term compliance.
 
 ### Consequences
 
 - **Positive**:
-  - The primary problem of AI rule degradation will be effectively eliminated, leading to more consistent and reliable agent behavior.
-  - The developer's cognitive load will be significantly reduced, as manual monitoring and correction of rule violations will no longer be necessary.
-  - The overall quality and consistency of outputs (e.g., commit messages, memory bank updates) are expected to improve.
+  - The primary problem of AI rule degradation is effectively managed, leading to more consistent and reliable agent behavior.
+  - The developer's cognitive load is significantly reduced, as the structured prompts ensure compliance without constant manual monitoring.
+  - The overall quality and consistency of outputs have demonstrably improved.
 - **Negative**:
-  - The automated rule *enforcement* is specific to the Cursor IDE, creating a degree of vendor lock-in for the automated workflow.
-  - A one-time effort is required to migrate the primary development workflow and settings to the new IDE.
+  - The current implementation of the prompt-driven workflow is manual and relies on the developer's discipline to apply the correct prompts.
+  - This creates a new form of cognitive load—remembering to use the prompt library—though it is significantly less burdensome than constant manual review.
 - **Risks**:
-  - The Cursor "Rules" feature may not be as effective in practice as anticipated, or it may have limitations not covered in the documentation. This risk is mitigated by the low cost of switching (the rule content in Markdown is portable) and the ability to revert to other options if necessary.
-  - The broader IDE experience of Cursor might have unforeseen drawbacks. This is mitigated by its foundation on VS Code, which allows for a familiar environment and extension support.
+  - The effectiveness of the workflow is tied to the quality and maintenance of the prompt library. Outdated or poorly written prompts could lead to inconsistent results.
+  - There is a risk of developer fatigue in manually applying the prompts, which could be mitigated in the future by exploring automation opportunities.
 
 ## Links
 
@@ -203,13 +205,15 @@ The core problem of AI rule degradation stems from three fundamental limitations
 
 - **Description**: This sub-option involves adopting the [Cursor IDE](https://cursor.com/), an AI-native code editor. Cursor has a built-in "Rules" feature that automatically injects user-defined instructions into the AI's context before every request. It specifically includes an "always apply" setting, which directly addresses the problem of rule degradation by ensuring foundational rules are never forgotten.
 - **Pros**:
-    - ✅ **Directly Solves the Core Problem**: The "always apply" feature is a purpose-built solution for rule degradation.
+    - ✅ **Provides Baseline Context**: The "always apply" feature is effective at loading the rules at the start of a session, providing a solid foundation for the agent.
     - ✅ **Excellent Alignment with Decision Drivers**: It offers a very **Rapid Implementation** (install and configure), requires **Low Maintenance** (vendor-supported feature), and has **Minimal Disruption** once the initial IDE switch is made.
     - ✅ **Portable Rule Content**: The rules are written in standard Markdown, making them easy to migrate to or from other systems if needed.
 - **Cons**:
+    - ❌ **Insufficient as a Standalone Solution**: Validation has shown that this feature alone does not prevent rule degradation over long sessions, as the rules are not re-loaded.
     - ❌ **Vendor Lock-in for Enforcement**: While the rule *content* is portable, the automated *enforcement mechanism* is exclusive to the Cursor IDE. Using other AI tools would still require manual rule application.
     - ❌ **Requires Workflow Migration**: Adopting this solution necessitates switching the primary development environment to Cursor, which could involve a learning curve and configuration effort.
 - **Mitigations**:
+    - The insufficiency of the feature is mitigated by using it in combination with the **Context-Aware Rule Reinforcement** strategy (i.e., the prompt-driven workflow).
     - The vendor lock-in is mitigated by the user's acceptance of having one primary automated tool and a manual process for others.
     - The workflow migration effort can be minimized by leveraging Cursor's compatibility with VS Code extensions and settings.
 
