@@ -12,5 +12,6 @@ REPOSITORIES=(
     # "$PARENT_DIR/../71.27-zwischenzeugnis-erhalten"
     # "$PARENT_DIR/../aircraftnoise-backend"
     # "$PARENT_DIR/../aoc_test_runner"
+    "$PARENT_DIR/../save-energy"
     # "$PARENT_DIR/../learning/GildedRose-Refactoring-Kata"
 )
