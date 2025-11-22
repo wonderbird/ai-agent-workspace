@@ -50,9 +50,13 @@ The first character allows to group rules together by category.
 
 Using a step size of 10 in the remaining two digits allows to insert more rules later.
 
-## DevContainer Setup
+## Isolating the AI agent from your computer
 
-You can isolate the AI agent from your computer by running the project in a DevContainer. The [configuration](./.devcontainer/devcontainer.json) supports both Visual Studio Code and the Cursor IDE.
+If grant AI agents permissions to execute arbitrary commands, then you should isolate it from the programs and data you rely on (4).
+
+I prefer using a dedicated virtual machine either on my computer or hosted in the cloud for this purpose (5).
+
+As an alternative, you can run the project in a DevContainer. The [configuration](./.devcontainer/devcontainer.json) supports both Visual Studio Code and the Cursor IDE.
 
 For running the DevContainer in Cursor, install the Anysphere DevContainer Plugin and ensure that the configuration `"remoteUser": "vscode"` is present.
 
@@ -69,3 +73,7 @@ Verify your sandbox: report user and current directory. You should be user 'vsco
 (2) Open AI, "AGENTS.md". Accessed: Oct. 09, 2025. [Online]. Available: [https://agents.md/](https://agents.md/)
 
 (3) Anysphere, “Cursor Documentation: Core / Rules,” Cursor Documentation. Accessed: Nov. 09, 2025. [Online]. Available: [https://cursor.com/docs/context/rules](https://cursor.com/docs/context/rules)
+
+(4) Section "Safe YOLO mode" in Anthropic, “Claude Code: Best practices for agentic coding.” Accessed: Nov. 22, 2025. [Online]. Available: [https://www.anthropic.com/engineering/claude-code-best-practices](https://www.anthropic.com/engineering/claude-code-best-practices)
+
+(5) S. Boos, "wonderbird/ai-agent-workspace". (Nov. 22, 2025). Shell. Accessed: Nov. 22, 2025. [Online]. Available: [https://github.com/wonderbird/ai-agent-workspace](https://github.com/wonderbird/ai-agent-workspace)
