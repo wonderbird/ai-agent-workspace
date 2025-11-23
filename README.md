@@ -4,19 +4,31 @@ This project provides rules for coding agents similar to the Cline Rules (1).
 
 ## Usage
 
-Clone this project next to your project folders. For example, if your projects are in `~/dev/project-a` and `~/dev/project-b`, clone this repository to `~/dev/ai-agent-workspace`.
+### Setup agent rules
 
-If you use Cursor, then link the `.cursor/rules` folder as a subfolder of the `.cursor/rules` for your project. In the `~/dev/project-a` you would run:
+The ai agent workspace folder should be next to your project folder(s). For example, if your projects are in `~/dev/project-a` and `~/dev/project-b`, clone this repository to `~/dev/ai-agent-workspace`.
+
+Next, link the folder `ai-agent-workspace/.cursor/rules` into the rules directory of your project.
+
+If you use Cursor, then you would run
 
 ```shell
-# Assumption: You have created the `.cursor/rules` folder already
-cd ~/dev/project-a/.cursor/rules
+cd ~/dev/project-a
+mkdir -p .cursor/rules
+cd .cursor/rules
 ln -s ../../../ai-agent-workspace/.cursor/rules general
 ```
 
-Then instruct your coding agent to read the rules by creating the file `AGENTS.md` in the parent directory (`~/dev/AGENTS.md`) with the following content:
+### Setup AGENTS.md as a kind of root prompt
 
-```markdown
+At the begin of every coding session the ai agent first reads the file `AGENTS.md` in the project directory (2). We will use this file to inform the agent about the applicable rules.
+
+Initialize that file using the following commands:
+
+```shell
+cd ~/dev/project-a/
+
+cat > AGENTS.md << EOF
 # AGENTS.md
 
 This file provides guidance to coding agents when working with projects in this folder.
@@ -24,15 +36,14 @@ This file provides guidance to coding agents when working with projects in this 
 ## How to follow your custom instructions
 
 Whenever the user says "follow your custom instructions", then you must read .cursor/rules/general/500-cline-memory-bank.mdc. Then read the memory bank and confirm readiness as described in .cursor/rules/general/900-confirm-readiness.mdc.
+EOF
 ```
 
-Finally, start your coding agent and say:
+### Prompt driven development workflow
 
-```text
-follow your custom instructions
-```
+At the moment I am building up the prompts and documentation for a structured and repeatable agentic workflow.
 
-For more usage instructions, read the documents cited in the references section below.
+The current status is documented in [Prompt-Driven Development Workflow](./docs/prompt-workflow/)
 
 ## Adding custom projectspecific rules
 

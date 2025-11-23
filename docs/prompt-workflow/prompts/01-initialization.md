@@ -6,7 +6,7 @@
 
 Activate Ask Mode before you run the prompt to avoid that the agent directly produces code or updates the memory bank prematurely.
 
-Switch to Agent Mode when you are ready to commit the memory bank.
+When you are ready to write the memory bank, switch to Plan or Agent Mode and instruct the agent accordingly.
 
 ### Caveat: Defer Decisions and Problem Solving
 
