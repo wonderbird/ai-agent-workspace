@@ -19,6 +19,13 @@ cd .cursor/rules
 ln -s ../../../ai-agent-workspace/.cursor/rules general
 ```
 
+Depending on how you like to code, you can link other files in as well, e.g. the clean-code rules:
+
+```shell
+cd .cursor/rules
+ln -s ../../../ai-agent-workspace/rules-banks/clean-code clean-code
+```
+
 ### Setup AGENTS.md as a kind of root prompt
 
 At the begin of every coding session the ai agent first reads the file `AGENTS.md` in the project directory (2). We will use this file to inform the agent about the applicable rules.
@@ -35,7 +42,7 @@ This file provides guidance to coding agents when working with projects in this 
 
 ## How to follow your custom instructions
 
-Whenever the user says "follow your custom instructions", then you must read .cursor/rules/general/500-cline-memory-bank.mdc. Then read the memory bank and confirm readiness as described in .cursor/rules/general/900-confirm-readiness.mdc.
+Whenever the user says "follow your custom instructions", then you must read .cursor/rules/general/500-cline-memory-bank.mdc. Then read the memory bank and identify the immediate next action. Afterwards, identify the applicable rules and read them. Finally, confirm readiness as described in .cursor/rules/general/900-confirm-readiness.mdc.
 EOF
 ```
 
