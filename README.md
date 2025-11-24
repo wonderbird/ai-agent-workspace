@@ -43,7 +43,7 @@ EOF
 
 At the moment I am building up the prompts and documentation for a structured and repeatable agentic workflow.
 
-The current status is documented in [Prompt-Driven Development Workflow](./docs/prompt-workflow/)
+The current status is documented in [Agentic Development Workflow](./docs/agentic-development-workflow/)
 
 ## Adding custom projectspecific rules
 

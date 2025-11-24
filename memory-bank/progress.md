@@ -22,8 +22,8 @@
 
 ### Short-term Development (1-2 weeks)
 
-1.  **Refine Prompt Library**: Flesh out the placeholder prompts in `docs/prompt-workflow/prompts/` with detailed, effective content.
-2.  **Enhance User Manual**: Expand the user manual in `docs/prompt-workflow/README.md` with best practices and examples.
+1.  **Refine Prompt Library**: Flesh out the placeholder prompts in `docs/agentic-development-workflow/prompts/` with detailed, effective content.
+2.  **Enhance User Manual**: Expand the user manual in `docs/agentic-development-workflow/README.md` with best practices and examples.
 3.  **Explore Automation**: Investigate opportunities to automate parts of the prompt sequence to further reduce manual intervention.
 
 ### Medium-term Goals (1-3 months)

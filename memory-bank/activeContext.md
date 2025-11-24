@@ -7,7 +7,7 @@
 ## Recent Changes
 
 ### Completed in This Session
-1.  **Workflow Formalized**: Created the initial user manual and placeholder prompt library in `docs/prompt-workflow/`.
+1.  **Workflow Formalized**: Created the initial user manual and placeholder prompt library in `docs/agentic-development-workflow/`.
 2.  **ADR Revised**: Updated the project ADR to reflect that the prompt-driven workflow is the true solution to rule degradation.
 3.  **Documentation Strategy Aligned**: Placed the new, stable documentation in the `docs/` directory, adhering to the project's documentation rules.
 
