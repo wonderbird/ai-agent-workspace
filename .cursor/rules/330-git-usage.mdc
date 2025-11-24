@@ -56,6 +56,8 @@ The headline of a `fix:` commit describes the most important symptom of the prob
 
 The headline of a `test:` commit describes the capability under test in short. Formulate the headline like a requirement using how the subject under test should behave (as in behavior driven development).
 
+The headline of a `ci:` commit describes the new capability of the CI/CD pipeline in short.
+
 A commit changing only documentation files is always a `docs:` commit, never a `refactor:` commit.
 
 The brief description of a commit body shall not exceed 50 words.
