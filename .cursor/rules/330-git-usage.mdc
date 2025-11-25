@@ -15,7 +15,7 @@ Only the subject is mandatory. Body and trailers are optional.
 
 Subject, body and trailers MUST be separated by an empty line.
 
-If the commit message consists of only subject and trailers, then the trailers MUST be separated from the subject by two empty lines.
+If the commit message consists of only subject and trailers, then the trailers MUST be separated from the subject by a single empty line.
 
 ## Name the Coding Agent as Co-Author for commits
 
