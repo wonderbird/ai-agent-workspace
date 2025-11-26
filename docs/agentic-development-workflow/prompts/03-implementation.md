@@ -10,8 +10,6 @@ Before executing the prompt, link the [Clean Code Rules](../../../rules-banks/cl
 
 Configure the agent and model name in the section "Your Name".
 
-If the memory bank contains multiple iterations, I explicitly state which iteration to work on by naming the headline in the goal section of the prompt.
-
 ### Executing the Prompt
 
 Activate Agent Mode before you run the prompt.
@@ -26,7 +24,7 @@ For git commits consider that you are Cursor Agent with the Claude Sonnet 4.5 mo
 
 ### Goal: Implement Iteration Goal from Memory Bank
 
-Please implement the tasks planned in the memory bank.
+Please implement the memory bank tasks planned for the current iteration.
 
 ### Constraints
 
