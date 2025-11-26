@@ -1,10 +1,24 @@
-# 3. Implementation Prompt
+# 4. Implementation Prompt
+
+## Purpose
+
+Implement the next iteration goal defined in the memory bank.
 
 ## Advice on Using the Prompt
 
 ### Establish Clean Code Rules
 
 Before executing the prompt, link the [Clean Code Rules](../../../rules-banks/clean-code/) into your agent rules directory.
+
+### Initialize the Agent's Memory
+
+Start the session with the command
+
+```text
+follow your custom instructions
+```
+
+The agent will read the memory bank and report the next iteration goal.
 
 ### Configuring the Prompt
 

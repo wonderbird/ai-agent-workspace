@@ -1,5 +1,9 @@
 # 1. Initialization Prompt
 
+## Purpose
+
+Create the initial memory bank.
+
 ## Advice on Using the Prompt
 
 ### Start with Ask Mode
