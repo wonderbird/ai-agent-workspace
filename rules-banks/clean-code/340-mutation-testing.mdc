@@ -6,11 +6,10 @@ alwaysApply: false
 
 Whenever you want to analyze mutations, you must instruct stryker to output a JSON formatted report:
 
-```shell
-dotnet stryker --reporter json
-```
-
-The report will be located in `StrykerOutput/YYYY-MM-DD.hh-mm-ss/reports/mutation-report.json` where `YYYY-MM-DD.hh-mm-ss` represents the system time when the report was generated.
+| Programming Language | Command to run Stryker Mutator   | JSON report location                                                                                                                                   |
+| -------------------- | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| C#                   | `dotnet stryker --reporter json` | `StrykerOutput/YYYY-MM-DD.hh-mm-ss/reports/mutation-report.json` where `YYYY-MM-DD.hh-mm-ss` represents the system time when the report was generated. |
+| JavaScript           | `npm run test:mutate`            | `reports/mutation/mutation.json`                                                                                                                       |
 
 The primary tool to analyse the JSON report is `jq`.
 
