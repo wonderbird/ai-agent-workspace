@@ -7,17 +7,28 @@ This file defines the primary workflows for this project.
 
 ## Pre-Commit Workflow
 
-Before every git commit, you MUST follow these steps in this exact order:
+Before every git commit (including TDD red/green/refactor commits), you MUST follow these steps in this exact order:
 
 1.  **Run Unit Tests**: Ensure all tests pass.
-    ```shell
-    dotnet test
-    ```
+    - Execute the project's unit test suite
+    - Verify all tests pass with no failures
+    - See project documentation for specific test commands
+
 2.  **Run Mutation Tests**: Get the latest mutation score.
-    - Get the mutation score and mutant statistics (per `general/340-mutation-testing.mdc`).
-3.  **Commit with Memory Bank Update**:
-    - First, update the memory bank (per `general/500-cline-memory-bank.mdc`) with the results from the steps above.
-    - Then, create a single git commit (per `general/330-git-usage.mdc`) that includes the changes to the code, tests, and memory bank.
+    - Execute the project's mutation test suite
+    - Capture mutation score and mutant statistics (per `general/340-mutation-testing.mdc`)
+    - See project documentation for specific mutation test commands
+
+3.  **Update Memory Bank**: Document the current state.
+    - Update `activeContext.md` and `progress.md` as needed (per `general/500-cline-memory-bank.mdc`)
+    - Include test results, mutation scores, and key learnings
+    - Stage memory bank changes with code changes
+
+4.  **Create Commit**: Single commit with all changes.
+    - Include code, tests, and memory bank updates in one commit
+    - Follow commit conventions (per `general/330-git-usage.mdc`)
+
+Note: This workflow acknowledges the speed tradeoff of running mutation tests after every TDD step. The benefit is continuous verification of test quality.
 
 Before you start, you must read the linked rule files.
 

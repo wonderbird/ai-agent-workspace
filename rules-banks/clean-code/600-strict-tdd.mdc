@@ -45,6 +45,10 @@ If you find yourself combining multiple refactoring techniques in one commit, **
 - Create a git commit for every documentation or memory bank update.
 - All commits must follow the git usage rules.
 
+## Integration with Pre-Commit Workflow
+
+Before creating each commit (after green or refactor phases), you MUST follow the pre-commit workflow defined in `390-workflow-orchestrator.mdc`. This ensures continuous quality verification at every step.
+
 ## Happiness
 
 👣
