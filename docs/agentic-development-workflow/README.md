@@ -1,5 +1,9 @@
 # Agentic Development Workflow
 
+>[!NOTE]
+>
+> I have learned how to create Cursor commands. As a consequence I am converting the prompts to cursor commands stored in [.cursor/commands](/.cursor/commands).
+
 ## 1. Initialization
 
 **Goal**: To create an initial memory bank.
@@ -17,7 +21,7 @@ This prompt guides the agent to understand the current context, and formulate a 
 ## 3. Document Architectural Decisions
 
 **Goal**: To make informed decisions with large impact
-**Prompt**: [`prompts/03-architecture-decisions.md`](./prompts/03-architecture-decisions.md)
+**Prompt**: [`create-adr.md`](/.cursor/commands/create-adr.md)
 
 This prompt guides the agent to research architectural decisions, evaluate options and propose a well informed decision.
 

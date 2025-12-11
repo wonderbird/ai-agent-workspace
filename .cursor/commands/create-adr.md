@@ -1,18 +1,35 @@
-# 3. Architecture Decisions Prompt
+# Create an Architecture Decision Record (ADR)
 
 ## Your role
 
 Act as a software architect experienced in preparing architectural decisions and presenting them to the decision makers.
 
-Decide yourself whether you need to maintain a task list to follow the instructions below.
+Create and maintain a task list so that you can follow the next instructions carefully.
+
+## Avoid AI rule degradation
+
+IMPORTANT: As an AI agent you are affected from AI rule degradation. This means there is a risk that you forget about the applicable rules. As a remedy, perform these steps before starting to execute the task list:
+
+For each task,
+
+- check which rules MUST be considered
+- ensure the rules are remembered by either extending the description of the task or by inserting corresponding tasks into the task list.
 
 ## Goal
 
-I would like to move all information related to the undecided architectural decision about DECISION_TOPIC into an architecture decision record (ADR).
+I consider the solution of the current discussion an architectural decision.
 
-You must create the ADR and then present the result so that I can make the decision.
+The next goal is to move all information related to the undecided decision into an architecture decision record (ADR).
 
-You must not implement a solution before I have approved the ADR.
+Please create the ADR and then present the result so that I can make the decision.
+
+You MUST NOT implement a solution before I have approved the ADR.
+
+## Identify topic and filename
+
+Please identify a good file name and headline for the ADR.
+
+All ADR files are stored in `docs/decisions`. The file name must start with a three digit number starting at 001, for example: `001-file-name.md`.
 
 ## Research the Architecture Decision Record (ADR) method
 
@@ -22,21 +39,13 @@ Please crawl and understand the following documentation about architecture decis
 - https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions
 - https://adr.github.io/madr/
 
-## Draft an ADR
+## Draft the ADR
 
->[!note] Edit this part of the prompt
->
->Then read INSERT_MVP_DOCUMENT_NAME. From that document and the information in the memory bank ...
->
->ALT:
->
->From the current iteration scope and goal defined in the memory bank ...
-
-... create a draft ADR following the format described in the crawled documentation.
+From the chat, create a draft ADR following the format described in the crawled documentation.
 
 IMPORTANT: The decision has not been made yet. The purpose of the document is to help stakeholders taking a well informed decision.
 
-Store the draft in docs/architecture-decisions/ID-CAPTION.md. The ID is a three digit number starting at 001. Find a good short document name (CAPTION). Create a git commit at that stage.
+Save the draft. Then create a git commit.
 
 ## Add frequently present alternative solutions
 
@@ -52,7 +61,7 @@ For each solution not contained in the draft ADR yet:
 2. Integrate the solution into the ADR.
 3. Ensure that the format and contents of the added content matches the quality of the existing solutions documented in the ADR.
 
-After completion, create a git commit
+After completion, create a git commit.
 
 ## Mitigate negative consequences
 
@@ -94,3 +103,10 @@ Create a commit and repeat the restructuring iterations until you cannot see add
 ## Final review and improvement
 
 Finally, proof read the ADR. Think hard of how you could improve the document, so that it is easy to understand for a reader who is new to the topic. Then update the document and commit these changes to git.
+
+## Rules to consider
+
+This section gives rules already known to be relevant. However, there could be additional applicable rules.
+
+- @330-git-usage.mdc
+- @400-markdown-formatting.mdc
