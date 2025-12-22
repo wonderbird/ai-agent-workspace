@@ -59,6 +59,8 @@ The headline of a `test:` commit describes the capability under test in short. F
 
 The headline of a `ci:` commit describes the new capability of the CI/CD pipeline in short.
 
+The headline of a `build(deps):` commit describes changes and updates to the build related files, e.g. project dependencies in `*.csproj`, `pubspec.*`, `package.*` and similar files.
+
 A commit changing only documentation files is always a `docs:` commit, never a `refactor:` commit.
 
 The brief description of a commit body shall not exceed 50 words.
