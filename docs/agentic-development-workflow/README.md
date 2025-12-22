@@ -1,19 +1,28 @@
-# Agentic Development Workflow
+# Cursor Commands
 
->[!NOTE]
->
-> I have learned how to create Cursor commands. As a consequence I am converting the prompts to cursor commands stored in [.cursor/commands](/.cursor/commands).
+## create-memory-bank - Create Memory Bank for Existing Project
 
-## Cursor commands
+**Goal**: Create the initial memory bank.
+**Prompt**: [create-memory-bank-from-existing-project.md](/.cursor/commands/create-memory-bank-from-existing-project.md)
 
-### create-adr - Document Architectural Decisions
+In ask mode, the LLM will analyze the project and ask questions until it can create the initial memory bank.
+
+Switch to plan or agent mode to acutally write the memory bank.
+
+Focus on writing the memory bank. Architectural decisions should become tasks in the memory bank.
+
+## create-adr - Document Architectural Decisions
 
 **Goal**: To make informed decisions with large impact
-**Prompt**: [`create-adr.md`](/.cursor/commands/create-adr.md)
+**Prompt**: [create-adr.md](/.cursor/commands/create-adr.md)
 
 This prompt guides the agent to research architectural decisions, evaluate options and propose a well informed decision.
 
 ## Prompts not converted to commands yet
+
+>[!NOTE]
+>
+> I have learned how to create Cursor commands. As a consequence I am converting the prompts to cursor commands stored in [.cursor/commands](/.cursor/commands).
 
 ### Initialization
 
