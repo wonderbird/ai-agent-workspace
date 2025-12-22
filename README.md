@@ -84,6 +84,12 @@ To verify that the LLM is running in a DevContainer you can use the following pr
 Verify your sandbox: report user and current directory. You should be user 'vscode' inside '/workspaces/'.
 ```
 
+## Acknowledgements
+
+The command [generate-cursor-rules.md](.cursor/commands/generate-cursor-rules.md) has been adopted from the following Udemy course:
+
+T. Phillips, “Cursor AI Beginner to Pro: Build Production Web Apps with AI,” Udemy. Accessed: Dec. 06, 2025. [Online]. Available: [https://www.udemy.com/course/learn-cursor-ai/](https://www.udemy.com/course/learn-cursor-ai/)
+
 ## References
 
 (1) Cline Bot, Inc., “Cline rules,” Cline. Accessed: Jun. 09, 2025. [Online]. Available: [https://docs.cline.bot/features/cline-rules](https://docs.cline.bot/features/cline-rules)
