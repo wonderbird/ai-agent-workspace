@@ -18,6 +18,13 @@ Focus on writing the memory bank. Architectural decisions should become tasks in
 
 This prompt guides the agent to research architectural decisions, evaluate options and propose a well informed decision.
 
+## update-docs-from-memory-bank.md - Permanently Document Learnings
+
+**Goal**: Transfer Insights from Memory Bank to Better Places
+**Prompt**: [update-docs-from-memory-bank.md](/.cursor/commands/update-docs-from-memory-bank.md)
+
+The goal is to identify important insights in the volatile memory bank. These insights shall be moved to appropriate places in the permanent documentation.
+
 ## Prompts not converted to commands yet
 
 >[!NOTE]
