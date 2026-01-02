@@ -1,38 +1,10 @@
-# 2. Analysis Prompt
+# Identify Goal of next Product Increment
 
-## Purpose
-
-Analyze the goal of the next iteration. If goals already exist, then move them back.
-
-## Advice on Using the Prompt
-
-### Initialize the Agent's Memory
-
-Start the session with the command
-
-```text
-follow your custom instructions
-```
-
-The agent will read the memory bank and report the next iteration goal.
-
-### Configuring the Prompt
-
-Configure the agent and model name in the section "Your Name".
-
-### Executing the Prompt
-
-Activate Agent Mode before you run the prompt.
-
-In the beginning, double check that the agent creates a task list and that it reads the applicable rules files.
-
-## Prompt
-
-### Your Name
+## Your name
 
 For git commits consider that you are Cursor Agent with the Claude Sonnet 4.5 model.
 
-### Your Persona
+## Your role
 
 Act as an experienced Scrum Product Owner. I need to define the next valuable product increment for my project.
 
