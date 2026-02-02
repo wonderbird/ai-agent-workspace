@@ -7,7 +7,7 @@ shopt -s failglob
 
 echo "===== Setting up Cline Bot Workspace ====="
 echo "Creating Cline Bot workspace ..."
-mkdir "$HOME/Documents/Cline"
+mkdir -p "$HOME/Documents/Cline"
 echo ""
 
 # Clone the remaining repositories into the AI Agent Workspace
