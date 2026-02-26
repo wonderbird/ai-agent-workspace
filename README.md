@@ -26,25 +26,11 @@ cd .cursor/rules
 ln -s ../../../ai-agent-workspace/rules-banks/clean-code clean-code
 ```
 
-### Setup AGENTS.md as a kind of root prompt
+### Setup CLAUDE.md as a kind of root prompt
 
-At the begin of every coding session the ai agent first reads the file `AGENTS.md` in the project directory (2). We will use this file to inform the agent about the applicable rules.
+At the begin of every coding session the ai agent first reads the file `CLAUDE.md` in the project directory (2). We will use this file to inform the agent about the applicable rules.
 
-Initialize that file using the following commands:
-
-```shell
-cd ~/dev/project-a/
-
-cat > AGENTS.md << EOF
-# AGENTS.md
-
-This file provides guidance to coding agents when working with projects in this folder.
-
-## How to follow your custom instructions
-
-Whenever the user says "follow your custom instructions", then you must read .cursor/rules/general/500-cline-memory-bank.mdc. Then read the memory bank and identify the immediate next action. Afterwards, identify the applicable rules and read them. Finally, confirm readiness as described in .cursor/rules/general/900-confirm-readiness.mdc.
-EOF
-```
+You can copy and adapt the [CLAUDE.md](./CLAUDE.md) in this repository for your project.
 
 ### Prompt driven development workflow
 
