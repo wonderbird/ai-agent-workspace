@@ -29,7 +29,7 @@ You MUST NOT implement a solution before I have approved the ADR.
 
 Please identify a good file name and headline for the ADR.
 
-All ADR files are stored in `docs/decisions`. The file name must start with a three digit number starting at 001, for example: `001-file-name.md`.
+All ADR files are stored in `docs/architecture/decisions`. The file name must start with a three digit number starting at 001, for example: `001-file-name.md`.
 
 ## Research the Architecture Decision Record (ADR) method
 

@@ -27,7 +27,7 @@ Projects use structured documentation following specialized templates and patter
 - **Lifecycle**: Updated frequently during development, reviewed at milestone completion
 - **Reading**: MUST read ALL files in sequence defined in 500-cline-memory-bank.md
 
-### `docs/` - Architecture Documentation
+### `docs/architecture` - Architecture Documentation
 
 - **Purpose**: Long-term architecture and interface documentation
 - **Pattern**: Follows arc42 architecture documentation template
