@@ -4,42 +4,30 @@ alwaysApply: false
 ---
 # Markdown formatting rules
 
-## Heading Structure
+## Linter is the source of truth
 
-- **NEVER** use bold text (`**text**`) for section headers
-- **ALWAYS** use proper markdown headings (`#`, `##`, `###`, `####`, `#####`, `######`)
-- Use heading hierarchy consistently (H1 for main title, H2 for major sections, H3 for subsections, etc.)
-- If text appears to be a section header, it should be a heading, not bold text
+This project uses [markdownlint](https://github.com/DavidAnson/markdownlint)
+to enforce formatting. After writing or modifying any `.md` or `.mdc` file,
+run the linter and fix all errors before considering the file done:
 
-## List Formatting
+```bash
+npx markdownlint <file>
+```
 
-- **ALWAYS** add a blank line before starting any list (ordered or unordered)
-- **ALWAYS** add a blank line after ending any list
-- This applies to both bullet points (`-`) and numbered lists (`1.`)
+If the command is not found, markdownlint is not installed. Inform the user
+and ask them to install it with:
 
-## Whitespace Management
+```bash
+npm install --save-dev markdownlint-cli
+```
 
-- **NEVER** include trailing spaces at the end of lines
-- **NEVER** use multiple consecutive blank lines (use only single blank lines)
-- **ALWAYS** end files with exactly one newline character
+Project-specific rule configuration lives in `.markdownlint.json` at the
+repository root.
 
-## Content Structure Guidelines
+## Semantic rule the linter cannot check
 
-- When creating section breaks, use headings instead of bold text
-- If content appears to be a subsection or category, use appropriate heading level
-- Maintain consistent spacing throughout the document
-- Use blank lines to separate logical sections and improve readability
-
-## Quality Checklist
-
-Before finalizing any markdown file, verify:
-
-1. All section headers use proper heading syntax (`#` not `**`)
-2. All lists have blank lines before and after them
-3. No trailing spaces on any lines
-4. No multiple consecutive blank lines
-5. File ends with exactly one newline character
-6. Consistent heading hierarchy throughout the document
+**NEVER** use bold text (`**text**`) as a substitute for a heading. If content
+looks like a section title, use proper heading syntax (`#`, `##`, `###`, …).
 
 ## Happiness
 
