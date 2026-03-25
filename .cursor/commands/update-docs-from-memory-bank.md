@@ -43,4 +43,5 @@ The following rules apply and might be helpful during your analysis:
 - 330-git-usage.mdc
 - 400-markdown-formatting.mdc
 - 500-cline-memory-bank.mdc
-- 510-documentation-strategy.mdc
+- 510-memory-bank-branches.mdc (if that file exists)
+- 600-documentation-strategy.mdc
