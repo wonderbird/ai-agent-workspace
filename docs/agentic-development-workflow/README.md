@@ -28,6 +28,14 @@ This prompt guides the agent to understand the current context, and formulate a 
 
 This prompt guides the agent to research architectural decisions, evaluate options and propose a well informed decision.
 
+## improve-document-iteratively - Improve any document for readability and understandability
+
+**Goal**: Agent improves document for readability and understandability
+**Prompt**: [improve-document-iteratively](/.cursor/commands/improve-document-iteratively.md)
+**Prerequisite**: None.
+
+This prompt guides the agent to iteratively improve the document under review.
+
 ## update-docs-from-memory-bank.md - Permanently Document Learnings
 
 **Goal**: Transfer Insights from Memory Bank to Better Places

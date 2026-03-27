@@ -11,14 +11,14 @@ to enforce formatting. After writing or modifying any `.md` or `.mdc` file,
 run the linter and fix all errors before considering the file done:
 
 ```bash
-npx markdownlint <file>
+markdownlint <file>
 ```
 
 If the command is not found, markdownlint is not installed. Inform the user
 and ask them to install it with:
 
 ```bash
-npm install --save-dev markdownlint-cli
+npm install --global markdownlint-cli
 ```
 
 Project-specific rule configuration lives in `.markdownlint.json` at the
