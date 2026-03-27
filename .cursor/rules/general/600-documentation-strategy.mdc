@@ -47,12 +47,6 @@ Projects use structured documentation following specialized templates and patter
 - Review at milestone completion to identify content for migration
 - Maintain clear separation between working memory and reference documentation
 
-## Integration with Specialized Rules
-
-- **500-cline-memory-bank.md**: Defines memory bank pattern and reading sequence
-- **520-memory-bank-of-current-project.md**: Applies memory bank pattern to current projects
-- **530-clarify-current-project.md**: Handles project selection and project-specific rules
-
 ## References
 
 - [arc42 Architecture Documentation](https://docs.arc42.org/)

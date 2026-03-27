@@ -1,5 +1,6 @@
 ---
 alwaysApply: false
+description: Use for documenting version information and when committing to git
 ---
 # Git version control rules
 
@@ -23,11 +24,7 @@ If this is the first commit of your session, you MUST ask the user for your agen
 
 | YOUR_AGENT_NAME | YOUR_VENDOR_URL | YOUR_EMAIL |
 | --- | --- | --- |
-| Cursor Agent (automatic mode) | https://cursor.com/home | cursoragent@cursor.com |
-| Cursor Agent (Claude Sonnet 4.5) | https://cursor.com/home | cursoragent@cursor.com |
-| Cursor Agent (Gemini 2.5 Pro) | https://cursor.com/home | cursoragent@cursor.com |
-| Cursor Agent (Gemini 3 Pro) | https://cursor.com/home | cursoragent@cursor.com |
-| Cursor Agent (Composer 1) | https://cursor.com/home | cursoragent@cursor.com |
+| Cursor Agent | https://cursor.com/home | cursoragent@cursor.com |
 | Claude Code | https://claude.ai/code | noreply@anthropic.com |
 | GitHub Copilot | https://github.com/copilot | 175728472+Copilot@users.noreply.github.com |
 
@@ -58,6 +55,8 @@ The headline of a `fix:` commit describes the most important symptom of the prob
 The headline of a `test:` commit describes the capability under test in short. Formulate the headline like a requirement using how the subject under test should behave (as in behavior driven development).
 
 The headline of a `ci:` commit describes the new capability of the CI/CD pipeline in short.
+
+The headline of a `build:` commit describes changes to the build toolchain and process.
 
 The headline of a `build(deps):` commit describes changes and updates to the build related files, e.g. project dependencies in `*.csproj`, `pubspec.*`, `package.*` and similar files.
 

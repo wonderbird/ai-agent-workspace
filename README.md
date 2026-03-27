@@ -16,7 +16,7 @@ If you use Cursor, then you would run
 cd ~/dev/project-a
 mkdir -p .cursor/rules
 cd .cursor/rules
-ln -s ../../../ai-agent-workspace/.cursor/rules general
+ln -s ../../../ai-agent-workspace/.cursor/rules/general general
 ```
 
 Depending on how you like to code, you can link other files in as well, e.g. the clean-code rules:

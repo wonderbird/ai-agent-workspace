@@ -1,4 +1,5 @@
 ---
+description: Use after creating or modifying a markdown file (*.md, *.mdc)
 globs: *.md,*.mdc
 alwaysApply: false
 ---
