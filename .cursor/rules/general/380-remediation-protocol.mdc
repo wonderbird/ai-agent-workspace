@@ -38,7 +38,7 @@ All work must be reduced to resolving a single, isolated obstacle. Attempting to
         - For a **tooling bug**, the fix was already verified in the previous step. No further action is needed.
     - **Verify Fix:** Run the relevant tests or commands to confirm the obstacle is resolved and no regressions were introduced.
 
-4. **Commit and Document:** Commit the change with a message that clearly states which specific obstacle was resolved (e.g., `test: kill mutant #14 in UpdateNormalItem` or `chore: fix stryker reporter command syntax`). Update the memory bank to reflect that one obstacle has been resolved.
+4. **Commit and Document:** Commit the change with a message that clearly states which specific obstacle was resolved (e.g. `build: fix stryker reporter command syntax`). Update the memory bank to reflect that one obstacle has been resolved.
 
 5. **Repeat or Resume:**
     - If there are more obstacles in the list from step 2, return to step 2 and select the next one.
