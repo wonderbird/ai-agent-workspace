@@ -1,5 +1,5 @@
 ---
-description: Use when following 'follow your custom instructions' to understand the memory bank concept
+description: Use when following 'follow your custom instructions' or 'update memory bank' to understand the memory bank concept
 alwaysApply: false
 ---
 # Memory Bank
@@ -69,6 +69,7 @@ flowchart TD
 ### Additional Context
 
 Create additional files/folders within memory-bank/ when they help organize:
+
 - Complex feature documentation
 - Integration specifications
 - API documentation
