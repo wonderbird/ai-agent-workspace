@@ -25,6 +25,27 @@ npm install --global markdownlint-cli
 Project-specific rule configuration lives in `.markdownlint.json` at the
 repository root.
 
+## Changes to `.markdownlint.json` must be reported
+
+Whenever you add, modify, or remove a rule in `.markdownlint.json`, you MUST
+include a dedicated paragraph in your task summary that lists every change.
+For each changed rule, state:
+
+- the rule ID (e.g. `MD013`)
+- what the previous value was (or that the rule was absent)
+- what the new value is (or that the rule was removed)
+- why the change was necessary
+
+This gives the user the information needed to judge whether the change is
+acceptable before the commit is reviewed.
+
+Example summary paragraph:
+
+> **`.markdownlint.json` changes**: Added `MD013: { code_blocks: false }` (was
+> absent — default enabled). Reason: fenced code blocks in ordered list items
+> regularly exceed 80 characters; suppressing the limit only for code blocks
+> keeps prose line-length enforcement intact.
+
 ## Semantic rule the linter cannot check
 
 **NEVER** use bold text (`**text**`) as a substitute for a heading. If content
