@@ -34,7 +34,7 @@ Ask the user questions, one after another, until you can create a solid plan to 
 
 - Proof read the documentation changes. Think hard of how you could improve the documents, so that they are easy to understand for a reader who is new to the topic. Then update the documents.
 
-- Execute the command `commit.md`.
+- Create a git commit.
 
 ## Rules to consider
 
