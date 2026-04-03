@@ -22,6 +22,13 @@ and ask them to install it with:
 npm install --global markdownlint-cli
 ```
 
+If the command is still not found after installation, Node is likely managed
+by NVM, which is not sourced in the agent shell. Prefix the invocation:
+
+```bash
+source ~/.nvm/nvm.sh && nvm use node &>/dev/null && markdownlint <file>
+```
+
 Project-specific rule configuration lives in `.markdownlint.json` at the
 repository root.
 
