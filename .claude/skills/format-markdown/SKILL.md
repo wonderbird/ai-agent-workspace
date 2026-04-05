@@ -1,9 +1,10 @@
 ---
-description: Use after creating or modifying a markdown file (*.md, *.mdc)
-globs: *.md,*.mdc
-alwaysApply: false
+name: format-markdown
+description: >
+  Improves readability of markdown documents by considering formatting rules.
+  Use after creating or modifying a markdown file (*.md, *.mdc).
 ---
-# Markdown formatting rules
+# Format Markdown Document
 
 ## Linter is the source of truth
 
@@ -57,7 +58,3 @@ Example summary paragraph:
 
 **NEVER** use bold text (`**text**`) as a substitute for a heading. If content
 looks like a section title, use proper heading syntax (`#`, `##`, `###`, …).
-
-## Happiness
-
-🛤️
