@@ -15,6 +15,10 @@ Throughout this session, apply these conventions:
 - **Ask one question at a time** so I can focus on each individually.
 - **A / B / C / Custom** — whenever you present options, list them in this format
   with a brief rationale per option.
+- **Never run .specify/scripts directly** — Never run the scripts in the
+  .specify/scripts directory directly. These scripts will be invoked by
+  speckit.specify, speckit.plan, speckit.tasks, and speckit.implement in
+  subagents at the appropriate phases.
 
 Before doing any work, create a task list covering all four phases. Mark each task
 as in progress when you start it and complete when it is done.
@@ -22,6 +26,9 @@ as in progress when you start it and complete when it is done.
 ---
 
 ### Phase 1 — Define Specification
+
+Ensure you are on the main branch and have the latest code. The speckit.specify
+command will create a feature branch, do not create one manually.
 
 Read the context reference in $ARGUMENTS to understand the existing context.
 If no context reference is provided, ask me for one before proceeding.
