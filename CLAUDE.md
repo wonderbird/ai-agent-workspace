@@ -53,4 +53,5 @@ your current task.
 | [400-markdown-formatting.mdc](.cursor/rules/general/400-markdown-formatting.mdc) | Use after creating or modifying a markdown file (`*.md`, `*.mdc`) |
 | [500-cline-memory-bank.mdc](.cursor/rules/general/500-cline-memory-bank.mdc) | Use when following 'follow your custom instructions' to understand the memory bank concept |
 | [600-documentation-strategy.mdc](.cursor/rules/general/600-documentation-strategy.mdc) | Use when creating and updating documentation |
+| [700-quality-of-agent-guidelines.mdc](.cursor/rules/general/700-quality-of-agent-guidelines.mdc) | Use when creating and updating rule files and memory bank files |
 | [900-confirm-readiness.mdc](.cursor/rules/general/900-confirm-readiness.mdc) | Use when responding to the "follow your custom instructions" command |

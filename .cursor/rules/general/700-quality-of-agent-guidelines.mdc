@@ -1,0 +1,27 @@
+---
+description: Quality requirements for memory bank files and agent rule files
+alwaysApply: false
+---
+# Memory Bank and Rule Quality Requirements
+
+## Target Audience
+
+Memory bank files and rule files are written for AI agents (LLMs in thinking
+mode), not humans.
+
+## Token Efficiency
+
+Every memory bank file and every rule file MUST minimise context token
+consumption while communicating context clearly and with focus.
+
+Concretely:
+
+- **No redundancy**: never repeat information that is already stated in an
+  existing rule file. Cross-reference the rule instead.
+- **Signal over noise**: omit background explanations the agent can infer.
+  State only what is unique to this project or this iteration.
+- **Brevity**: prefer short bullet points and tables over prose paragraphs.
+
+## Happiness
+
+🔎
