@@ -1,3 +1,9 @@
+---
+name: create-memory-bank
+description: >
+  Creates a focused memory bank for the current project iteration using scope,
+  git history, and tests. Use when no memory bank exists.
+---
 # Create Memory Bank for Existing Project
 
 ## Your Role
