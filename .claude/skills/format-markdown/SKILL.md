@@ -54,6 +54,13 @@ Example summary paragraph:
 > regularly exceed 80 characters; suppressing the limit only for code blocks
 > keeps prose line-length enforcement intact.
 
+## Long headings must be shortened
+
+When MD013 fires on a heading, reword the heading to fit within the line
+length limit. Do NOT add a `"headings": false` exemption to
+`.markdownlint.json`. A shorter heading with the same meaning is always
+preferred over suppressing the rule.
+
 ## Semantic rule the linter cannot check
 
 **NEVER** use bold text (`**text**`) as a substitute for a heading. If content
