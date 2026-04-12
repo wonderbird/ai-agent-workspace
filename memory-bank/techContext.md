@@ -5,14 +5,12 @@
 ### Current Technologies
 - **Cursor IDE**: Primary development environment with built-in rule enforcement
 - **Git**: Version control with pre-commit hooks capability
-- **Markdown**: Documentation format for rules and memory bank
 - **Bash/Shell**: Scripting for automation and validation
 
 ### Chosen Technologies
 - **Cursor IDE Rules System**: Built-in "always apply" rule enforcement
 - **VS Code Extensions**: Compatibility layer for familiar development experience
 - **Git Integration**: Native git support within Cursor IDE
-- **Markdown Rules**: Portable rule content in standard format
 
 ## Development Setup
 
@@ -20,7 +18,6 @@
 - **Cursor IDE**: Primary development environment
 - **Cursor Rules**: Centralized rule management with "always apply" enforcement
 - **Git**: Version control integrated into the IDE
-- **Markdown**: Documentation format for memory bank
 - **Individual Developer Workflow**: Optimized for solo work
 
 ## Technical Constraints
@@ -48,7 +45,6 @@
 - Cursor IDE (commercial license)
 - VS Code extensions (for compatibility)
 - Git (for version control)
-- Markdown (for rule content)
 
 ## Tool Usage Patterns
 

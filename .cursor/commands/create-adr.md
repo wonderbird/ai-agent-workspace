@@ -109,4 +109,3 @@ Finally, proof read the ADR. Think hard of how you could improve the document, s
 This section gives rules already known to be relevant. However, there could be additional applicable rules.
 
 - @330-git-usage.mdc
-- @400-markdown-formatting.mdc

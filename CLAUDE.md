@@ -50,7 +50,6 @@ your current task.
 | [310-collaboration.mdc](.cursor/rules/general/310-collaboration.mdc) | Always applied |
 | [330-git-usage.mdc](.cursor/rules/general/330-git-usage.mdc) | Use for documenting version information and when committing to git |
 | [380-remediation-protocol.mdc](.cursor/rules/general/380-remediation-protocol.mdc) | Use when an unexpected obstacle prevents progress |
-| [400-markdown-formatting.mdc](.cursor/rules/general/400-markdown-formatting.mdc) | Use after creating or modifying a markdown file (`*.md`, `*.mdc`) |
 | [500-cline-memory-bank.mdc](.cursor/rules/general/500-cline-memory-bank.mdc) | Use when following 'follow your custom instructions' to understand the memory bank concept |
 | [600-documentation-strategy.mdc](.cursor/rules/general/600-documentation-strategy.mdc) | Use when creating and updating documentation |
 | [700-quality-of-agent-guidelines.mdc](.cursor/rules/general/700-quality-of-agent-guidelines.mdc) | Use when creating and updating rule files and memory bank files |
