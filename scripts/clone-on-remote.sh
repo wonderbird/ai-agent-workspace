@@ -10,7 +10,14 @@ echo "Creating Cline Bot workspace ..."
 mkdir -p "$HOME/Documents/Cline"
 echo ""
 
-# Clone the remaining repositories into the AI Agent Workspace
+echo "===== Extracting compressed repositories ====="
+for ARCHIVE in $HOME/Documents/*.tar.gz; do
+    echo "Extracting $ARCHIVE ..."
+    tar -xzf "$ARCHIVE" -C "$HOME/Documents/"
+    rm -f "$ARCHIVE"
+done
+
+# Clone the repositories into the AI Agent Workspace
 for SOURCE in $HOME/Documents/*.git; do
     echo "===== $(basename $SOURCE .git) ====="
 
