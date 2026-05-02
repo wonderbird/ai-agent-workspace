@@ -31,6 +31,7 @@ while read -r SOURCE; do
         continue
     fi
 
+    echo "Linking $(basename "$SOURCE")"
     cmd //c mklink //j "$WIN_TARGET" "$WIN_SOURCE" || {
         echo "Failed to create junction for $(basename "$SOURCE")"
         exit 1

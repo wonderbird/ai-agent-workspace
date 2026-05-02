@@ -28,6 +28,7 @@ while read -r SOURCE; do
         continue
     fi
 
+    echo "Linking $(basename "$SOURCE")"
     ln -s "$SOURCE" "$TARGET" || {
         echo "Failed to create symlink for $(basename "$SOURCE")"
         exit 1
