@@ -1,6 +1,6 @@
 ---
+name: review-documentation
 description: Use when creating and updating documentation
-alwaysApply: false
 ---
 # Documentation Strategy
 
