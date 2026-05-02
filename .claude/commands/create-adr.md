@@ -102,10 +102,4 @@ Create a commit and repeat the restructuring iterations until you cannot see add
 
 ## Final review and improvement
 
-Finally, proof read the ADR. Think hard of how you could improve the document, so that it is easy to understand for a reader who is new to the topic. Then update the document and commit these changes to git.
-
-## Rules to consider
-
-This section gives rules already known to be relevant. However, there could be additional applicable rules.
-
-- @330-git-usage.mdc
+Finally, proof read the ADR. Think hard of how you could improve the document, so that it is easy to understand for a reader who is new to the topic. Then update the document and commit these changes to git using the /commit skill.

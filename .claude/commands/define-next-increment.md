@@ -20,6 +20,6 @@ Create a task list to achieve the goal. Consider your own work breakdown and the
 2. Define a clear MVP increment with specific deliverables and success criteria
 3. Think hard about how to update the memory bank in a way that complies to @500-cline-memory-bank.mdc
 4. Update the memory bank
-5. Commit the changes following @330-git-usage.mdc
+5. Commit the changes using the /commit skill
 
 Please ask your questions one by one, so that I can focus on answering a single question at a time. Ask me the first question.

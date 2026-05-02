@@ -26,7 +26,7 @@ Before every git commit (including TDD red/green/refactor commits), you MUST fol
 
 4.  **Create Commit**: Single commit with all changes.
     - Include code, tests, and memory bank updates in one commit
-    - Follow commit conventions (per `general/330-git-usage.mdc`)
+    - Use /commit skill to commit
 
 Note: This workflow acknowledges the speed tradeoff of running mutation tests after every TDD step. The benefit is continuous verification of test quality.
 

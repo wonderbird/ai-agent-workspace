@@ -1,12 +1,97 @@
 ---
 name: commit
-description: >
-  Prepares and executes a git commit.
-  Use after creating or modifying a markdown file (*.md, *.mdc).
+description: Prepares and executes a git commit
 ---
-# Commit
-
 1. Prepare a git commit by executing the /format-markdown skill for every
-   created or changed markdown file with .md or mdc extension. Use subagents for these tasks to save context tokens
+   created or changed markdown file. Use subagents for these tasks to save context tokens.
 
-2. Create a commit by following @.claude/rules/general/330-git-usage.mdc
+2. Create a commit following the rules below
+
+## Git is the source of version and author information
+
+NEVER add version history related information to documents, because git is
+the trusted source of such information.
+
+## Mandatory structure of a commit message
+
+Commit messages consist of the subject line, the body and the trailers.
+Trailers are also known as footers.
+
+Only the subject is mandatory. Body and trailers are optional.
+
+Subject, body and trailers MUST be separated by an empty line.
+
+If the commit message consists of only subject and trailers, then the trailers
+MUST be separated from the subject by a single empty line.
+
+## Name the Coding Agent as Co-Author for commits
+
+If this is the first commit of your session, you MUST ask the user for your
+agent name, so that you can construct the correct commit body using the
+following table:
+
+| YOUR_AGENT_NAME | YOUR_VENDOR_URL | YOUR_EMAIL |
+| --- | --- | --- |
+| Cursor Agent | <https://cursor.com/home> | <cursoragent@cursor.com> |
+| Claude Code | <https://claude.ai/code> | <noreply@anthropic.com> |
+| GitHub Copilot | <https://github.com/copilot> | <175728472+Copilot@users.noreply.github.com> |
+
+If you are not contained in the valid combinations, then you MUST suggest
+appropriate values for YOUR_AGENT_NAME, YOUR_VENDOR_URL and YOUR_EMAIL.
+
+If a commit shall have a commit body, then you MUST add the following line
+at the end of the body:
+
+```text
+🤖 Generated with [YOUR_AGENT_NAME](YOUR_VENDOR_URL)
+```
+
+Whenever you helped creating the commit, then the Co-Authored-By trailer MUST
+be added to the commit message. The trailer MUST comply to the format
+
+```text
+Co-authored-by: YOUR_AGENT_NAME <YOUR_EMAIL>
+```
+
+## Commit conventions
+
+Your commits MUST use one of the following conventional commit prefixes:
+`feat:`, `fix:`, `refactor:`, `test:`, `docs:`, `ci:`, `build(deps):`.
+If the correct prefix is unclear, ask the user.
+
+All your commits MUST represent a small, coherent and working increment.
+If these criteria are not met, ask the user how to proceed.
+
+The headline of a `feat:` commit explains the new capability of the project
+in short. The headline of such a commit does not tell what you have done to
+achieve this. Example: You would write "feat: show hello message on startup"
+instead of "feat: implement printing hello on startup".
+
+The headline of a `fix:` commit describes the most important symptom of the
+problem in past tense. The commit message body describes the problem and its
+root cause. It may also contain the major steps required to fix the problem.
+
+The headline of a `test:` commit describes the capability under test in short.
+Formulate the headline like a requirement using how the subject under test
+should behave (as in behavior driven development).
+
+The headline of a `ci:` commit describes the new capability of the CI/CD
+pipeline in short.
+
+The headline of a `build:` commit describes changes to the build toolchain
+and process.
+
+The headline of a `build(deps):` commit describes changes and updates to the
+build related files, e.g. project dependencies in `*.csproj`, `pubspec.*`,
+`package.*` and similar files.
+
+A commit changing only documentation files is always a `docs:` commit, never
+a `refactor:` commit.
+
+The brief description of a commit body shall not exceed 50 words.
+
+## Git command line tool usage
+
+If you request git history information, you MUST ALWAYS use the `--no-pager`
+flag as the very first option to git. This avoids blocking git commands
+waiting for the user to terminate the pager.

@@ -48,7 +48,6 @@ your current task.
 | --- | --- |
 | [020-rule-confirmation.mdc](.claude/rules/general/020-rule-confirmation.mdc) | Always applied |
 | [310-collaboration.mdc](.claude/rules/general/310-collaboration.mdc) | Always applied |
-| [330-git-usage.mdc](.claude/rules/general/330-git-usage.mdc) | Use for documenting version information and when committing to git |
 | [380-remediation-protocol.mdc](.claude/rules/general/380-remediation-protocol.mdc) | Use when an unexpected obstacle prevents progress |
 | [500-cline-memory-bank.mdc](.claude/rules/general/500-cline-memory-bank.mdc) | Use when following 'follow your custom instructions' to understand the memory bank concept |
 | [600-documentation-strategy.mdc](.claude/rules/general/600-documentation-strategy.mdc) | Use when creating and updating documentation |
