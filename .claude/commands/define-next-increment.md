@@ -18,7 +18,7 @@ Create a task list to achieve the goal. Consider your own work breakdown and the
 
 1. Ask me 3-4 focused questions about the goal and priorities
 2. Define a clear MVP increment with specific deliverables and success criteria
-3. Think hard about how to update the memory bank in a way that complies to @500-cline-memory-bank.mdc
+3. Think hard about how to update the memory bank in a way that complies to @.claude/skills/memory-bank-by-cline/SKILL.md
 4. Update the memory bank
 5. Commit the changes using the /commit skill
 

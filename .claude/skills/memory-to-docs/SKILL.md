@@ -12,7 +12,7 @@ Act as an experienced Software Architect with strong skill in technical document
 
 ## Goal: Transfer Insights from Memory Bank to Better Places
 
-The goal of this session is to identify important insights in the volatile memory bank. These insights shall be moved to appropriate places in the permanent documentation.
+The goal of this session is to identify important insights in the volatile memory bank defined by @.claude/skills/memory-bank-by-cline/SKILL.md. These insights shall be moved to appropriate places in the permanent documentation.
 
 ## How to Achieve the Goal
 
@@ -44,7 +44,7 @@ Ask the user questions, one after another, until you can create a solid plan to 
 
 ## Rules to consider
 
-The following rules apply and might be helpful during your analysis:
+The following skills and rules apply and might be helpful during your analysis:
 
-- 500-cline-memory-bank.mdc
+- @.claude/skills/memory-bank-by-cline/SKILL.md
 - 600-documentation-strategy.mdc

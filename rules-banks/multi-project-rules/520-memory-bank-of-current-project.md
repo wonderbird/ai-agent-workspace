@@ -2,6 +2,8 @@
 
 ## Select Memory Bank
 
+The memory bank concept is defined in @.claude/skills/memory-bank-by-cline/SKILL.md.
+
 The entry `./memory-bank` inside the selected project represents the memory bank associated with the current iteration.
 
 If neither the entry `./memory-bank` nor a folder `./memory-bank-branches` exists, then you MUST ask the user whether they would like to explore a product vision in order to create a memory bank. If they confirm, then ask the user for a business analyst persona prompt which tailors your answers to their need.
@@ -30,6 +32,6 @@ Then you MUST:
 
 ## Process the Memory Bank
 
-If the `./memory-bank` entry exists for the selected project or after the corresponding symbolic link has been created, you MUST process the memory bank inside the selected project. For this, you search for and read all files in the project subdirectory or symbolic link `./memory-bank` in the exact sequence defined in 500-cline-memory-bank.md. These files describe the goals and the context of the current project iteration.
+If the `./memory-bank` entry exists for the selected project or after the corresponding symbolic link has been created, you MUST process the memory bank inside the selected project. For this, you search for and read all files in the project subdirectory or symbolic link `./memory-bank` in the exact sequence defined in .claude/skills/memory-bank-by-cline/SKILL.md. These files describe the goals and the context of the current project iteration.
 
 At this stage, you NEVER read and process more files. You MUST save context tokens at this stage. However, if you have encountered interesting files up to now, then you ask the user whether to read them.

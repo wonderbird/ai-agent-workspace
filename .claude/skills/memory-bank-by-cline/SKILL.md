@@ -1,6 +1,9 @@
 ---
-description: Use when following 'follow your custom instructions' or 'update memory bank' to understand the memory bank concept
-alwaysApply: false
+name: memory-bank-by-cline
+description: >
+    Memory bank concept and structure for maintaining project knowledge across
+    sessions. Use when following 'follow your custom instructions' to understand
+    the memory bank concept.
 ---
 # Memory Bank
 

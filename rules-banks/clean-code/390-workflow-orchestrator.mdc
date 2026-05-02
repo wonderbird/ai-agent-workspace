@@ -20,7 +20,7 @@ Before every git commit (including TDD red/green/refactor commits), you MUST fol
     - See project documentation for specific mutation test commands
 
 3.  **Update Memory Bank**: Document the current state.
-    - Update `activeContext.md` and `progress.md` as needed (per `general/500-cline-memory-bank.mdc`)
+    - Update `activeContext.md` and `progress.md` as needed (per `.claude/skills/memory-bank-by-cline/SKILL.md`)
     - Include test results, mutation scores, and key learnings
     - Stage memory bank changes with code changes
 

@@ -1,4 +1,5 @@
 ---
+name: fix-problem
 description: >
     Remediation protocol for resolving obstacles one at a time via hypothesize, test, fix, and document.
     Use when an unexpected obstacle prevents progress.

@@ -11,7 +11,7 @@ The virtual machine may be destroyed at any time. The memory bank must always
 reflect the current state so a fresh agent can resume work in a new session without
 loss of context.
 
-Read `.claude/rules/general/500-cline-memory-bank.mdc` to understand the required
+Read @.claude/skills/memory-bank-by-cline/SKILL.md to understand the required
 structure and file conventions.
 
 Create a task list with one task per memory bank file. For each file:

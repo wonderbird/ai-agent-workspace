@@ -22,10 +22,10 @@ Projects use structured documentation following specialized templates and patter
 ### `memory-bank/` - Working Memory
 
 - **Purpose**: Milestone-focused working memory for developers and coding agents
-- **Pattern**: Follows cline memory bank pattern (see 500-cline-memory-bank.md)
+- **Pattern**: Follows cline memory bank pattern (see @.claude/skills/memory-bank-by-cline/SKILL.md)
 - **Content**: Current iteration context, active decisions, progress tracking
 - **Lifecycle**: Updated frequently during development, reviewed at milestone completion
-- **Reading**: MUST read ALL files in sequence defined in 500-cline-memory-bank.md
+- **Reading**: MUST read ALL files in sequence defined in @.claude/skills/memory-bank-by-cline/SKILL.md
 
 ### `docs/architecture` - Architecture Documentation
 
@@ -50,7 +50,7 @@ Projects use structured documentation following specialized templates and patter
 ## References
 
 - [arc42 Architecture Documentation](https://docs.arc42.org/)
-- [Cline Memory Bank Pattern](500-cline-memory-bank.md)
+- [Cline Memory Bank Pattern](.claude/skills/memory-bank-by-cline/SKILL.md)
 
 ## Happiness
 

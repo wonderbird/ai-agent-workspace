@@ -20,8 +20,8 @@ avoiding ambiguity) are in `.claude/rules/general/310-collaboration.mdc`.
 
 ## How to follow your custom instructions
 
-Whenever the user says "follow your custom instructions", then you must read
-`.claude/rules/general/500-cline-memory-bank.mdc`.
+Whenever the user says "follow your custom instructions", then use the
+/memory-bank-by-cline skill to understand the memory bank concept and structure.
 
 If there is no memory bank, then you MUST ask the user for clarification
 before proceeding.
@@ -48,7 +48,6 @@ your current task.
 | --- | --- |
 | [020-rule-confirmation.mdc](.claude/rules/general/020-rule-confirmation.mdc) | Always applied |
 | [310-collaboration.mdc](.claude/rules/general/310-collaboration.mdc) | Always applied |
-| [500-cline-memory-bank.mdc](.claude/rules/general/500-cline-memory-bank.mdc) | Use when following 'follow your custom instructions' to understand the memory bank concept |
 | [600-documentation-strategy.mdc](.claude/rules/general/600-documentation-strategy.mdc) | Use when creating and updating documentation |
 | [700-quality-of-agent-guidelines.mdc](.claude/rules/general/700-quality-of-agent-guidelines.mdc) | Use when creating and updating rule files and memory bank files |
 | [900-confirm-readiness.mdc](.claude/rules/general/900-confirm-readiness.mdc) | Use when responding to the "follow your custom instructions" command |
