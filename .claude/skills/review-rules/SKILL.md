@@ -19,14 +19,14 @@ All other files must align to it — no duplication, no contradiction.
 # Files
 
 Always present:
-- `.specify/memory/constitution.md` — must link all `.cursor/rules` files
+- `.specify/memory/constitution.md` — must link all `.claude/rules` files
   with guidance on when to read each
 - `CLAUDE.md` — first file read by any agent; must direct to AGENTS.md and
   constitution; no rules of its own beyond that direction
 
 Check existence; skip if absent:
 - `AGENTS.md` — detailed agent instructions
-- `.cursor/rules/**/*.mdc` — each must be linked from constitution
+- `.claude/rules/**/*.mdc` — each must be linked from constitution
 - Files explicitly linked from any of the above (one level deep) —
   typically ADRs
 
@@ -43,19 +43,19 @@ Constitution — must be:
 - Token-efficient, unambiguous, complete
 - Internally consistent
 - Scoped correctly: primary rules inline; optional detail in linked ADRs
-- Links all existing `.cursor/rules` files with guidance on when to read each
+- Links all existing `.claude/rules` files with guidance on when to read each
 
 All other files — must be:
 - Token-efficient, unambiguous, complete
 - Internally consistent
 - Correctly scoped:
   - `AGENTS.md` → detailed instructions not duplicating constitution
-  - `.cursor/rules/**/*.mdc` → Cursor-specific rules, linked from constitution
+  - `.claude/rules/**/*.mdc` → Cursor-specific rules, linked from constitution
 
 Cross-file properties (verified in Step 3 only):
 - No duplication of constitution content in other files
 - No contradictions between files
-- Every existing `.cursor/rules` file linked from constitution
+- Every existing `.claude/rules` file linked from constitution
 
 # Finding types
 
@@ -65,7 +65,7 @@ Cross-file properties (verified in Step 3 only):
 - `wrong-scope` — content in wrong file
 - `token-waste` — verbose phrasing, filler
 - `contradicts-constitution` — file disagrees with constitution
-- `missing-constitution-link` — `.cursor/rules` file not linked from
+- `missing-constitution-link` — `.claude/rules` file not linked from
   constitution
 - `missing-required-pointer` — required direction absent (e.g., CLAUDE.md
   not directing to AGENTS.md or constitution)
@@ -79,7 +79,7 @@ Auto-fix all types except `requires-invention`.**
 
 ## Step 1 — Discover files
 
-Check existence of AGENTS.md and `.cursor/rules/**/*.mdc`.
+Check existence of AGENTS.md and `.claude/rules/**/*.mdc`.
 Collect linked files from all existing files (one level deep).
 Constitution and CLAUDE.md always included.
 

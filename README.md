@@ -8,21 +8,21 @@ This project provides rules for coding agents similar to the Cline Rules (1).
 
 The ai agent workspace folder should be next to your project folder(s). For example, if your projects are in `~/dev/project-a` and `~/dev/project-b`, clone this repository to `~/dev/ai-agent-workspace`.
 
-Next, link the folder `ai-agent-workspace/.cursor/rules` into the rules directory of your project.
+Next, link the folder `ai-agent-workspace/.claude/rules` into the rules directory of your project.
 
 If you use Cursor, then you would run
 
 ```shell
 cd ~/dev/project-a
-mkdir -p .cursor/rules
-cd .cursor/rules
-ln -s ../../../ai-agent-workspace/.cursor/rules/general general
+mkdir -p .claude/rules
+cd .claude/rules
+ln -s ../../../ai-agent-workspace/.claude/rules/general general
 ```
 
 Depending on how you like to code, you can link other files in as well, e.g. the clean-code rules:
 
 ```shell
-cd .cursor/rules
+cd .claude/rules
 ln -s ../../../ai-agent-workspace/rules-banks/clean-code clean-code
 ```
 
@@ -72,7 +72,7 @@ Verify your sandbox: report user and current directory. You should be user 'vsco
 
 ## Acknowledgements
 
-The command [generate-cursor-rules.md](.cursor/commands/generate-cursor-rules.md) has been adopted from the following Udemy course:
+The command [generate-cursor-rules.md](.claude/commands/generate-cursor-rules.md) has been adopted from the following Udemy course:
 
 T. Phillips, “Cursor AI Beginner to Pro: Build Production Web Apps with AI,” Udemy. Accessed: Dec. 06, 2025. [Online]. Available: [https://www.udemy.com/course/learn-cursor-ai/](https://www.udemy.com/course/learn-cursor-ai/)
 
