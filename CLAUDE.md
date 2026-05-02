@@ -1,7 +1,7 @@
-# CLAUDE.md
+# Project Instructions for AI Agents
 
-This file provides guidance to coding agents when working with projects
-in this folder.
+This file provides instructions and context for AI coding agents working on this
+project.
 
 ## Collaboration between you and the user
 
