@@ -25,6 +25,14 @@ projects.
 The folder [rules-banks](./rules-banks) contains use case specific rules that
 you can link into your project as needed.
 
+### Make skills available system-wide
+
+To symlink all skills from `.claude/skills` into `~/.claude/skills`, run the
+appropriate script for your OS:
+
+- **Linux:** `scripts/create-skills-links-in-home.sh`
+- **Windows (GitBash):** `scripts/create-skills-links-in-home-win.sh`
+
 ## Acknowledgements
 
 The [generate-cursor-rules.md](.claude/commands/generate-cursor-rules.md)
