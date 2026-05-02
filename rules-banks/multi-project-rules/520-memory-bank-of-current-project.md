@@ -2,7 +2,7 @@
 
 ## Select Memory Bank
 
-The memory bank concept is defined in @.claude/skills/memory-bank-by-cline/SKILL.md.
+The memory bank concept is defined in the "memory-bank-by-cline" skill.
 
 The entry `./memory-bank` inside the selected project represents the memory bank associated with the current iteration.
 

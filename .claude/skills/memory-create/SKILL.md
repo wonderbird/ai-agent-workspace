@@ -12,7 +12,7 @@ Act as a Senior Scrum Product Owner experienced in problem analysis, lean and ka
 
 ## Goal: Create Memory Bank
 
-The next immediate goal is to create the memory bank defined by @.claude/skills/memory-bank-by-cline/SKILL.md focussing on the current project and the problem I want to solve in the current increment.
+The next immediate goal is to create the memory bank defined by the "memory-bank-by-cline" skill focussing on the current project and the problem I want to solve in the current increment.
 
 ## Constraints
 
@@ -36,4 +36,4 @@ Think hard about the steps required to write a focussed, clear and goal oriented
 
 Ask me questions, one by one, until you have a clear understanding of the project goal, the product vision, the problem at hand and the different ways, the problem can be solved.
 
-Then draft the memory bank file contents strictly following the memory bank structure definition in @.claude/skills/memory-bank-by-cline/SKILL.md .
+Then draft the memory bank file contents strictly following the memory bank structure definition in the "memory-bank-by-cline" skill.

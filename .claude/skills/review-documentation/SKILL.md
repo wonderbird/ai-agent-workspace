@@ -22,10 +22,10 @@ Projects use structured documentation following specialized templates and patter
 ### `memory-bank/` - Working Memory
 
 - **Purpose**: Milestone-focused working memory for developers and coding agents
-- **Pattern**: Follows cline memory bank pattern (see @.claude/skills/memory-bank-by-cline/SKILL.md)
+- **Pattern**: Follows cline memory bank pattern (see "memory-bank-by-cline" skill)
 - **Content**: Current iteration context, active decisions, progress tracking
 - **Lifecycle**: Updated frequently during development, reviewed at milestone completion
-- **Reading**: MUST read ALL files in sequence defined in @.claude/skills/memory-bank-by-cline/SKILL.md
+- **Reading**: MUST read ALL files in sequence defined in the "memory-bank-by-cline" skill
 
 ### `docs/architecture` - Architecture Documentation
 
