@@ -2,10 +2,7 @@
 name: commit
 description: Prepares and executes a git commit
 ---
-1. Prepare a git commit by executing the /format-markdown skill for every
-   created or changed markdown file. Use subagents for these tasks to save context tokens.
-
-2. Create a commit following the rules below
+Create a commit following the rules below:
 
 ## Git is the source of version and author information
 

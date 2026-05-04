@@ -1,6 +1,3 @@
----
-alwaysApply: true
----
 You must apply strict TDD with red, green, refactor phases.
 
 ## TDD Cycle
@@ -14,7 +11,7 @@ You must apply strict TDD with red, green, refactor phases.
 3.  **Green Phase**: Write the minimum code to make the test pass (e.g., a guard clause). Verify it passes.
 
 4.  **Refactor Phase**: Improve code design with small, incremental refactoring steps.
-    - Select refactorings according to the absolute priority premise (as per `.claude/rules/A00-absolute-priority-premise.mdc`)
+    - Use skill "refactor-absolute-priority-premise" to select refactorings
     - Verify tests pass after *each* refactoring step.
     - If you see a larger design pattern, document it in a comment before refactoring towards it.
 
@@ -41,14 +38,7 @@ If you find yourself combining multiple refactoring techniques in one commit, **
 
 ## Commits
 
-- Create a git commit after each green step and each refactoring step.
-- Create a git commit for every documentation or memory bank update.
-- All commits must follow the git usage rules.
+Use the "commit" skill to
 
-## Integration with Pre-Commit Workflow
-
-Before creating each commit (after green or refactor phases), you MUST follow the pre-commit workflow defined in `390-workflow-orchestrator.mdc`. This ensures continuous quality verification at every step.
-
-## Happiness
-
-👣
+- create a git commit after each green step and each refactoring step,
+- create a git commit for every documentation or memory bank update.

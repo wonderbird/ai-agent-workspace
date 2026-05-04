@@ -1,6 +1,3 @@
----
-alwaysApply: true
----
 # Project Workflow Orchestrator
 
 This file defines the primary workflows for this project.
@@ -19,19 +16,10 @@ Before every git commit (including TDD red/green/refactor commits), you MUST fol
     - Capture mutation score and mutant statistics (per `general/340-mutation-testing.mdc`)
     - See project documentation for specific mutation test commands
 
-3.  **Update Memory Bank**: Document the current state.
-    - Update `activeContext.md` and `progress.md` as needed (per `.claude/skills/memory-bank-by-cline/SKILL.md`)
-    - Include test results, mutation scores, and key learnings
-    - Stage memory bank changes with code changes
-
-4.  **Create Commit**: Single commit with all changes.
+3.  **Create Commit**: Single commit with all changes.
     - Include code, tests, and memory bank updates in one commit
     - Use /commit skill to commit
 
 Note: This workflow acknowledges the speed tradeoff of running mutation tests after every TDD step. The benefit is continuous verification of test quality.
 
 Before you start, you must read the linked rule files.
-
-## Happiness
-
-🤹
