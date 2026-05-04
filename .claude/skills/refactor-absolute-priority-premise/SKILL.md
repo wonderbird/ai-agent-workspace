@@ -1,6 +1,9 @@
 ---
-description: Use when chosing which code to refactor and how to refactor
-alwaysApply: false
+name: refactor-absolute-priority-premise
+description: >
+  Choose which code to refactor and how to refactor it based on the mass values
+  of code components. Use when chosing which code to refactor and how to
+  refactor.
 ---
 # Absolute Priority Premise (APP)
 
