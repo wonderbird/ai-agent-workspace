@@ -37,8 +37,7 @@ argument-hint: "[optional additional instructions]"
         ]
       }
 
-4. Invoke the ralph skill with the substituted prompt below (append
-   $ARGUMENTS if provided):
+4. Invoke the ralph skill with the substituted prompt below
 
    ralph: implement the feature defined in:
           - FEATURE_DIR/tasks.md         (task list — READ-ONLY; do NOT
