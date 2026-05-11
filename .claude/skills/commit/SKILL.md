@@ -53,7 +53,7 @@ Co-authored-by: YOUR_AGENT_NAME <YOUR_EMAIL>
 ## Commit conventions
 
 Your commits MUST use one of the following conventional commit prefixes:
-`feat:`, `fix:`, `refactor:`, `test:`, `docs:`, `ci:`, `build(deps):`.
+`feat:`, `fix:`, `refactor:`, `test:`, `docs:`, `ci:`, `build(deps):`, `ai:`.
 If the correct prefix is unclear, ask the user.
 
 All your commits MUST represent a small, coherent and working increment.
@@ -81,6 +81,14 @@ and process.
 The headline of a `build(deps):` commit describes changes and updates to the
 build related files, e.g. project dependencies in `*.csproj`, `pubspec.*`,
 `package.*` and similar files.
+
+The headline of an `ai:` commit describes changes to documentation, rules, or
+skills whose audience is AI agents — for example, files under
+`.claude/skills/`, `.claude/rules/`, `AGENTS.md`, `CLAUDE.md`, agent rule
+files, or constitution updates that govern agent behavior. Use `ai:` instead
+of `docs:` when the audience is an AI agent rather than a human reader. An
+optional scope MAY be added to narrow the area, e.g. `ai(skills):`,
+`ai(rules):`.
 
 A commit changing only documentation files is always a `docs:` commit, never
 a `refactor:` commit.
