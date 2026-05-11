@@ -21,6 +21,8 @@ Projects use structured documentation following specialized templates and patter
 
 ### `memory-bank/` - Working Memory
 
+Applies only if folder `memory-bank/` exists in the project.
+
 - **Purpose**: Milestone-focused working memory for developers and coding agents
 - **Pattern**: Follows cline memory bank pattern (see "memory-bank-by-cline" skill)
 - **Content**: Current iteration context, active decisions, progress tracking
@@ -51,7 +53,3 @@ Projects use structured documentation following specialized templates and patter
 
 - [arc42 Architecture Documentation](https://docs.arc42.org/)
 - [Cline Memory Bank Pattern](.claude/skills/memory-bank-by-cline/SKILL.md)
-
-## Happiness
-
-📝
