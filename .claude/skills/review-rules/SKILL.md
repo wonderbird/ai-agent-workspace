@@ -4,7 +4,6 @@ description: >
   Review and fix all agent-facing context files for consistency, clarity, and
   token efficiency. Constitution is ground truth. Use when rules files may be
   out of sync, redundant, or contradictory.
-disable-model-invocation: true
 model: opus
 effort: high
 context: fork
