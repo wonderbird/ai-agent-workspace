@@ -25,7 +25,7 @@ Always present:
 
 Check existence; skip if absent:
 - `AGENTS.md` — detailed agent instructions
-- `.claude/rules/**/*.mdc` — each must be linked from constitution
+- `.claude/rules/**/*.md` — each must be linked from constitution
 - Files explicitly linked from any of the above (one level deep) —
   typically ADRs
 
@@ -49,7 +49,7 @@ All other files — must be:
 - Internally consistent
 - Correctly scoped:
   - `AGENTS.md` → detailed instructions not duplicating constitution
-  - `.claude/rules/**/*.mdc` → Cursor-specific rules, linked from constitution
+  - `.claude/rules/**/*.md` → Claude-specific rules, linked from constitution
 
 Cross-file properties (verified in Step 3 only):
 - No duplication of constitution content in other files
@@ -78,7 +78,7 @@ Auto-fix all types except `requires-invention`.**
 
 ## Step 1 — Discover files
 
-Check existence of AGENTS.md and `.claude/rules/**/*.mdc`.
+Check existence of AGENTS.md and `.claude/rules/**/*.md`.
 Collect linked files from all existing files (one level deep).
 Constitution and CLAUDE.md always included.
 
