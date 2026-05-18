@@ -1,3 +1,12 @@
+---
+name: create-adr
+description: >
+  Creates a structured Architecture Decision Record (ADR) from the current
+  discussion or a given topic. Use when an architectural decision needs to be
+  documented before implementation — covers drafting alternatives, consequences,
+  mitigations, and decision drivers, then iteratively refines the document for
+  clarity.
+---
 # Create an Architecture Decision Record (ADR)
 
 ## Your role
@@ -6,24 +15,19 @@ Act as a software architect experienced in preparing architectural decisions and
 
 Create and maintain a task list so that you can follow the next instructions carefully.
 
-## Avoid AI rule degradation
+## Topic
 
-IMPORTANT: As an AI agent you are affected from AI rule degradation. This means there is a risk that you forget about the applicable rules. As a remedy, perform these steps before starting to execute the task list:
-
-For each task,
-
-- check which rules MUST be considered
-- ensure the rules are remembered by either extending the description of the task or by inserting corresponding tasks into the task list.
+$ARGUMENTS
 
 ## Goal
 
-I consider the solution of the current discussion an architectural decision.
+If the section "Topic" is empty and the current discussion does not clarify the scope of the architecture decision, then ask me for the decision to make.
 
 The next goal is to move all information related to the undecided decision into an architecture decision record (ADR).
 
 Please create the ADR and then present the result so that I can make the decision.
 
-You MUST NOT implement a solution before I have approved the ADR.
+You MUST NOT implement a solution.
 
 ## Identify topic and filename
 
@@ -39,13 +43,11 @@ Please crawl and understand the following documentation about architecture decis
 - https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions
 - https://adr.github.io/madr/
 
-## Draft a provisional recommendation
+## Draft the ADR
 
-From the chat, draft the ADR with a PROVISIONAL recommendation. The recommendation MUST be explicitly flagged as provisional in the document (e.g. `## Recommendation (provisional — pending mitigation review)`).
+From the chat, create a draft ADR following the format described in the crawled documentation.
 
 IMPORTANT: The decision has not been made yet. The purpose of the document is to help stakeholders taking a well informed decision.
-
-Save the draft. Then create a git commit.
 
 ## Add frequently present alternative solutions
 
@@ -61,16 +63,12 @@ For each solution not contained in the draft ADR yet:
 2. Integrate the solution into the ADR.
 3. Ensure that the format and contents of the added content matches the quality of the existing solutions documented in the ADR.
 
-After completion, create a git commit.
-
 ## Mitigate negative consequences
 
 For each solution in the ADR which lists negative consequences but does not address how they could be mitigated:
 
 1. Think about possible ways to reduce or eliminate negative consequences
 2. Update the ADR with a section about these mitigations
-
-After completion, create a git commit
 
 ## Verify the decision drivers
 
@@ -84,31 +82,9 @@ Ask the user whether you should interview them in order to find out the correct 
 
 Then perform the update.
 
-Finally, create a commit.
-
-## Re-evaluate the provisional recommendation against mitigations and drivers
-
-Now that every option carries its mitigations and the decision drivers are priority-ranked, re-walk the option matrix. For each option, ask: (a) do the mitigations applied to the rejected options change the verdict? (b) does the priority-ranked driver list still favour the provisional recommendation? If either answer flips, update the recommendation. Then remove the "provisional" flag from the Recommendation heading and document any changes in the Consequences or Mitigations sections.
-
-Finally, create a git commit.
-
 ## Complete the ADR draft
 
 Then think hard: What should be added to the ADR so that the entire decision related information including the different design aspects is preserved?
-
-Update the document and create another commit at that stage.
-
-## Mandate a Confirmation criterion
-
-Every ADR MUST contain a Confirmation section that states a testable criterion proving the decision worked. The criterion MUST be observable (a check, a log line, a metric, a Dependabot PR shape, etc.) rather than a vague "review later". If no testable criterion can be written, document that explicitly and treat the absence as a Revisit Trigger (next stage).
-
-Create a git commit after writing the Confirmation section.
-
-## Mandate Revisit Triggers
-
-Every ADR MUST contain a Revisit Triggers section enumerating the events that should re-open this decision. At minimum: a relevant CVE / public compromise in the affected supply chain; failure of the Confirmation criterion; an annual review date; adoption of a related option that changes the trust topology.
-
-Create a git commit after writing the Revisit Triggers section.
 
 ## Iterative restructuring for readability and understandability
 
@@ -116,8 +92,8 @@ Now start an iterative restructuring process with the goal of moving detailed in
 
 In every iteration check whether you can make the information on the upper document part simpler and refer to details at the bottom. After having moved some parts of the document, check whether it is still easy to follow and understand the document.
 
-Create a commit and repeat the restructuring iterations until you cannot see additional improvements. If that is the case, then skip the last commit but revert the last set of changes.
+Repeat the restructuring iterations until you cannot see additional improvements.
 
 ## Final review and improvement
 
-Finally, proof read the ADR. Think hard of how you could improve the document, so that it is easy to understand for a reader who is new to the topic. Then update the document and commit these changes to git using the /commit skill.
+Finally, proof read the ADR. Think hard of how you could improve the document, so that it is easy to understand for a reader who is new to the topic. Then update the document.

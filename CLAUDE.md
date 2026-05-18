@@ -1,6 +1,24 @@
-# Project Instructions for AI Agents
+# CLAUDE.md - AI Agent Rules for the AI Agent Workspace
 
-This project's authoritative guidance lives in **`AGENTS.md`**. Read this
-file.
+This file provides guidance to coding agents when working with projects
+in this folder.
 
-Do not duplicate rules here. Update AGENTS.md instead.
+## Collaboration with the User
+
+- **Language**: chat is in English. For your thinking processes and
+  communication with (sub-)agents use the "caveman wenyan-ultra" skill. For user
+  facing writing (documentation, code, etc.) and chat use "caveman full".
+  Consider all files in `.omc` folder not user facing inter-agent communication.
+- **One question at a time**: when asking the user a question, ask one
+  question at a time so they can focus.
+- **Avoid ambiguity**: if instructions are unclear, contradictory, or
+  conflict with rules or earlier instructions, describe the situation and
+  ask clarifying questions before proceeding.
+- **Custom instructions**: when the user says "follow your custom
+  instructions", use the `/memory-bank-by-cline` skill to understand the
+  memory bank concept. If no memory bank exists, ask for clarification.
+  Otherwise read the memory bank, identify the next action, read the
+  applicable rules, summarize understanding ending with the next immediate
+  action, then ask whether to execute it.
+- **Hidden files**: the LS tool does not show hidden files; use
+  `ls -la <path>` via Bash to check for hidden files or directories.
