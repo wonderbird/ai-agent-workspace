@@ -98,6 +98,18 @@ Then think hard: What should be added to the ADR so that the entire decision rel
 
 Update the document and create another commit at that stage.
 
+## Mandate a Confirmation criterion
+
+Every ADR MUST contain a Confirmation section that states a testable criterion proving the decision worked. The criterion MUST be observable (a check, a log line, a metric, a Dependabot PR shape, etc.) rather than a vague "review later". If no testable criterion can be written, document that explicitly and treat the absence as a Revisit Trigger (next stage).
+
+Create a git commit after writing the Confirmation section.
+
+## Mandate Revisit Triggers
+
+Every ADR MUST contain a Revisit Triggers section enumerating the events that should re-open this decision. At minimum: a relevant CVE / public compromise in the affected supply chain; failure of the Confirmation criterion; an annual review date; adoption of a related option that changes the trust topology.
+
+Create a git commit after writing the Revisit Triggers section.
+
 ## Iterative restructuring for readability and understandability
 
 Now start an iterative restructuring process with the goal of moving detailed information down and keeping higher level information further up in the document.
