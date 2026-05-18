@@ -39,9 +39,9 @@ Please crawl and understand the following documentation about architecture decis
 - https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions
 - https://adr.github.io/madr/
 
-## Draft the ADR
+## Draft a provisional recommendation
 
-From the chat, create a draft ADR following the format described in the crawled documentation.
+From the chat, draft the ADR with a PROVISIONAL recommendation. The recommendation MUST be explicitly flagged as provisional in the document (e.g. `## Recommendation (provisional — pending mitigation review)`).
 
 IMPORTANT: The decision has not been made yet. The purpose of the document is to help stakeholders taking a well informed decision.
 
@@ -85,6 +85,12 @@ Ask the user whether you should interview them in order to find out the correct 
 Then perform the update.
 
 Finally, create a commit.
+
+## Re-evaluate the provisional recommendation against mitigations and drivers
+
+Now that every option carries its mitigations and the decision drivers are priority-ranked, re-walk the option matrix. For each option, ask: (a) do the mitigations applied to the rejected options change the verdict? (b) does the priority-ranked driver list still favour the provisional recommendation? If either answer flips, update the recommendation. Then remove the "provisional" flag from the Recommendation heading and document any changes in the Consequences or Mitigations sections.
+
+Finally, create a git commit.
 
 ## Complete the ADR draft
 
