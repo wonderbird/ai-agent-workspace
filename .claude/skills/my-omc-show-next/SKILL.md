@@ -1,5 +1,5 @@
 ---
-name: show-next-task
+name: my-omc-show-next
 description: >
   Identify the next immediate action from open issues. Shows a focused
   ASCII dependency graph scoped to in-progress work (or current branch as
@@ -98,6 +98,33 @@ One paragraph, ≤4 sentences:
 - What it unblocks when done
 
 Format: `**Next immediate action: \`<id>\` [then \`<id>\`].**`
+
+## Step 7 — Autonomous execution assessment
+
+Output this question block verbatim after the next-action statement:
+
+---
+
+> **What is the concrete next action? What can you do autonomously? For which tasks do you need me?**
+> *(Check the MCP tools, plugins and skills available to you)*
+
+---
+
+Then answer it in three parts:
+
+**Autonomous** — tasks/steps executable without user input (file edits,
+shell commands, gh API calls, Beads operations available via MCP or CLI).
+
+**Needs user** — tasks/steps requiring user decision, approval, credentials,
+or physical access (GitHub UI actions not exposed via API, secrets,
+hardware-level ops, review approval gates).
+
+**Recommendation** — one of:
+- If 2+ actionable tasks are fully autonomous and independent: suggest
+  invoking the `parallel-work` skill to delegate to parallel sub-agents.
+- If 1 actionable task is autonomous: suggest claiming and executing directly.
+- If any actionable task needs the user first: list those explicitly so
+  the user can unblock them before agent execution proceeds.
 
 ## Output constraints
 
