@@ -18,14 +18,11 @@ All other files must align to it — no duplication, no contradiction.
 # Files
 
 Always present:
-- `.specify/memory/constitution.md` — must link all `.claude/rules` files
-  with guidance on when to read each
 - `CLAUDE.md` — first file read by any agent; must direct to AGENTS.md and
   constitution; no rules of its own beyond that direction
 
 Check existence; skip if absent:
 - `AGENTS.md` — detailed agent instructions
-- `.claude/rules/**/*.md` — each must be linked from constitution
 - Files explicitly linked from any of the above (one level deep) —
   typically ADRs
 
@@ -42,19 +39,17 @@ Constitution — must be:
 - Token-efficient, unambiguous, complete
 - Internally consistent
 - Scoped correctly: primary rules inline; optional detail in linked ADRs
-- Links all existing `.claude/rules` files with guidance on when to read each
 
 All other files — must be:
 - Token-efficient, unambiguous, complete
 - Internally consistent
 - Correctly scoped:
   - `AGENTS.md` → detailed instructions not duplicating constitution
-  - `.claude/rules/**/*.md` → Claude-specific rules, linked from constitution
+  - `.claude/rules/**/*.md` → Claude-specific rules
 
 Cross-file properties (verified in Step 3 only):
 - No duplication of constitution content in other files
 - No contradictions between files
-- Every existing `.claude/rules` file linked from constitution
 
 # Finding types
 
@@ -78,7 +73,8 @@ Auto-fix all types except `requires-invention`.**
 
 ## Step 1 — Discover files
 
-Check existence of AGENTS.md and `.claude/rules/**/*.md`.
+Check existence of AGENTS.md, `.claude/rules/**/*.md`, `.claude/skills/**/*.md`
+and `.claude/commands/**/*.md`.
 Collect linked files from all existing files (one level deep).
 Constitution and CLAUDE.md always included.
 
