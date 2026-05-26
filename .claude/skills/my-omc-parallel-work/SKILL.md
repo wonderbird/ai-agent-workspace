@@ -1,5 +1,5 @@
 ---
-name: parallel-work
+name: my-omc-parallel-work
 description: >
   Spawn parallel sub-agents in isolated git worktrees for independent Beads
   tasks. Use when triage shows 2+ independent actionable tasks suited for
