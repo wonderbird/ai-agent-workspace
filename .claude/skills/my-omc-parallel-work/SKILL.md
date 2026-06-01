@@ -105,8 +105,12 @@ Claim and complete Beads issue ansible-all-my-things-<id>: "<title>".
 CLAUDE.md and AGENTS.md will load automatically. Follow the session
 completion protocol they specify.
 ```
+## Step 5 - Show agent output in tmux panes
 
-## Step 5 — Monitor and report
+If your terminal supports it, open a tmux pane to the bottom right for each
+agent to show real-time output.
+
+## Step 6 — Monitor and report
 
 After all agents complete, report:
 
