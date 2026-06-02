@@ -45,8 +45,7 @@ fi
 
 REMOTE_HOST="$1"
 REMOTE_HOST_NAME="agent"
-REMOTE_USER=galadriel
-REMOTE_TARGET="/home/galadriel/Documents"
+REMOTE_TARGET="/home/$REMOTE_USER/Documents"
 
 # Remove remote entries in local repositories
 echo "===== Removing remote entries in local repositories ====="

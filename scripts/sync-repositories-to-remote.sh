@@ -45,8 +45,7 @@ fi
 
 REMOTE_HOST="$1"
 REMOTE_HOST_NAME="agent"
-REMOTE_USER=galadriel
-REMOTE_TARGET="/home/galadriel/Documents"
+REMOTE_TARGET="/home/$REMOTE_USER/Documents"
 
 # Ensure the remote target directory exists
 ssh -p $REMOTE_PORT "$REMOTE_USER@$REMOTE_HOST" "mkdir -p $REMOTE_TARGET"
