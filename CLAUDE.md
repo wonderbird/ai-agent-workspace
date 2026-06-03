@@ -22,3 +22,12 @@ in this folder.
   action, then ask whether to execute it.
 - **Hidden files**: the LS tool does not show hidden files; use
   `ls -la <path>` via Bash to check for hidden files or directories.
+
+## Beads Workflow
+
+- When a feature issue transitions to `in_progress`, instantiate the `pr-review-cycle`
+  molecule and attach its user story as a child of the feature:
+  ```bash
+  bd mol pour pr-review-cycle        # instantiate; note the returned story ID
+  bd update <story-id> --parent <feature-id>  # attach story to feature
+  ```
