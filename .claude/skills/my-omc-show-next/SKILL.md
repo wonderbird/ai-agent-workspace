@@ -18,8 +18,19 @@ Produce a focused, human-readable next-action analysis.
 ```bash
 bd list --status=in_progress
 git branch --show-current
+bd ready
+bd blocked
 bv --robot-triage --format toon
 ```
+
+> **Authoritative sources (bd v1.0.4+):**
+> - `bd ready` = the ONLY authoritative list of actionable issues
+> - `bd blocked` = the ONLY authoritative list of blocked issues
+> - `bv --robot-triage` = supplementary priority/graph data only — do NOT use
+>   `bv unblocks_ids` to determine readiness; parent-child edges inflate that
+>   count and those children may already be in `bd ready`
+> - `dep tree` and `dep list --direction down` = display views only — a
+>   parent-child entry in `dep list` is NOT a blocker; never override `bd ready`
 
 ## Step 2 — Determine WIP scope
 
@@ -45,9 +56,14 @@ the WIP can be shipped and verified. Exclude:
 - Issues in unrelated epics with no dependency edge into WIP
 - Backlog items with no blocking relationship to WIP
 
-For each open issue, determine:
-- Is it **actionable** (no open blockers)?
-- Or **blocked** (has open dependencies)?
+For each open issue, determine actionability using ONLY authoritative commands:
+- **Actionable**: appears in `bd ready` output
+- **Blocked**: appears in `bd blocked` output
+
+Do NOT use `bd dep tree`, `bd dep list`, or `bv unblocks_ids` to classify
+issues as blocked — these commands show graph structure, not readiness state.
+In bd v1.0.4, `--parent` wiring does NOT gate parents or children; only
+explicit `bd dep add` edges create true blocking visible in `bd blocked`.
 
 ## Step 4 — Render ASCII dependency graph
 
