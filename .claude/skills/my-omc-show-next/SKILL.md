@@ -1,17 +1,30 @@
 ---
 name: my-omc-show-next
 description: >
-  Identify the next immediate action from open issues. Shows a focused
-  ASCII dependency graph scoped to in-progress work (or current branch as
-  proxy), lists required issue IDs with headlines, and states the single
-  next action with rationale. Invoke when the user asks "what's next",
-  "show next", "what should I work on", or wants a triage summary.
+  Triage open issues down to the single next action. Scopes to in-progress
+  work (or the current branch as proxy), renders a compact
+  actionable-vs-blocked graph, and names the one issue to claim next with
+  rationale. Invoke on "what's next", "show next", "what should I work on",
+  or any triage-summary request.
 model: sonnet
 ---
 
 # Show-Next: Next Immediate Action
 
-Produce a focused, human-readable next-action analysis.
+Produce a focused next-action analysis. First output line is the graph
+header — no preamble.
+
+## Authoritative rule (bd v1.0.4)
+
+`bd ready` is the ONLY source of actionable issues. `bd blocked` is the ONLY
+source of blocked issues. `dep tree`, `dep list`, and `--parent` are
+display-only views — they NEVER override readiness. Only `bd dep add` creates
+a real blocker.
+
+Validated against bd v1.0.4 — re-check if a newer bd changelog touches
+parent-child gating or `bd ready` behaviour. If `bd ready` and `bd blocked`
+look contradictory, suspect a `--parent`/`bd dep add` antiparallel cycle;
+audit with `bd dep list <id> --direction up|down`.
 
 ## Step 1 — Gather state (run in parallel)
 
@@ -22,98 +35,47 @@ bd ready
 bd blocked
 ```
 
-> **Authoritative sources (bd v1.0.4+):**
-> - `bd ready` = the ONLY authoritative list of actionable issues
-> - `bd blocked` = the ONLY authoritative list of blocked issues
-> - `dep tree` and `dep list --direction down` = display views only — a
->   parent-child entry in `dep list` is NOT a blocker; never override `bd ready`
+## Step 2 — Scope to WIP
 
-## Step 2 — Determine WIP scope
+- **in_progress issues exist** → scope to them plus their blockers/dependents
+  as reported by `bd ready`/`bd blocked`; finish these before starting new work.
+- **none** → use the current branch as WIP proxy; its name identifies the epic.
 
-**If in_progress issues exist**: scope the analysis to those issues and
-their dependency subtrees. These are the primary focus — finish before
-starting anything new.
+Keep only open issues whose readiness comes from `bd ready` / `bd blocked`
+membership. Drop closed issues, unrelated epics, and unblocked backlog with no
+edge into WIP.
 
-**If no in_progress issues**: use the current git branch as WIP proxy.
-The branch name identifies the associated epic (e.g.
-`feature/fork-safe-docker-ci` → Docker CI epic). Run `bd show` on the
-epic and its open dependencies to map the subtree.
+Findings always attach to WIP. A finding not tied to active WIP becomes a
+normal feature request (headline drops "Finding"; description may keep
+provenance).
 
-Note: findings are always connected to WIP. A finding not tied to active
-WIP must be converted to a normal feature request (headline must NOT
-contain "Finding"; description may record provenance).
-
-## Step 3 — Identify required open issues
-
-From the WIP subtree, collect only open issues that must close before
-the WIP can be shipped and verified. Exclude:
-
-- Closed issues
-- Issues in unrelated epics with no dependency edge into WIP
-- Backlog items with no blocking relationship to WIP
-
-For each open issue, determine actionability using ONLY authoritative commands:
-- **Actionable**: appears in `bd ready` output
-- **Blocked**: appears in `bd blocked` output
-
-Do NOT use `bd dep tree` or `bd dep list` to classify issues as blocked —
-these commands show graph structure, not readiness state.
-In bd v1.0.4, `--parent` wiring does NOT gate parents or children; only
-explicit `bd dep add` edges create true blocking visible in `bd blocked`.
-
-## Step 4 — Render ASCII dependency graph
-
-Use this exact format — readable in a terminal without extra tooling:
+## Step 3 — Render graph
 
 ```
-BRANCH: <branch-name>   [or: IN PROGRESS: <issue-id> — <title>]
-<in_progress status or proxy explanation — one line>
+WIP: <branch>   [or: <issue-id> — <title>]
+<one-line status / proxy note>
 
-ACTIONABLE                                    BLOCKED
-──────────────────────────────────────────    ──────────────────────────────────────
-[id] P<n>  <short title>               ──┬─► [id] P<n>  <short title>
-[id] P<n>  <short title>               ──┤
-                                         └─► [id] P<n>  <short title>
-
-[id] P<n>  <short title>               ──┐
-[id] P<n>  <short title>               ──┼─► [id] P<n>  <short title>
-[id] P<n>  <short title>               ──┘
-
-[id] P<n>  <short title>                ── (standalone note if relevant)
+ACTIONABLE (bd ready)             BLOCKED (bd blocked)
+[id] P<n> <title>                 [id] P<n> <title>  ← waits on [id],[id]
+[id] P<n> <title>                 [id] P<n> <title>  ← waits on [id]
 ```
 
-Rules:
-- Left column: actionable issues (no open blockers), sorted P1 first
-- Right column: blocked issues, each preceded by its open blockers
-- Use `──►` for single blocker, `──┬─►` / `──┤` / `──┘` for multi-blocker fan-in
-- Keep titles short enough to fit one terminal line (~50 chars max)
-- Omit closed issues entirely
+- Left column: actionable issues, P-sorted (P1 first).
+- Right column: blocked issues, each with its open blocker ids (from
+  `bd blocked` / `bd show <id>`, never the graph views) after `← waits on`.
+- Titles ≤50 chars. Box-drawing or plain text only — no Mermaid, no HTML.
 
-## Step 5 — List issues
+## Step 4 — State the next action
 
-Flat list below the graph:
+One paragraph, ≤4 sentences: name the issue to claim, why it is next (by
+precedence: unblocks the most > P1 > branch-aligned), the concrete action
+(file, command, or deliverable), and what closing it unblocks. End with:
 
-```
-**Issues**
-- `<id>` — <full title> [*(blocked: reason)*]
-```
+`**Next immediate action: \`<id>\` [then \`<id>\`].**`
 
-One line per issue. Blocked issues note what they wait on.
+## Step 5 — Autonomous assessment
 
-## Step 6 — State next immediate action
-
-One paragraph, ≤4 sentences:
-
-- Name the single next issue to claim
-- Why it is next (unblocks the most, most concrete, branch-aligned, P1)
-- What the action concretely is (file, command, or deliverable)
-- What it unblocks when done
-
-Format: `**Next immediate action: \`<id>\` [then \`<id>\`].**`
-
-## Step 7 — Autonomous execution assessment
-
-Output this question block verbatim after the next-action statement:
+Output this block verbatim:
 
 ---
 
@@ -122,24 +84,18 @@ Output this question block verbatim after the next-action statement:
 
 ---
 
-Then answer it in three parts:
+Then answer in three parts:
 
-**Autonomous** — tasks/steps executable without user input (file edits,
-shell commands, gh API calls, Beads operations available via MCP or CLI).
-
-**Needs user** — tasks/steps requiring user decision, approval, credentials,
-or physical access (GitHub UI actions not exposed via API, secrets,
-hardware-level ops, review approval gates).
-
-**Recommendation** — one of:
-- If 2+ actionable tasks are fully autonomous and independent: suggest
-  invoking the `parallel-work` skill to delegate to parallel sub-agents.
-- If 1 actionable task is autonomous: suggest claiming and executing directly.
-- If any actionable task needs the user first: list those explicitly so
-  the user can unblock them before agent execution proceeds.
+- **Autonomous** — steps doable without the user (file edits, shell, gh API,
+  bd operations via MCP or CLI).
+- **Needs user** — steps needing a decision, approval, credentials, or a GitHub
+  UI action not exposed by the API.
+- **Recommendation** — one of: 2+ independent autonomous tasks → suggest
+  `my-omc-parallel-work`; exactly one autonomous task → claim and run it
+  directly; any actionable task needs the user first → list those so the user
+  can unblock them.
 
 ## Output constraints
 
-- Plain text + box-drawing chars only — no Mermaid, no HTML
-- No preamble ("Here is the analysis…") — start with the graph header
-- Caveman mode applies to prose; graph and issue list are structured, not caveman
+- Prose is caveman-mode; the graph and issue ids are structured, not caveman.
+- No preamble — start with the graph header.
