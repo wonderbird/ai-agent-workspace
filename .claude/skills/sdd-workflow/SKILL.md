@@ -8,7 +8,8 @@ argument-hint: <feature description> <@context-reference> [<@patterns-reference>
 disable-model-invocation: true
 ---
 
-You are running the Spec Driven Development workflow for: $ARGUMENTS
+You are running the Spec Driven Development workflow for the context defined
+below.
 
 Throughout this session, apply these conventions:
 
@@ -20,8 +21,16 @@ Throughout this session, apply these conventions:
   speckit.specify, speckit.plan, speckit.tasks, and speckit.implement in
   subagents at the appropriate phases.
 
-Before doing any work, create a task list covering all four phases. Mark each task
-as in progress when you start it and complete when it is done.
+Before doing any work, create an internal task list (not beads) covering all
+phases. Mark each task as in progress when you start it and complete when it is
+done.
+
+---
+
+### Constraints
+
+- Follow rules and principles from @AGENTS.md and constitution
+- KISS: Smallest possible increment from main to working feature
 
 ---
 
@@ -35,7 +44,17 @@ If the context is unclear, ask me for context before proceeding.
 
 ---
 
-### Phase 1 — Define Specification
+### Phase 1 - Create Beads Feature Request
+
+Search beads for an epic or feature that could be a parent for this work. It is
+ok if you find none.
+
+Create corresponding feature in beads. If parent candidate exists, wire the new
+feature to the parent.
+
+Claim the new feature and move it to in_progress.
+
+### Phase 2 — Define Specification
 
 Ensure you are on the main branch and have the latest code. The speckit.specify
 command will create a feature branch, do not create one manually.
@@ -68,7 +87,7 @@ into the spec.
 
 ---
 
-### Phase 2 — Create Plan and Tasks
+### Phase 3 — Create Plan and Tasks
 
 Invoke speckit.plan in a subagent. Derive the solution approach from the session
 context.
@@ -91,13 +110,13 @@ into the relevant artifacts.
 
 ---
 
-### Phase 3 — Implementation and Review
+### Phase 4 — Implementation and Review
 
 Invoke the "sdd-ralhp" skill in a subagent.
 
 ---
 
-### Phase 4 — Acceptance Test
+### Phase 5 — Acceptance Test
 
 Read the acceptance criteria from the spec. Walk me through each criterion one step
 at a time: briefly explain which acceptance criterion you are testing and what the
