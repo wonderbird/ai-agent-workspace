@@ -25,13 +25,20 @@ as in progress when you start it and complete when it is done.
 
 ---
 
+### Context
+
+$ARGUMENTS
+
+### How to Handle Unknown Context
+
+If the context is unclear, ask me for context before proceeding.
+
+---
+
 ### Phase 1 — Define Specification
 
 Ensure you are on the main branch and have the latest code. The speckit.specify
 command will create a feature branch, do not create one manually.
-
-Read the context reference in $ARGUMENTS to understand the existing context.
-If no context reference is provided, ask me for one before proceeding.
 
 Ask me questions to clarify scope, technical approach, and acceptance
 criteria. If a decision requires domain knowledge you are not confident
@@ -42,7 +49,7 @@ Avoid big upfront design.
 Invoke speckit.specify in a subagent. Pass it a concise solution description that
 captures everything learned: feature name, platform constraints, dependencies,
 installation or implementation approach, acceptance criterion, patterns to follow
-from the patterns reference in $ARGUMENTS (if provided), and the primary use case.
+from the patterns reference in the context (if provided), and the primary use case.
 Present any immediate clarification questions raised by the spec draft.
 
 Invoke speckit.clarify in a subagent. For each finding, follow this resolution order:
@@ -86,35 +93,7 @@ into the relevant artifacts.
 
 ### Phase 3 — Implementation and Review
 
-Invoke speckit.implement in a subagent.
-
-Invoke a subagent with the following prompt:
-
-> Act as a senior developer with deep expertise in the language and technology stack
-> used in this implementation.
->
-> I wish to merge the changes of the active branch into main.
->
-> Perform a diligent code review of the differences. Focus on the following:
->
-> - Security risks must be avoided by design or mitigated. If not mitigated, a clear
->   rationale must explain why the risk is acceptable.
-> - The code must follow the rules and conventions in the project (check for any
->   rules or style guides in the repository).
-> - The code must be easy to maintain and extend.
-> - Identify evolving patterns in the codebase and check whether the new code
->   follows them.
-> - The code must be idiomatic for the language and technology used.
->
-> Sort all findings by severity. Present them in a structured format that can be
-> handed directly to a developer agent for fixing.
-
-Hand all findings to a subagent with the following instruction:
-
-> Act as a senior developer with deep expertise in the language and technology stack
-> used in this implementation. Fix all findings from the code review, working through
-> them in severity order (critical first). For each finding, apply the minimal change
-> that resolves it without introducing new issues.
+Invoke the "sdd-ralhp" skill in a subagent.
 
 ---
 
