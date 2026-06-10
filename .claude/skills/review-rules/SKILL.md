@@ -4,6 +4,7 @@ description: >
   Review and fix all agent-facing context files for consistency, clarity, and
   token efficiency. Constitution is ground truth. Use when rules files may be
   out of sync, redundant, or contradictory.
+argument-hint: "[Refined scope (optional): e.g. a single file]"
 model: opus
 effort: high
 context: fork
@@ -28,6 +29,13 @@ Check existence; skip if absent:
 
 ADRs / linked-only files: read for context. Reviewed solely for
 contradictions with constitution. No internal quality review. Never edited.
+
+# Refined Scope
+
+This section may contain a stricter definition of the files to review, if
+text follows the colon:
+
+$ARGUMENTS
 
 # Quality criteria
 

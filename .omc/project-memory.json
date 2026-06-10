@@ -1,0 +1,70 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1780285219341,
+  "projectRoot": "/home/galadriel/Documents/Cline/ai-agent-workspace",
+  "techStack": {
+    "languages": [],
+    "frameworks": [],
+    "packageManager": null,
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": null,
+    "scripts": {}
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "docs",
+      "scripts"
+    ],
+    "gitBranches": {
+      "defaultBranch": "main",
+      "branchingStrategy": null
+    }
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "docs": {
+      "path": "docs",
+      "purpose": "Documentation",
+      "fileCount": 1,
+      "lastAccessed": 1780285219336,
+      "keyFiles": [
+        "synchronize-repos-with-vm.md"
+      ]
+    },
+    "rules-banks": {
+      "path": "rules-banks",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1780285219337,
+      "keyFiles": []
+    },
+    "scripts": {
+      "path": "scripts",
+      "purpose": "Build/utility scripts",
+      "fileCount": 7,
+      "lastAccessed": 1780285219338,
+      "keyFiles": [
+        "clone-on-remote.sh",
+        "configuration.sh",
+        "create-skills-links-in-home-win.sh",
+        "create-skills-links-in-home.sh",
+        "delete-on-remote.sh"
+      ]
+    }
+  },
+  "hotPaths": [],
+  "userDirectives": []
+}
