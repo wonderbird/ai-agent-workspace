@@ -112,7 +112,11 @@ into the relevant artifacts.
 
 ### Phase 4 — Implementation and Review
 
-Invoke the "sdd-ralhp" skill in a subagent.
+The context is likely full. Ask the user whether they want a prompt so that they
+can execute the "sdd-ralph" skill in a separate session.
+
+If you shall continue in the current session, invoke the "sdd-ralph" skill in
+a subagent.
 
 ---
 
