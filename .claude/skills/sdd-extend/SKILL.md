@@ -33,11 +33,11 @@ knowledge you are not confident about, consult an expert subagent first and
 present its findings as part of the options. Stop asking when you have enough
 to describe the additions precisely.
 
-Invoke speckit.clarify in a subagent. Provide it with a concise description of the
+Invoke speckit-clarify in a subagent. Provide it with a concise description of the
 additions that captures everything learned: what is new, how it relates to existing
 functionality, any changed constraints or dependencies, patterns to follow
 from the patterns reference in $ARGUMENTS (if provided), and the new
-acceptance criteria. For each finding raised by speckit.clarify, follow this
+acceptance criteria. For each finding raised by speckit-clarify, follow this
 resolution order:
 
 1. **Resolve from context** — check whether the existing codebase, spec, or prior
@@ -56,7 +56,7 @@ into the spec, adding the new requirements alongside the existing ones.
 
 ### Phase 2 — Update Plan and Tasks
 
-Invoke speckit.analyze in a subagent. Provide it with the updated spec so it can
+Invoke speckit-analyze in a subagent. Provide it with the updated spec so it can
 identify gaps introduced by the new requirements in the existing plan, tasks,
 and any other derived documents. For each finding, follow this resolution order:
 
@@ -77,7 +77,7 @@ requirements without discarding or overwriting existing content.
 
 ### Phase 3 — Implementation and Review
 
-Invoke speckit.implement in a subagent.
+Invoke speckit-implement in a subagent.
 
 Invoke a subagent with the following prompt:
 
