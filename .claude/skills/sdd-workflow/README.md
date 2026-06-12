@@ -18,9 +18,9 @@ session without hitting the context token limit.
 
 | Phase | What happens |
 | --- | --- |
-| 1 — Define Specification | Scope Q&A, speckit.specify, speckit.clarify |
-| 2 — Create Plan and Tasks | speckit.plan, speckit.tasks, speckit.analyze |
-| 3 — Implementation and Review | speckit.implement, code review, fix findings |
+| 1 — Define Specification | Scope Q&A, speckit-specify, speckit-clarify |
+| 2 — Create Plan and Tasks | speckit-plan, speckit-tasks, speckit-analyze |
+| 3 — Implementation and Review | speckit-implement, code review, fix findings |
 | 4 — Acceptance Test | Guided step-by-step test execution |
 
 The skill pauses naturally wherever user input is needed (Q&A, command output).
@@ -59,9 +59,9 @@ Copy the `sdd-workflow/` directory to one of the following locations:
 This skill invokes the following [speckit](https://github.com/github/spec-kit)
 commands, which must be available as skills in the project:
 
-- `speckit.specify`
-- `speckit.clarify`
-- `speckit.plan`
-- `speckit.tasks`
-- `speckit.analyze`
-- `speckit.implement`
+- `speckit-specify`
+- `speckit-clarify`
+- `speckit-plan`
+- `speckit-tasks`
+- `speckit-analyze`
+- `speckit-implement`
