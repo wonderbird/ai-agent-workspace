@@ -12,7 +12,7 @@ with newly discovered requirements, without overwriting any existing artifacts.
 Use `sdd-extend` when additional requirements are discovered after the initial
 specification has been written and a plan already exists. The skill adds the new
 requirements to the spec and updates the plan and tasks to cover the gaps — it never
-calls `speckit.specify` or `speckit.plan`, which would overwrite the existing artifacts.
+calls `speckit-specify` or `speckit-plan`, which would overwrite the existing artifacts.
 
 Use `sdd-workflow` instead when starting a brand-new feature from scratch.
 
@@ -26,9 +26,9 @@ can run in a single chat session without hitting the context token limit.
 
 | Phase | What happens |
 | --- | --- |
-| 1 — Extend Specification | Scope Q&A for new requirements, speckit.clarify |
-| 2 — Update Plan and Tasks | speckit.analyze, plan/task gap fixes |
-| 3 — Implementation and Review | speckit.implement, code review, fix findings |
+| 1 — Extend Specification | Scope Q&A for new requirements, speckit-clarify |
+| 2 — Update Plan and Tasks | speckit-analyze, plan/task gap fixes |
+| 3 — Implementation and Review | speckit-implement, code review, fix findings |
 | 4 — Acceptance Test | Guided step-by-step test execution for new criteria |
 
 The skill pauses naturally wherever user input is needed (Q&A, command output).
@@ -68,6 +68,6 @@ Copy the `sdd-extend/` directory to one of the following locations:
 This skill invokes the following [speckit](https://github.com/github/spec-kit)
 commands, which must be available as skills in the project:
 
-- `speckit.clarify`
-- `speckit.analyze`
-- `speckit.implement`
+- `speckit-clarify`
+- `speckit-analyze`
+- `speckit-implement`

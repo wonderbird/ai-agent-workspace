@@ -18,7 +18,7 @@ Throughout this session, apply these conventions:
   with a brief rationale per option.
 - **Never run .specify/scripts directly** — Never run the scripts in the
   .specify/scripts directory directly. These scripts will be invoked by
-  speckit.specify, speckit.plan, speckit.tasks, and speckit.implement in
+  speckit-specify, speckit-plan, speckit-tasks, and speckit-implement in
   subagents at the appropriate phases.
 
 Before doing any work, create an internal task list (not beads) covering all
@@ -56,7 +56,7 @@ Claim the new feature and move it to in_progress.
 
 ### Phase 2 — Define Specification
 
-Ensure you are on the main branch and have the latest code. The speckit.specify
+Ensure you are on the main branch and have the latest code. The speckit-specify
 command will create a feature branch, do not create one manually.
 
 Ask me questions to clarify scope, technical approach, and acceptance
@@ -65,13 +65,13 @@ about, consult an expert subagent first and present its findings as part of
 the options. Stop asking when you have enough to write a focused, small spec.
 Avoid big upfront design.
 
-Invoke speckit.specify in a subagent. Pass it a concise solution description that
+Invoke speckit-specify in a subagent. Pass it a concise solution description that
 captures everything learned: feature name, platform constraints, dependencies,
 installation or implementation approach, acceptance criterion, patterns to follow
 from the patterns reference in the context (if provided), and the primary use case.
 Present any immediate clarification questions raised by the spec draft.
 
-Invoke speckit.clarify in a subagent. For each finding, follow this resolution order:
+Invoke speckit-clarify in a subagent. For each finding, follow this resolution order:
 
 1. **Resolve from context** — check whether the existing codebase, spec, or prior
    conversation already answers it. If yes, resolve it directly.
@@ -89,12 +89,12 @@ into the spec.
 
 ### Phase 3 — Create Plan and Tasks
 
-Invoke speckit.plan in a subagent. Derive the solution approach from the session
+Invoke speckit-plan in a subagent. Derive the solution approach from the session
 context.
 
-Invoke speckit.tasks in a subagent.
+Invoke speckit-tasks in a subagent.
 
-Invoke speckit.analyze in a subagent. For each finding, follow this resolution order:
+Invoke speckit-analyze in a subagent. For each finding, follow this resolution order:
 
 1. **Resolve from context** — check whether the existing codebase, spec, plan, or
    tasks already answer it. If yes, resolve it directly.
