@@ -5,6 +5,7 @@
 set -eEufo pipefail
 
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
+REMOTE_USER=galadriel
 PARENT_DIR=$(dirname "$SCRIPT_DIR")
 
 REPOSITORIES=(
