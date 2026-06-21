@@ -24,30 +24,21 @@ MUST be separated from the subject by a single empty line.
 ## Name the Coding Agent as Co-Author for commits
 
 If this is the first commit of your session, you MUST ask the user for your
-agent name, so that you can construct the correct commit body using the
-following table:
+agent name, so that you can construct the correct commit body using one of the
+following agent identifiers:
 
-| YOUR_AGENT_NAME | YOUR_VENDOR_URL | YOUR_EMAIL |
-| --- | --- | --- |
-| Cursor Agent | <https://cursor.com/home> | <cursoragent@cursor.com> |
-| Claude Code | <https://claude.ai/code> | <noreply@anthropic.com> |
-| GitHub Copilot | <https://github.com/copilot> | <175728472+Copilot@users.noreply.github.com> |
+- OpenCode
+- Cursor
+- Claude Code
+- GitHub Copilot
 
-If you are not contained in the valid combinations, then you MUST suggest
-appropriate values for YOUR_AGENT_NAME, YOUR_VENDOR_URL and YOUR_EMAIL.
+If you are not listed, then you MUST suggest an appropriate value.
 
-If a commit shall have a commit body, then you MUST add the following line
-at the end of the body:
-
-```text
-🤖 Generated with [YOUR_AGENT_NAME](YOUR_VENDOR_URL)
-```
-
-Whenever you helped creating the commit, then the Co-Authored-By trailer MUST
+Whenever you helped creating the commit, then the Assisted-by trailer MUST
 be added to the commit message. The trailer MUST comply to the format
 
 ```text
-Co-authored-by: YOUR_AGENT_NAME <YOUR_EMAIL>
+Assisted-by: YOUR_AGENT_NAME
 ```
 
 ## Commit conventions
