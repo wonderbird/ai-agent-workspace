@@ -14,25 +14,14 @@ the trusted source of such information.
 Commit messages consist of the subject line, the body and the trailers.
 Trailers are also known as footers.
 
-Only the subject is mandatory. Body and trailers are optional.
+Subject and trailers are mandatory. Body is optional.
 
 Subject, body and trailers MUST be separated by an empty line.
 
 If the commit message consists of only subject and trailers, then the trailers
 MUST be separated from the subject by a single empty line.
 
-## Name the Coding Agent as Co-Author for commits
-
-If this is the first commit of your session, you MUST ask the user for your
-agent name, so that you can construct the correct commit body using one of the
-following agent identifiers:
-
-- OpenCode
-- Cursor
-- Claude Code
-- GitHub Copilot
-
-If you are not listed, then you MUST suggest an appropriate value.
+## Coding agent harness as "Assisted-by:" trailer
 
 Whenever you helped creating the commit, then the Assisted-by trailer MUST
 be added to the commit message. The trailer MUST comply to the format
@@ -40,6 +29,26 @@ be added to the commit message. The trailer MUST comply to the format
 ```text
 Assisted-by: YOUR_AGENT_NAME
 ```
+
+The following agent names are known so far:
+
+- OpenCode
+- Cursor
+- Claude Code
+- GitHub Copilot
+
+Derive your name from your agent harness. Exclude the concrete LLM model and
+the current type of agent, i.e. exclude "Sisyphus", "architect", "Claude Sonnet"
+and alike.
+
+If you are unsure, then you MUST suggest an appropriate value and ask for
+confirmation from the user.
+
+## Beads issue ID as "Refs: <issue-id>"
+
+When committing changes associated with an issue in an issue tracker like
+JIRA, Azure DevOps, beads, always Append the issue id as an "Refs: <issue-id>"
+trailer to the commit message.
 
 ## Commit conventions
 

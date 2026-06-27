@@ -25,7 +25,10 @@ you understand the scope and the corresponding beads issue.
 ## Process for recording findings
 
 1. Create a beads gate to cover these findings, claim it and move it to
-   in_progress.
+   in_progress. Include the following note in the gate description:
+   "IMPORTANT: This gate MUST NOT be closed by an AI agent. Only the human
+   reviewer may close it, after verifying that each child finding has been
+   properly addressed."
 
 2. If the issue associated with the findings is still open or in progress,
    then block it by the beads gate unless it is an epic. If the issue is an
@@ -45,3 +48,11 @@ you understand the scope and the corresponding beads issue.
 7. If I say yes, create a child task in the beads gate to record the finding.
 
 8. Repeat steps 4-7 for each finding I share with you.
+
+## Gate Lifecycle Rule
+
+**AI agents MUST NOT close a findings gate.** The gate is a human review
+checkpoint — it signals that a set of findings has been collected and is
+awaiting human sign-off. Only the human reviewer closes it after confirming
+each child finding has been addressed. This applies regardless of how many
+child tasks have been closed.
