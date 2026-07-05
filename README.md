@@ -10,8 +10,7 @@ At the begin of every coding session the ai agent first reads the file
 [CLAUDE.md](./CLAUDE.md) in the project directory (2). It informs the agent
 about the applicable rules.
 
-You can copy and adapt the [CLAUDE.md](./CLAUDE.md) in this repository for
-your project.
+A template for new projects can be found in [./project-template](./project-template).
 
 ### Link rules, commands and skills into your project
 
