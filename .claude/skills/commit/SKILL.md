@@ -53,8 +53,8 @@ trailer to the commit message.
 ## Commit conventions
 
 Your commits MUST use one of the following conventional commit prefixes:
-`feat:`, `fix:`, `refactor:`, `test:`, `docs:`, `ci:`, `build(deps):`, `ai:`.
-If the correct prefix is unclear, ask the user.
+`feat:`, `fix:`, `refactor:`, `test:`, `docs:`, `ci:`, `build(deps):`, `ai:`,
+`chore:`. If the correct prefix is unclear, ask the user.
 
 All your commits MUST represent a small, coherent and working increment.
 If these criteria are not met, ask the user how to proceed.
@@ -89,6 +89,12 @@ files, or constitution updates that govern agent behavior. Use `ai:` instead
 of `docs:` when the audience is an AI agent rather than a human reader. An
 optional scope MAY be added to narrow the area, e.g. `ai(skills):`,
 `ai(rules):`.
+
+The headline of a `chore:` commit describes routine maintenance with no
+production-code or documentation effect, e.g. exporting/syncing an issue
+tracker's data file (beads `.beads/issues.jsonl`) after claiming, updating,
+or closing issues. You MUST always confirm the use of `chore:` with the user
+before committing — never choose it unprompted.
 
 A commit changing only documentation files is always a `docs:` commit, never
 a `refactor:` commit.
