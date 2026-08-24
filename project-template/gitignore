@@ -1,0 +1,13 @@
+# New entries are added to the top
+
+# Oh My Claude Code state - block all, then carve out what to share
+!.omc/
+.omc/*
+!.omc/skills/
+!.omc/skills/**
+!.omc/project-memory.json
+
+#####
+# Remainder of the file is auto-generated
+#####
+
