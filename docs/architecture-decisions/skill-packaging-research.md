@@ -6,6 +6,54 @@
 
 ---
 
+## Provenance and Verification Note
+
+This document is a **background whitepaper at enterprise altitude**, not a
+source-verified evaluation like the ADRs in this folder. It carries no per-claim
+citations. On 2026-09-05 the four load-bearing standards/tools named below were
+independently confirmed to exist:
+
+- Agent Skills SKILL.md open standard — https://agentskills.io (published as an
+  open standard 2025-12-18).
+- Agent Skills as OCI Artifacts (`application/vnd.agent-skills.skill.v1`) —
+  https://github.com/ThomasVitale/agents-skills-oci-artifacts-spec and
+  `agentskills/agentskills` discussion #292.
+- Agent Packaging Standard (APS) — https://agentpackaging.org.
+- `vercel-labs/skills` (`npx skills`) — https://github.com/vercel-labs/skills.
+
+**Not verified against upstream:** the specific manifest fields, CLI flags, version
+numbers (e.g. `apsVersion: "0.1"`), and example schemas below are illustrative and
+may not match current upstream specs — confirm before relying on any exact syntax.
+The APS/OCI/Cosign code blocks, media types, and diagrams throughout read
+authoritatively but carry this same caveat; treat them as illustrative, not
+copy-pastable.
+
+**Two specific corrections where this whitepaper conflicts with source-verified
+findings in [ADR 002](002-skill-manager-tool-selection.md):**
+
+- **GitHub Copilot compatibility is overstated.** This document's adoption tables
+  and prose (§2.2, §3, §6) imply Copilot has "universal / instant" support for the
+  `agentskills.io` SKILL.md *folder* format. ADR 002 source-verified the opposite:
+  real GitHub Copilot / Copilot CLI are **file-based** (`.github/instructions/*.instructions.md`
+  with `applyTo`), and **no** surveyed tool — `vercel-labs/skills` included — serves
+  Copilot by a skills directory. Treat Copilot as file-based per ADR 002; the
+  "universal" claim here is contested.
+- **`npx skills` command vocabulary differs from the verified set.** §5.2 shows
+  `npx skills find/add/sync`; the source-verified command set at HEAD `435076e` is
+  `add` / `--skill` / `remove` / `install` / `use` / `list` / `update` (see the
+  scorecard, [skill-manager-vercel-labs-scorecard-2026-09-05.md](skill-manager-vercel-labs-scorecard-2026-09-05.md)).
+  Use the scorecard's set, not §5.2's, for exact commands.
+
+**Relevance to this project (a solo-developer, per-project skill-selection use
+case):** most of this document — APS registries, OCI+Cosign supply-chain signing,
+SBOMs, multi-tenant marketplaces, Kubernetes runners — is enterprise-scale and out
+of scope. Its concrete contribution was surfacing `vercel-labs/skills`, now
+evaluated as [Option 14 in ADR 002](002-skill-manager-tool-selection.md). The
+distribution standards are scoped there under Consequences/Open questions as a
+future-only path, not adopted.
+
+---
+
 ## Executive Summary
 
 As enterprise adoption of generative AI evolves from experimental LLM wrappers to autonomous agentic systems, software architecture teams face a fundamental engineering bottleneck: **how to package, version, govern, and distribute domain expertise and agent workflows across heterogeneous teams and software projects.**

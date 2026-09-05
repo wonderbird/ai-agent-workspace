@@ -37,18 +37,39 @@ source-verified six further open-source tools. Key results:
   table, SQLite-tracked reversible delivery) and `omrikais/sm` (symlink into native
   dirs, doctor/backups, recent HEAD — sustained activity unverified) both deliver
   into native agent directories — removing the runtime-pull/enforcement caveat that
-  limited `skill-cli`. The day-one lead is therefore now contested.
+  limited `skill-cli`. (This "lead is contested between these two" framing is
+  superseded below: a later review surfaced `vercel-labs/skills`.)
 - **The wanted targets span two delivery shapes.** Claude Code, OpenCode, pi, and
   Antigravity use the SKILL.md **skills-directory** standard (symlink-friendly);
   GitHub Copilot and Copilot CLI are **file-based** (`*.instructions.md`), needing
   generation. No verified tool emits the modern Copilot `.instructions.md` shape.
 - **Commercial products exist** (SkillReg, Packmind, Tessl); none confirmed for
   per-project subset + OpenCode + Copilot CLI. See [Option 11](#11-buy-a-commercial-product).
+- **A later packaging-standards review reshaped the field.** A whitepaper on
+  enterprise skill packaging ([skill-packaging-research.md](skill-packaging-research.md))
+  surfaced **`vercel-labs/skills` (`npx skills`)**, missed by the earlier scans:
+  per-project subset with both activate and disable *mechanics*, native symlink
+  delivery, a data-driven 20+-agent table, and the strongest project health in the
+  survey. Source-verified at HEAD `435076e` (code paths, MIT LICENSE, 58 test files,
+  CI, and — after deepening the clone — active multi-author commit cadence); its
+  ~30k★ is **web-observed** (2026-09-05), not clone-derived. It is now the day-one
+  **lead on health (d5)**, but that is the lowest-priority driver and its "central
+  store" is a distribution/registry model that does **not** match d1's literal
+  single-store framing — a driver-priority inversion the spike must weigh, not a
+  clean win. See [Option 14](#14-adopt-vercel-labsskills-npx-skills) and its
+  source-verified scorecard
+  ([skill-manager-vercel-labs-scorecard-2026-09-05.md](skill-manager-vercel-labs-scorecard-2026-09-05.md)).
+  The same review confirmed
+  three real distribution standards (the Agent Skills SKILL.md standard at
+  `agentskills.io`, Agent Skills as OCI artifacts, and the Agent Packaging Standard);
+  their relevance is scoped in [Consequences](#consequences) and
+  [Open questions](#open-questions), not folded in as tool evidence.
 
-Because a new day-one lead is not being crowned unilaterally, the recommendation
-presents `skills-mgr` and `omrikais/sm` as day-one **co-candidates** (with
-`skill-cli` as a fallback and Option 2's native script as a control)
-to be settled by a spike; the decision stays open.
+Because the field now has a clear health leader but an unresolved model-fit
+question, the recommendation presents `vercel-labs/skills` as the day-one **lead**
+with `skills-mgr` and `omrikais/sm` as **challengers** (with `skill-cli` as a
+fallback and Option 2's native script as a control) to be settled by a spike; the
+decision stays open.
 
 ## Context and Problem Statement
 
@@ -149,6 +170,10 @@ most important), confirmed with the stakeholder through two short interviews.
     See [Detailed Analysis](#12-extend-a-base-without-forking).
 13. **Fork / build** — hard-fork the strongest base. See
     [Detailed Analysis](#13-fork--build).
+14. **Adopt `vercel-labs/skills` (`npx skills`)** — per-project canonical store +
+    symlink delivery + data-driven agents + by far the healthiest project (surfaced
+    by the packaging-standards research). See
+    [Detailed Analysis](#14-adopt-vercel-labsskills-npx-skills).
 
 ## Recommendation (pending decision)
 
@@ -159,7 +184,30 @@ gating question for one co-candidate (`omrikais/sm`). Deliberately, this ADR doe
 **not** crown a single winner — it presents day-one **co-candidates** and defers
 the choice to a hands-on spike:
 
-Two tools are genuine day-one co-candidates. They trade off cleanly — one leads
+The packaging-standards research ([skill-packaging-research.md](skill-packaging-research.md))
+then surfaced a candidate the earlier scans missed — **`vercel-labs/skills`
+(`npx skills`)** — which changes the shape of the field. It clears the
+**activate/disable mechanics of d1** (`--skill` to select, `remove` to
+disable/swap, with a mass-delete guard), Claude Code out of the box (d2), native
+canonical-store + symlink delivery (d4), a data-driven 20+-agent table (d3), and —
+decisively — **the strongest health (d5)**: MIT with a filed LICENSE, 58 test
+files, CI, and active multi-author cadence (30 commits in 2026-07, 17 in 2026-08),
+all source-verified at HEAD `435076e`; its ~30k★ is web-observed (2026-09-05), not
+clone-derived, and would make it the most-starred tool in the survey by far — hence
+stated as an observation, not folded into the source-verified bundle. That health
+largely retires the solo-developer risk that shadowed the two prior co-candidates.
+Two genuine reservations temper the lead: (i) the "central store" is a
+*distribution* model (install *from* a source repo/registry into each project), so
+it does **not** match d1's literal single-store framing — on that framing
+`skills-mgr` fits d1 better, and editing the one central source still requires a
+re-sync into each project (the same staleness class flagged for `skills-mgr`); and
+(ii) it too fails to emit Copilot's `.instructions.md`. So it leads on **d5, the
+lowest-priority driver**, while carrying an open question on d1's own premise — a
+priority inversion the spike must resolve, not a clean win. On current evidence it
+is the **day-one lead**, with the two tools below as challengers the spike weighs
+against it.
+
+The two prior day-one co-candidates trade off cleanly — one leads
 d1+d4-architecture but is stale/unlicensed; the other leads d5-freshness but has a
 narrower d1 and d3 — so neither is crowned; the spike decides on live criteria.
 
@@ -198,9 +246,9 @@ an automated pipeline.
 
 Staged path, unchanged in shape:
 
-1. **Adopt a day-one tool now** — decided by the spike below (co-candidates
-   skills-mgr and omrikais/sm, with the native symlink baseline of Option 2 as a
-   control arm, and skill-cli only as a fallback).
+1. **Adopt a day-one tool now** — decided by the spike below (lead
+   `vercel-labs/skills`, co-candidates skills-mgr and omrikais/sm, with the native
+   symlink baseline of Option 2 as a control arm, and skill-cli only as a fallback).
 2. **Extend when the further agents are needed** — Option 12 (wrapper) or Option
    13 (fork), base chosen then.
 
@@ -232,12 +280,16 @@ Coverage below is source-verified. Driver columns follow the priority set.
 | 11 Commercial product | unknown (trial) | yes (SkillReg/Packmind) | vendor-controlled | product feature | vendor-supported |
 | 12 Extend a base (no fork) | add via wrapper | inherit | inherit | inherit | shared with upstream |
 | 13 Fork/build | by design | inherit | by design | inherit | you co-own it |
+| 14 vercel-labs/skills | mechanics yes (`--skill` + `remove`); but store is a distribution model, not d1's single local store | yes (native) | data-driven (20+ agents); no Copilot file-gen | **strong** (canonical + ref-counted symlink, guarded delete) | **strongest**: MIT+LICENSE / 58 test files / CI / active cadence (verified); ~30k★ (web-observed 2026-09-05) |
 
 The decisive columns are d1 (per-project), d4 (safe delivery), and d3 (cheap
-extensibility). skills-mgr leads d1+d4 with data-driven d3; omrikais/sm leads d4
-with symlink delivery but weak d3; skill-cli leads the selection model but has the
-delivery caveat. No candidate also solves the file-based Copilot targets, so an
-extension step (Option 12/13) remains eventual regardless.
+extensibility). **vercel-labs/skills now leads on d5 while matching or beating the
+others on d2/d4** (the activate/disable mechanics of d1, native symlink, guarded
+delete) — though on d1's literal single-store framing `skills-mgr` fits better;
+skills-mgr leads d1+d4-architecture with data-driven d3; omrikais/sm leads
+symlink-delivery safety but is additive-only on d1 and weak on d3; skill-cli leads
+the selection model but has the delivery caveat. No candidate solves the file-based
+Copilot targets, so an extension step (Option 12/13) remains eventual regardless.
 
 ## Detailed Analysis of Options
 
@@ -544,6 +596,71 @@ Mitigation of negatives: prefer Option 12 first; fork only if it fails. Decide t
 base with the spike named in [Open questions](#open-questions); `skills-mgr` now
 looks like the smallest-gap base.
 
+### 14. Adopt `vercel-labs/skills` (`npx skills`)
+
+TypeScript CLI on npm (`npx skills`). Surfaced by the packaging-standards research
+([skill-packaging-research.md](skill-packaging-research.md)), which the earlier
+scans missed; source-verified at HEAD `435076e` (2026-08-18), with a companion
+scorecard
+([skill-manager-vercel-labs-scorecard-2026-09-05.md](skill-manager-vercel-labs-scorecard-2026-09-05.md))
+matching the landscape-scan evidence format. It uses the native canonical-store +
+symlink delivery the drivers favour, and leads the survey on health (d5).
+
+- Good, because it does the **activate/disable mechanics of driver 1**. Activate:
+  project scope is the default (skills land in the canonical `.agents/skills/`, `-g`
+  for global) and `--skill <names>` selects a subset (`install.ts:31-32`, `add.ts`).
+  Disable/swap: `remove` takes named skills, `--all`, `*`, or an interactive
+  multiselect (`remove.ts:166-195`), with a footgun-guard that refuses `--all`
+  combined with named skills so an agent cannot mass-delete by accident
+  (`remove.ts:79-90`). This clears the disable/re-select gap that limits
+  `omrikais/sm` — but see the store-model reservation below, which is why d1 is not
+  an unqualified pass.
+- Good, because Claude Code works out of the box (d2): `claude-code` is a native
+  entry (`agents.ts:152-159`) and universal agents resolve to the canonical dir.
+- Good, because *within a project* delivery is a **canonical store + symlink into
+  native agent dirs**, the shape the drivers prefer: one canonical copy under
+  `.agents/skills/` (`installer.ts:98`), symlinked out per agent and edited live
+  without a refresh step. **This live-edit benefit is within-project only** — it
+  does not extend across the central-store→project boundary (see the store-model
+  reservation below).
+- Good, because safe delivery is strong (d4): canonical removal is **ref-counted**
+  so uninstalling from one agent does not break another (`remove.ts:281-298`,
+  issues #287/#1718), lock-tracked, ENOENT-tolerant scans, atomic, and the
+  interactive path confirms before deleting.
+- Good, because agents are **data-driven** (d3): the `agents` record holds 20+
+  entries (Claude Code, GitHub Copilot, Gemini, Antigravity, and more; upstream
+  advertises 75+, only the 20+ source-confirmed), so adding a skills-directory agent
+  is a data entry.
+- Good, because it is the **healthiest candidate** (d5), and the health claim is now
+  split by evidence class: **source-verified** at the pinned HEAD — MIT with a filed
+  LICENSE, 58 test files, CI, and (after deepening the clone) active multi-author
+  cadence, 30 commits in 2026-07 and 17 in 2026-08 across ~10+ contributors, so
+  bus-factor is clearly >1 unlike the 1★/4★ solo priors; **web-observed** (2026-09-05,
+  not clone-derived) — ~30.4k★ and hundreds of open issues/PRs, which if accurate
+  make it the most-starred tool in the survey by an order of magnitude, hence stated
+  as an observation rather than a verified fact.
+- **Bad, because the "central store" is a distribution model, not a single local
+  store — so d1 is not an outright pass.** It installs skills *from* remote sources /
+  a registry into each project's canonical dir (a package-manager shape, like
+  `skillkit`), so the canonical central store must be realised as a git repo or
+  registry that projects `add` from — not the "one local store, symlink a per-project
+  view" model of `skills-mgr` (which fits d1's literal framing better). It satisfies
+  the *mechanics* of driver 1; the spike must confirm the source-repo store shape is
+  acceptable. Note the workflow cost: **editing the one central source repo requires
+  a re-`add`/`sync` into every consuming project** — the same copy-staleness class
+  this ADR penalized `skills-mgr` for, not a one-time reframing.
+- Bad, because it does **not** emit Copilot's `.instructions.md`: `github-copilot`
+  maps to a skills *directory* (`agents.ts:350-357`), so that entry is **nominal for
+  real Copilot** (file-based, like lijianru/sklm/skillkit) and the file-based Copilot
+  / Copilot CLI target remains extension work — the same gap every candidate has.
+
+Mitigation of negatives: model the central store as a private git skills repo (or
+npm package) the projects `add` from; pin the version; accept the re-`add`/`sync`
+step on every central-store edit (the two costs — that distribution tax and the
+Copilot file-gen gap — are detailed above). It is the day-one **lead on d5
+(health)**, but because d5 is the lowest-priority driver and d1's store-shape gate
+is open, the lead is a spike hypothesis, not a settled pick.
+
 ## Consequences
 
 - Adopting a day-one tool now delivers per-project selection on Claude Code
@@ -573,6 +690,16 @@ looks like the smallest-gap base.
   chosen.
 - Deferring the whole decision (Option 1) leaves the duplication and
   per-project-drift problem unsolved and grows the eventual migration cost.
+- **Keep the central store SKILL.md-native to preserve a distribution path.** The
+  store already uses the `agentskills.io` SKILL.md standard, and every serious
+  candidate consumes it. Staying native keeps open — without committing to it now —
+  a future team-scale distribution path via **Agent Skills as OCI artifacts**
+  (`application/vnd.agent-skills.skill.v1`, distributable through any OCI registry
+  with Sigstore/Cosign signing). This is enterprise supply-chain machinery, out of
+  scope for a solo developer today; the only present-day consequence is to avoid a
+  proprietary store format that would foreclose it. The **Agent Packaging Standard
+  (APS)** targets whole autonomous agents/sub-agents run outside IDEs — a different
+  problem than per-project skill selection — and is parked as not applicable.
 
 ## Confirmation
 
@@ -586,10 +713,14 @@ and no clobbered local edits.
 by tool:
 
 - For **skills-directory / file delivery** (Option-2 native baseline, lijianru,
-  mode-io, skills-mgr, omrikais/sm, Copilot file generation): inspect the agent's
-  target
-  location and confirm it holds exactly the selected subset, and that a sync does
-  not delete unrelated skills (the sklm failure mode).
+  mode-io, skills-mgr, omrikais/sm, vercel-labs/skills, Copilot file generation):
+  inspect the agent's target location and confirm it holds exactly the selected
+  subset, and that a sync does not delete unrelated skills (the sklm failure mode).
+- For **distribution / registry-pull delivery** (vercel-labs/skills): additionally
+  confirm the central-store-as-source-repo model fits — that a chosen subset can be
+  `add`-ed from the central repo into a project *and* cleanly removed, and that
+  editing the central source and re-syncing propagates to the project without
+  clobbering local edits (the re-sync/staleness path is exercised, not assumed).
 - For **injection/pull delivery** (skill-cli): the skills directory stays empty by
   design, so confirm end-to-end that a live agent session actually loads the
   selected skills and none of the deselected ones — selection correct on disk but
@@ -600,28 +731,38 @@ pass/fail condition.
 
 ## Open questions
 
-- **Day-one spike (the immediate question).** Compare `skills-mgr` and `omrikais/sm`
-  hands-on against d1–d5 in a real repo, with the **Option-2 native symlink baseline
-  as a control arm** (does a tool beat a symlink into `.claude/skills/`?) and
-  `skill-cli` as a fallback if both native-delivery tools disappoint. Rather than a
-  fixed preference order, decide by resolvable gates, in driver priority — each is a
+- **Day-one spike (the immediate question).** Compare `vercel-labs/skills` (lead),
+  `skills-mgr`, and `omrikais/sm` hands-on against d1–d5 in a real repo, with the
+  **Option-2 native symlink baseline as a control arm** (does a tool beat a symlink
+  into `.claude/skills/`?) and `skill-cli` as a fallback. For `vercel-labs/skills`
+  the spike must also answer a model-fit gate: **can the canonical store be realised
+  as a private git skills repo / npm package the projects `add` from**, and does
+  that source-repo shape satisfy the "one central store" intent (it is a
+  distribution model, not a local symlink-select store)? Rather than a fixed
+  preference order, decide by resolvable gates, in driver priority — each is a
   question the spike answers, sometimes via a workaround, not the tool's current
   state alone:
   - **d1 gate:** can you activate AND cleanly disable/swap a subset per repo,
-    including a small prune workaround if needed? (`skills-mgr` clears it natively;
-    `omrikais/sm` is additive-only today, so the spike must confirm a prune is
-    feasible.)
+    including a small prune workaround if needed — and, for `vercel-labs/skills`,
+    does the central-store-as-source-repo shape satisfy the single-store intent?
+    (`skills-mgr` clears both natively; `omrikais/sm` is additive-only today, so the
+    spike must confirm a prune is feasible; `vercel-labs/skills` clears the mechanics
+    but must clear the store-shape question.)
   - **d4 gate:** does delivery avoid clobbering hand-authored/edited skills, and is
-    it reversible? (both clear it; sklm fails, hence excluded.)
+    it reversible? (all three clear it; sklm fails, hence excluded.)
   - **health gate:** can the license be confirmed and is the project not
     effectively dormant? (`skills-mgr` needs its declared MIT confirmed with
     upstream and its ~5-month-stale HEAD weighed; `omrikais/sm` already has a clean
-    MIT LICENSE and a fresh HEAD.)
-  Pick whichever tool clears all three gates after the spike; if both do, prefer the
-  one whose weakest driver is least costly to live with. **If neither clears all
-  three** (e.g. no feasible prune AND license unconfirmable), fall through to the
-  `skill-cli` fallback if its runtime pull proves reliable, else the Option-2
-  native baseline. Do not pre-commit to a name here.
+    MIT LICENSE and a fresh HEAD; `vercel-labs/skills` has verified MIT + active
+    cadence, but **re-confirm the ~30k★/issue counts live** since those are
+    web-observed, not clone-derived.)
+  Pick whichever tool clears all three gates after the spike; if more than one does,
+  prefer the one whose weakest driver is least costly to live with (e.g. weigh
+  `vercel-labs/skills`'s re-sync tax and store-shape against `skills-mgr`'s literal
+  d1 fit but staler/unlicensed health). **If none clears all three** (e.g. no
+  feasible prune AND license unconfirmable AND store-shape unacceptable), fall
+  through to the `skill-cli` fallback if its runtime pull proves reliable, else the
+  Option-2 native baseline. Do not pre-commit to a name here.
 - **License confirmation.** `Leonezz/skills-mgr` declares MIT in `Cargo.toml` but
   ships no LICENSE file; confirm with upstream before adoption.
 - **Extend vs. fork, and which base (deferred until the further agents are
@@ -635,6 +776,11 @@ pass/fail condition.
 - **Commercial trial.** Do SkillReg or Packmind do per-project subset selection and
   cover OpenCode + Copilot CLI? Their marketing lists neither, so likely not — but
   a cheap trial settles it.
+- **Distribution path (future, not day-one).** If the store ever needs signed,
+  versioned team-scale distribution, does packaging SKILL.md folders as OCI
+  artifacts (see the [ThomasVitale spec](https://github.com/ThomasVitale/agents-skills-oci-artifacts-spec)
+  and `agentskills/agentskills` discussion #292) + Cosign fit the chosen day-one
+  tool, or is it a separate layer? Out of scope until team-scale is real.
 
 ## More Information
 
@@ -647,6 +793,16 @@ pass/fail condition.
 - Landscape scan of six further tools, source-verified with pinned HEADs and
   per-driver scorecards:
   [skill-manager-landscape-scan-2026-09-05.md](skill-manager-landscape-scan-2026-09-05.md).
+- Source-verified scorecard for the day-one lead `vercel-labs/skills` (pinned HEAD
+  `435076e`, evidence split into source-verified vs web-observed):
+  [skill-manager-vercel-labs-scorecard-2026-09-05.md](skill-manager-vercel-labs-scorecard-2026-09-05.md).
+- Enterprise packaging & distribution standards review (background; surfaced
+  `vercel-labs/skills`): [skill-packaging-research.md](skill-packaging-research.md).
+  Referenced standards, verified to exist: Agent Skills SKILL.md standard
+  (https://agentskills.io), Agent Skills as OCI artifacts
+  (https://github.com/ThomasVitale/agents-skills-oci-artifacts-spec), Agent
+  Packaging Standard (https://agentpackaging.org), `vercel-labs/skills`
+  (https://github.com/vercel-labs/skills).
 - Method references: MADR (https://adr.github.io/madr/), Michael Nygard's ADRs
   (https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions),
   arc42 section 9 (https://docs.arc42.org/section-9/).
