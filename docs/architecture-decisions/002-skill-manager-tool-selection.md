@@ -7,50 +7,48 @@
 
 This document records how to centralize skill definitions, prompt rules, and MCP
 configuration in one store and select a per-project subset of them across our
-coding agents. Each agent loads skills from
-a different directory with a different schema, so a skill has to be maintained
-several times and there is no single place from which a project can pick the
-subset it needs. This ADR frames the problem, sets the decision drivers, and
-evaluates the realistic options — from doing nothing, through a hand-rolled
-script, to adopting one of the surveyed open-source tools, buying a product, or
-extending/forking a base. **The decision has not been made yet.** The purpose of
-this document is to let the stakeholder make a well-informed choice.
+coding agents. Each agent loads skills from a different directory with a different
+schema, so a skill has to be maintained several times and there is no single place
+from which a project can pick the subset it needs. This ADR frames the problem,
+sets the decision drivers, and evaluates the realistic options — from doing
+nothing, through a hand-rolled script, to adopting one of the surveyed open-source
+tools, buying a product, or extending/forking a base. **The decision has not been
+made yet.** The purpose of this document is to let the stakeholder make a
+well-informed choice.
 
-A source-code evaluation of the five candidate tools underpins the analysis
-below; see [skill-manager-evaluation.md](skill-manager-evaluation.md). That evaluation scored
-fit against OpenCode / Claude Code / Cursor. Two rounds of stakeholder interviews
-then reshaped the [Decision Drivers](#decision-drivers): the top priority is now
-**per-project skill selection** (a central store from which each repository
-activates only a chosen subset), followed by **Claude Code working out of the
-box**, with **OpenCode, GitHub Copilot, and Copilot CLI added later** rather than
-day-one requirements. A verification round re-checked the clones (source-verified)
-and researched each agent's real instruction mechanism (web-verified). Key
-results, which drive the recommendation:
+A source-code evaluation of five tools underpins the early analysis; see
+[skill-manager-evaluation.md](skill-manager-evaluation.md). The drivers were then
+reprioritized over two stakeholder interviews: top priority is **per-project skill
+selection** (a central store from which each repository activates a chosen subset),
+then **Claude Code out of the box**, with **OpenCode, GitHub Copilot, and Copilot
+CLI added later** rather than day-one requirements. A verification round checked
+the clones (source-verified) and each agent's real instruction mechanism
+(web-verified). Finally, a **landscape scan (2026-09-05)** widened the search and
+source-verified six further open-source tools. Key results:
 
-- **The day-one need is already met off the shelf, several ways.**
-  `VictorTomaili/skill-cli` has the best per-project `allow`/`deny` activation model
-  (d1) and Claude Code support (d2) — but delivers by injecting a bootstrap and
-  relying on the model *pulling* skills at runtime, not native skills-dir loads, a
-  real caveat. `lijianru` and `skill-factory` do per-project + Claude by copying
-  into native dirs; and a plain symlink script into `.claude/skills/` (Option 2)
-  may cover the day-one case almost for free. **`mode-io` has no per-project scope
-  at all** (global-only) and so fails the #1 driver.
-- **The real tension is d1 vs. d3, not "the top two".** No tool combines
-  per-project selection (d1) with cheap extensibility to the further agents (d3).
-  For skill-cli, that gap is narrower than first thought: **OpenCode is likely a
-  cheap injection-target addition; only the file-based Copilot / Copilot CLI need
-  real new work** (a spike hypothesis, not asserted). mode-io owns the
-  extensibility/delivery breadth (d3) but has no per-project scope. So the lead is
-  **adopt a day-one tool now** (skill-cli leading, with its delivery caveat) and
-  **extend or fork when the further agents are actually needed** — *which base*
-  the open question, and its migration cost explicit (see Consequences).
-- **The wanted targets span two delivery shapes.** Claude Code and OpenCode (and
-  nice-to-haves pi and Antigravity) use the SKILL.md **skills-directory** standard
-  — symlink-friendly. GitHub Copilot and Copilot CLI are **file-based**
-  (`*.instructions.md`), needing generation, not a symlinked dir. Any extension
-  must handle both.
-- **Commercial products exist after all** (correcting an earlier assumption): see
-  [Option 7](#7-buy-a-commercial-product).
+- **Per-project selection is common; safe native delivery + extensibility is
+  rare.** Off the shelf, `skill-cli`, `lijianru`, `skill-factory`, and the newly
+  found `skills-mgr`, `omrikais/sm` (partial/additive), and `sklm` all do
+  per-project subsets; `mode-io` does not (global-only). The differentiators are
+  *how* they deliver
+  (symlink vs. copy vs. runtime-pull) and how safely.
+- **The landscape scan found stronger day-one candidates than the original five.**
+  `Leonezz/skills-mgr` (per-project profiles with inheritance, data-driven agent
+  table, SQLite-tracked reversible delivery) and `omrikais/sm` (symlink into native
+  dirs, doctor/backups, recent HEAD — sustained activity unverified) both deliver
+  into native agent directories — removing the runtime-pull/enforcement caveat that
+  limited `skill-cli`. The day-one lead is therefore now contested.
+- **The wanted targets span two delivery shapes.** Claude Code, OpenCode, pi, and
+  Antigravity use the SKILL.md **skills-directory** standard (symlink-friendly);
+  GitHub Copilot and Copilot CLI are **file-based** (`*.instructions.md`), needing
+  generation. No verified tool emits the modern Copilot `.instructions.md` shape.
+- **Commercial products exist** (SkillReg, Packmind, Tessl); none confirmed for
+  per-project subset + OpenCode + Copilot CLI. See [Option 11](#11-buy-a-commercial-product).
+
+Because a new day-one lead is not being crowned unilaterally, the recommendation
+presents `skills-mgr` and `omrikais/sm` as day-one **co-candidates** (with
+`skill-cli` as a fallback and Option 2's native script as a control)
+to be settled by a spike; the decision stays open.
 
 ## Context and Problem Statement
 
@@ -92,20 +90,13 @@ interviews, is tiered by *when* each target must work:
 - **Nice to have (same extensibility path):** Cursor, pi, Gemini (antigravity),
   Codex.
 
-This diverges from the source evaluation, which scored fit against OpenCode /
-Claude Code / **Cursor**, and treats coverage differently from the earlier draft
-of this ADR: only Claude Code must work immediately; the rest are judged by how
-cheaply they can be *added*. Verification found no functional Copilot support in
-any candidate (only one nominal, wrong-path attempt) and no Copilot CLI target at
-all — consistent with treating them as added-later rather than off-the-shelf.
-
 This ADR is intended for the project stakeholder (the developer) and any future
 contributor.
 
 ## Decision Drivers
 
 The choice will be guided by the following principles, in priority order (1 =
-most important), confirmed with the stakeholder through a short interview.
+most important), confirmed with the stakeholder through two short interviews.
 
 1. 🔀 **Per-project skill selection.** From one central store holding many skills,
    each project must be able to activate only a chosen subset — enable/disable
@@ -131,102 +122,122 @@ most important), confirmed with the stakeholder through a short interview.
 
 ## Considered Options
 
-1. **Do nothing / accept the status quo** — keep maintaining skills separately
-   per agent directory. See [Detailed Analysis](#1-do-nothing--status-quo).
-2. **Manual workaround: a hand-rolled symlink/copy script** — a small in-house
-   shell/Node script that links a central folder into each agent dir. See
-   [Detailed Analysis](#2-manual-workaround-hand-rolled-script).
-3. **Adopt `mode-io/skill-manager`** — central store, declarative targets, symlink
-   + file-codec delivery; Claude Code + OpenCode native but **no per-project
-   scope**. See [Detailed Analysis](#3-adopt-mode-ioskill-manager).
-4. **Adopt `lijianru/skills-manager`** — a Node CLI that copies a chosen skill
-   subset into per-project dirs (does driver 1 by copy, but clobbers edits,
-   hardcoded). See [Detailed Analysis](#4-adopt-lijianruskills-manager).
-5. **Adopt `VictorTomaili/skill-cli`** — best per-project `allow`/`deny` model +
-   Claude Code out of the box; the strongest day-one adopt. See
-   [Detailed Analysis](#5-adopt-victortomailiskill-cli).
-6. **Adopt another surveyed tool** — `24KaratAu/openhub` or `lexler/skill-factory`.
-   See [Detailed Analysis](#6-adopt-another-surveyed-tool-openhub--skill-factory).
-7. **Buy / adopt a commercial product** — real paid options exist (SkillReg,
-   Packmind, Tessl), none confirmed for per-project subset + OpenCode/Copilot CLI.
-   See [Detailed Analysis](#7-buy-a-commercial-product).
-8. **Extend a base without forking** — consume `mode-io` (or another tool) as a
-   dependency and add a thin per-project layer on top, without owning a fork. See
-   [Detailed Analysis](#8-extend-a-base-without-forking).
-9. **Fork / build** — hard-fork the strongest base (skill-cli or mode-io) and
-   extend it to satisfy all drivers. See [Detailed Analysis](#9-fork--build).
+1. **Do nothing / accept the status quo.** See [Detailed Analysis](#1-do-nothing--status-quo).
+2. **Manual workaround: a hand-rolled symlink/copy script** into agents' native
+   per-project dirs. See [Detailed Analysis](#2-manual-workaround-hand-rolled-script).
+3. **Adopt `mode-io/skill-manager`** — no per-project scope (global-only). See
+   [Detailed Analysis](#3-adopt-mode-ioskill-manager).
+4. **Adopt `lijianru/skills-manager`** — per-project by copy, clobbers, hardcoded.
+   See [Detailed Analysis](#4-adopt-lijianruskills-manager).
+5. **Adopt `VictorTomaili/skill-cli`** — best selection model, runtime-pull
+   delivery caveat. See [Detailed Analysis](#5-adopt-victortomailiskill-cli).
+6. **Adopt `Leonezz/skills-mgr`** — per-project profiles + data-driven agents +
+   strongest safe delivery (new, from the landscape scan). See
+   [Detailed Analysis](#6-adopt-leonezzskills-mgr).
+7. **Adopt `omrikais/skill-manager` (sm)** — symlink native delivery + strong
+   safety, two hardcoded agents (new). See
+   [Detailed Analysis](#7-adopt-omrikaisskill-manager-sm).
+8. **Adopt `Auran0s/sklm`** — data-driven agents but destructive sync (new). See
+   [Detailed Analysis](#8-adopt-auran0ssklm).
+9. **Adopt `rohitg00/skillkit`** — mature cross-agent package manager, not
+   central-store subset (new). See [Detailed Analysis](#9-adopt-rohitg00skillkit).
+10. **Adopt another surveyed tool** — openhub, skill-factory, or the desktop-GUI
+    cluster. See [Detailed Analysis](#10-adopt-another-surveyed-tool).
+11. **Buy / adopt a commercial product** — SkillReg, Packmind, Tessl. See
+    [Detailed Analysis](#11-buy-a-commercial-product).
+12. **Extend a base without forking** — wrap a tool as a dependency + thin layer.
+    See [Detailed Analysis](#12-extend-a-base-without-forking).
+13. **Fork / build** — hard-fork the strongest base. See
+    [Detailed Analysis](#13-fork--build).
 
 ## Recommendation (pending decision)
 
-Under the re-prioritized drivers (1 per-project subset, 2 Claude Code
-out-of-the-box, 3 cheap extensibility to further agents, 4 safe delivery, 5
-health), the day-one drivers (d1 + d2) *are* satisfiable off the shelf, by more
-than one tool, each with a caveat:
+Under the drivers (1 per-project subset, 2 Claude Code out-of-the-box, 3 cheap
+extensibility, 4 safe delivery, 5 health), d2 and at least the *activate* half of
+d1 are met off the shelf by several tools; the *disable/swap* half of d1 is a live
+gating question for one co-candidate (`omrikais/sm`). Deliberately, this ADR does
+**not** crown a single winner — it presents day-one **co-candidates** and defers
+the choice to a hands-on spike:
 
-- **`VictorTomaili/skill-cli`** has the strongest per-project model — an
-  `allow`/`deny` activation config over a central store (`config.js:78-113`) — and
-  Claude Code support. **Caveat (delivery):** it writes nothing into the agent's
-  skills directory; it injects a bootstrap block into the agent's instruction file
-  and relies on the model *pulling* skills at runtime, with no enforcement. So its
-  d2/d4 are real but by a prompt-dependent mechanism, not native skills-dir loads.
-- **`lijianru`** copies a chosen subset into the *native* per-project skills dirs
-  (so the agent loads them normally), but overwrites edits (fails d4), is hardcoded
-  and untested (fails d5).
-- **Native mechanisms + a small copy/symlink** (Option 2) may already give d1+d2
-  for Claude Code almost for free — worth ruling out before adopting any tool.
+Two tools are genuine day-one co-candidates. They trade off cleanly — one leads
+d1+d4-architecture but is stale/unlicensed; the other leads d5-freshness but has a
+narrower d1 and d3 — so neither is crowned; the spike decides on live criteria.
 
-The conflict the drivers expose is **d1 vs. d3**, but more narrowly than the first
-draft claimed. d3 is not uniformly hard for skill-cli: **OpenCode is instruction-
-file driven too, so adding it is plausibly another array/target entry
-(`paths.js:16-22`), not a delivery rebuild** — this is a spike hypothesis, not a
-verified fact. Only the **file-based Copilot / Copilot CLI** need a new generation
-mechanism. `mode-io` sits opposite: it owns the extensibility/delivery
-breadth (data catalog + symlink and file codecs, OpenCode native, crash-safe,
-tested — d2–d5) but has **no per-project scope at all** (global-only), failing d1.
+- **`Leonezz/skills-mgr`** — per-project profiles with `includes` inheritance
+  (`profiles.rs:56-88`), Claude Code at both scopes (`presets.rs:9-13`),
+  data-driven agents (`config.rs:145-157`), and the richest safe-delivery design:
+  SQLite-tracked placements, `doctor`, conflict-bail, ref-counted reversible
+  deactivate (`placements.rs:338-354`), rollback on failure (`:278-289`).
+  **Against it:** HEAD is `fded9c6` dated **2026-04-15 — ~5 months stale** at scan
+  time (possibly dormant); single author, 1★; MIT declared in `Cargo.toml` but
+  **no LICENSE file**; delivery is copy (not symlink), so edited sources need a
+  `refresh`; Rust, a higher extension barrier for a Node/Python developer; no
+  Copilot `.instructions.md` transform.
+- **`omrikais/sm`** — symlink into native agent dirs (`src/fs/links.ts:19-66`),
+  per-project profiles, and a strong safe-delivery surface (no-clobber via
+  conflict-refusal, atomic temp+rename, doctor, backups, non-destructive rollback).
+  **On d5 it strictly beats skills-mgr:** HEAD `970fb64` dated **2026-09-03 (fresh)**,
+  clean MIT LICENSE file, 4★, dependabot, 84 test files — though *sustained*
+  activity is unverifiable (shallow clone), so "recent HEAD" is the honest claim,
+  not "actively maintained". **Against it:** profile switching is **additive-only**
+  — it deploys but never undeploys the prior set (`install.ts:35-57`), so it
+  **fails the disable/re-select half of driver 1** until a prune exists (a spike
+  gating question, not a footnote); and targets are hardcoded to Claude Code +
+  Codex (`src/fs/paths.ts:85`), so adding agents (d3) is a source edit.
 
-Because only Claude Code is required on day one, the path is staged:
+`skill-cli` is now a **fallback**, not a co-candidate: its `allow`/`deny` selection
+model (`config.js:78-113`) is the cleanest, but it delivers by runtime pull with no
+enforcement and is effectively unmaintained (single ~6h burst) — the two tools
+above remove the reason to accept its delivery caveat. `lijianru` (copy, clobbers)
+and `sklm` (destructive `rmtree` sync, `_sync.py:38-40`) are weaker still. `mode-io`
+remains the best *extensibility* base (data catalog + file codec) but fails d1.
+`skillkit` is the healthiest project (1470★, Apache-2.0, ~1537 test assertions) but
+is a package manager, not central-store subset selection. Desktop GUIs
+(xingkongliang 4270★, jiweiyeah 971★) are **GUI-only, not headless**, unusable for
+an automated pipeline.
 
-1. **Adopt a day-one tool now** for per-project selection on Claude Code.
-   `skill-cli` leads on the *selection model* (subject to the pull-delivery
-   caveat); `lijianru` or native+copy are alternatives with native delivery but
-   weaker safety/health. A one-day spike picks between them.
-2. **Extend when the further agents are needed** — Option 8 (wrapper) or Option 9
-   (fork), base chosen then, not now.
+Staged path, unchanged in shape:
 
-The seam: skill-cli (config + injection) and mode-io (catalog + symlink) are
-**incompatible models**, so "extend later" may mean either rebuilding delivery
-inside a skill-cli fork *or* migrating off skill-cli to a mode-io base —
-discarding the skill-cli config investment and possibly running two tools in the
-interim. Day-one value is modest and does not buy down that later cost; adopting
-now is justified by getting value early, not by making extension cheaper.
-**Commercial products** (Option 7) deserve a trial in case one covers everything
-and removes the extension question. This ADR is a *proposal only* — decision open.
+1. **Adopt a day-one tool now** — decided by the spike below (co-candidates
+   skills-mgr and omrikais/sm, with the native symlink baseline of Option 2 as a
+   control arm, and skill-cli only as a fallback).
+2. **Extend when the further agents are needed** — Option 12 (wrapper) or Option
+   13 (fork), base chosen then.
 
-Note a reversal from the source evaluation, which is deliberate: skill-cli scored
-Fit = 2 ("weak fit, architecturally off-target") there because that evaluation
-judged global coverage of three agents. Under the reprioritized drivers
-(per-project selection first, Claude-first), its activation model moves it to the
-day-one lead. Same evidence, different question.
+The migration seam still applies: the selection/delivery models differ across
+these tools, so "extend later" may mean discarding the day-one tool's config and
+running two tools briefly. Adopting now is justified by early value, not by making
+extension cheaper. **Commercial products** (Option 11) deserve a trial in case one
+covers everything. This ADR is a *proposal only* — decision open.
 
-Coverage below is source-verified. Driver columns follow the re-prioritized set.
+A note on reversals: skill-cli scored Fit = 2 in the source evaluation (which
+judged global three-agent coverage); the per-project-first drivers promoted it to
+last round's lead; the landscape scan now shows tools that match its selection
+model without its delivery caveat. Same evidence base, evolving question.
+
+Coverage below is source-verified. Driver columns follow the priority set.
 
 | Option | Per-project subset (d1) | Claude Code OOTB (d2) | Cheap extensibility (d3) | Safe delivery (d4) | Health (d5) |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | 1 Do nothing | none (manual) | manual | n/a | manual, error-prone | n/a |
-| 2 Hand-rolled script | you build it | you build it | you own it | you build it | you own it |
+| 2 Hand-rolled script | you build it | you build it (trivial) | you own it | native loads, no clobber | you own it |
 | 3 mode-io/skill-manager | **no (global-only)** | yes (+ OpenCode) | **best** (data catalog + symlink & file codec) | crash-safe, reversible | CI + 61 tests, pre-1.0/private |
-| 4 lijianru/skills-manager | yes (copy subset to project) | yes (native dir) | poor (hardcoded switch) | copy overwrites edits | no tests, bus-factor 1 |
-| 5 skill-cli | **best** (`allow`/`deny` project config) | yes, but via injection/pull (no enforcement) | OpenCode likely cheap; Copilot needs file-gen | store safe, but delivery is prompt-dependent | 227 tests but ~6h burst, effectively unmaintained |
-| 6a openhub | no | no (CC label-only) | poor | fake-success installs | placeholder tests |
-| 6b skill-factory | yes (project-local copy) | yes (native dir) | poor (constants, Claude-only) | defensive but 1 target | no CI/tests, bus-factor 1 |
-| 7 Commercial product | unknown (trial needed) | yes (SkillReg/Packmind) | vendor-controlled | product feature | vendor-supported |
-| 8 Extend a base (no fork) | add via wrapper layer | inherit from base | inherit from base | inherit from base | shared with upstream |
-| 9 Fork/build | by design | inherit from base | by design | inherit from base | you co-own it |
+| 4 lijianru/skills-manager | yes (copy subset) | yes (native dir) | poor (hardcoded switch) | copy overwrites edits | no tests, bus-factor 1 |
+| 5 skill-cli | best (`allow`/`deny`) | yes, via injection/pull (no enforcement) | OpenCode likely cheap; Copilot needs file-gen | store safe, delivery prompt-dependent | 227 tests but ~6h burst, unmaintained |
+| 6 skills-mgr (Leonezz) | **yes (profiles + includes)** | yes (both scopes) | data-driven (`agents.toml`); Rust | **strongest** (SQLite, doctor, reversible, rollback) | 80 tests / CI / 1★ / HEAD ~5mo stale / no LICENSE file |
+| 7 omrikais/sm | partial — deploys but no clean disable/swap (additive-only) | yes (symlink native) | poor (hardcoded cc\|codex) | **strong** (no-clobber, atomic, doctor, backups, rollback) | MIT / 84 tests / 4★ / HEAD fresh (2026-09-03); sustained activity unverified |
+| 8 sklm | yes (config) | yes (project-only) | **data-driven (30 YAML)** | **unsafe (rmtree clobbers foreign)** | MIT / 184 tests / CI |
+| 9 skillkit (rohitg00) | partial (pkg-mgr) | yes | data-driven 46 + `translate` | decent (skip-existing, scan) | Apache-2.0 / ~1537 tests / 1470★ |
+| 10 openhub / skill-factory / GUIs | mixed | mixed | poor | mixed | see analysis |
+| 11 Commercial product | unknown (trial) | yes (SkillReg/Packmind) | vendor-controlled | product feature | vendor-supported |
+| 12 Extend a base (no fork) | add via wrapper | inherit | inherit | inherit | shared with upstream |
+| 13 Fork/build | by design | inherit | by design | inherit | you co-own it |
 
-The decisive columns are d1 (per-project) and d3 (cheap extensibility): the
-scarcity is the *combination* — several tools do d1, mode-io leads d3, none does
-both — which is why the recommendation adopts for day-one value now and defers the
-extension (and its migration cost) to a spike.
+The decisive columns are d1 (per-project), d4 (safe delivery), and d3 (cheap
+extensibility). skills-mgr leads d1+d4 with data-driven d3; omrikais/sm leads d4
+with symlink delivery but weak d3; skill-cli leads the selection model but has the
+delivery caveat. No candidate also solves the file-based Copilot targets, so an
+extension step (Option 12/13) remains eventual regardless.
 
 ## Detailed Analysis of Options
 
@@ -236,278 +247,330 @@ Keep maintaining each skill separately in each agent's directory by hand.
 
 - Good, because it requires no new tool, no dependency, and no learning curve.
 - Good, because there is zero risk from third-party code health or abandonment.
-- Bad, because every skill is duplicated across three directories and edits
-  drift out of sync.
-- Bad, because there is no single switch to enable/disable a skill everywhere —
-  the exact capability we want.
-- Bad, because the manual effort and error rate grow with the number of skills.
+- Bad, because every skill is duplicated across agent directories and edits drift.
+- Bad, because there is no per-project subset selection — the capability we want.
+- Bad, because manual effort and error rate grow with the number of skills.
 
-Mitigation of negatives: a naming convention and a checklist reduce drift
-somewhat, but they do not remove the duplication or provide global toggling; the
-core problem remains unsolved.
+Mitigation of negatives: a naming convention and a checklist reduce drift, but do
+not remove the duplication or provide per-project selection; the core problem
+remains unsolved.
 
 ### 2. Manual workaround: hand-rolled script
 
 Write a small in-house script that symlinks (or copies) a chosen subset from a
-central store into each agent's **native** per-project location — for Claude Code
-`.claude/skills/`, for Copilot `.github/instructions/`, etc. The agents already
-have per-project mechanisms; this option just feeds them, so the day-one target
-(per-project subset for Claude Code) may be nearly free — a few lines that symlink
-selected store entries into a repo's `.claude/skills/`.
+central store into each agent's **native** per-project location — `.claude/skills/`
+for Claude Code, `.github/instructions/` for Copilot, etc. The agents already have
+per-project mechanisms; this option just feeds them, so the day-one target
+(per-project subset for Claude Code) may be nearly free.
 
 - Good, because it is fully under our control, has no external dependency, and for
   the day-one case (Claude Code, native skills-dir) is trivial — which raises the
   bar every other option must clear.
 - Good, because it uses each agent's native loading, so there is no enforcement/
-  pull caveat (unlike skill-cli) and no schema translation for skills-dir agents.
+  pull caveat and no schema translation for skills-dir agents.
 - Bad, because we take on all maintenance, cross-platform edge cases (Windows
   junctions, synced folders), and correctness (collision handling, safe removal).
 - Bad, because the file-based Copilot / Copilot CLI schema (`.instructions.md`
-  with `applyTo`) and Cursor `.mdc` still have to be generated by us — the same
-  work the tools defer.
+  with `applyTo`) and Cursor `.mdc` still have to be generated by us.
 - Bad, because as it grows to cover the further agents it reinvents what the
   candidate tools already do.
 
-Mitigation of negatives: keep it symlink-only and Claude/OpenCode-first to limit
-scope. This is the honest baseline for the day-one drivers — any adopted tool must
-justify itself against "a symlink script into `.claude/skills/`"; a tool earns its
-place mainly by carrying the later, harder file-based targets, not the easy one.
+Mitigation of negatives: keep it symlink-only and Claude/OpenCode-first. This is
+the honest baseline for the day-one drivers — any adopted tool must justify itself
+against "a symlink script into `.claude/skills/`"; a tool earns its place mainly
+by carrying the later, harder file-based targets.
 
 ### 3. Adopt `mode-io/skill-manager`
 
 A central content store with declarative per-agent binding profiles and symlink
-adapters. Winner of the source evaluation — but no longer the ADR's lead once
-per-project selection became the top driver, which this tool does not provide.
+adapters. Winner of the source evaluation, but it does not do per-project
+selection.
 
-- **Bad, because it has no per-project scope — failing driver 1, the top
-  priority.** All its binding scopes point at global/home locations
-  (`catalog.py:106-286`); there is no mechanism for a repository to activate a
-  chosen subset. This is the decisive weakness for our reprioritized use case.
-- Good, because Claude Code works out of the box (driver 2), along with OpenCode
-  and Cursor, modeled natively with correct roots and env overrides
-  (`catalog.py:139,207,172`).
-- Good, because targets are declarative data (binding-profile catalog,
-  `catalog.py:93`) **and** it already ships a frontmatter-rewriting codec for
-  slash-commands (`codecs.py`), so it has both a symlink adapter and a
-  file-generating adapter — the two delivery shapes the wanted targets need. This
-  makes it the strongest base for driver 3 (extensibility): adding Copilot /
-  Copilot CLI is a new binding profile plus reuse of the file codec, not a rewrite.
-- Bad, because it does not target Copilot today — "GitHub Copilot" is only an
-  unchecked roadmap box (`README.md:405`), and Copilot CLI is absent — so that
-  adapter work, though well-supported by the architecture, is still work we must
-  do or sponsor.
-- Good, because mutations are crash-safe (preflight link validation, backup
-  dirs, rollback) and it has real CI and 61 tests (drivers 4–5).
-- Bad, because symlink delivery breaks on filesystems or synced dirs that cannot
-  follow links, unless the copy fallback is used.
-- Bad, because the repo is pre-1.0 (v0.3.1), marked private, and authored mostly
-  by two people — a bus-factor and contract-stability risk.
+- **Bad, because it has no per-project scope — failing driver 1.** All binding
+  scopes point at global/home locations (`catalog.py:106-286`); no repository can
+  activate a chosen subset.
+- Good, because Claude Code works out of the box (d2), with OpenCode and Cursor,
+  modeled natively (`catalog.py:139,207,172`).
+- Good, because targets are declarative data (`catalog.py:93`) **and** it ships a
+  frontmatter-rewriting codec for slash-commands (`codecs.py`) — both a symlink
+  adapter and a file-generating adapter, the two shapes the wanted targets need.
+  This makes it the strongest base for driver 3.
+- Bad, because it does not target Copilot today (roadmap box, `README.md:405`).
+- Good, because mutations are crash-safe and it has CI + 61 tests (d4–d5).
+- Bad, because symlink delivery breaks on non-symlink-friendly locations unless
+  the copy fallback is used; and the repo is pre-1.0, private, two authors.
 
-Mitigation of negatives: the missing per-project scope and the Copilot targets
-are exactly what an extension would add (see [Option 8](#8-extend-a-base-without-forking)
-or [Option 9](#9-fork--build)) — this tool is the strongest *base*, not a finished
-answer. Pin to a known-good version/commit
-and vendor or fork it to remove the "private repo could disappear" risk; use the
-built-in materialize-to-copy path on non-symlink-friendly locations. The
-frontmatter gap for skills (only slash-commands are rewritten) is acceptable
-between Claude Code and OpenCode, which share the same `name`/`description`
-SKILL.md frontmatter; GitHub Copilot's file-based format is part of the extension
-work.
+Mitigation of negatives: mode-io is a strong *base* for Options 12–13, not a
+day-one answer; its missing per-project scope is exactly what a wrapper/fork would
+add. Pin/vendor the version.
 
 ### 4. Adopt `lijianru/skills-manager`
 
-A lightweight Node CLI that copies a chosen skill subset into a hardcoded set of
-target dirs. Like skill-cli (Option 5) it does per-project selection and Claude
-Code out of the box, but by copying rather than a config toggle, and less cleanly.
+A Node CLI that copies a chosen subset into a hardcoded set of target dirs.
 
-- Good, because it does driver 1: an interactive checkbox picks which skills
-  (`selectedSkills`, `link-manager.ts:55-70`) and copies just that subset into a
-  chosen project directory / `process.cwd()` (`:142,171`) — a real per-project
-  subset, though realized by copying rather than a re-flippable toggle.
-- Good, because Claude Code works out of the box (driver 2), and it has built-in
-  cases for OpenCode, Cursor, **and** Copilot, Gemini/Antigravity, Codex
-  (`link-manager.ts:105-170`) — and is simple to run and understand.
-- Good, because it keeps a central config registry and can re-sync copies with
-  an `update` command.
-- Bad, because its Copilot and Gemini paths are **wrong**: it writes to
-  `~/.copilot/skills` / `.github/skills` (`link-manager.ts:122,162`) and
-  `~/.gemini/antigravity/skills` (`:113`), but Copilot reads
-  `.github/instructions/*.instructions.md` and Antigravity reads
-  `~/.gemini/config/skills/` — so that coverage is nominal and likely
-  non-functional until verified/fixed. It also has no distinct Copilot CLI target.
-- Bad, because the targets are a hardcoded switch (`link-manager.ts:82,105,145`),
-  so correcting those paths or adding Copilot CLI is a source edit, not config.
-- Bad, because delivery is copy-with-overwrite that can silently clobber local
-  edits, with no conflict detection — failing driver 4.
-- Bad, because it has no tests, a single author over ~11 days, and a wrong
-  hardcoded version string — failing driver 5.
-- Bad, because it does no per-agent schema translation, so its file-based Copilot
-  delivery cannot be made correct without real work.
+- Good, because it does driver 1 by copy: a checkbox picks skills
+  (`link-manager.ts:55-70`) copied into a project dir / `process.cwd()`
+  (`:142,171`); and Claude Code works out of the box into a native dir (d2).
+- Bad, because its Copilot/Gemini paths are wrong (`link-manager.ts:122,162,113`)
+  vs. the agents' real locations — nominal, likely non-functional.
+- Bad, because targets are a hardcoded switch (`:82,105,145`); copy-with-overwrite
+  clobbers local edits (fails d4); no tests, single author (fails d5).
 
-Mitigation of negatives: treat target dirs as machine-managed (never hand-edit
-them) so overwrite-on-update is harmless; wrap it with our own backup step; pin
-the version. It is a fallback to skill-cli (Option 5) if that tool's pull-delivery
-model is judged unsuitable — but it is the weaker of the two off-the-shelf
-per-project options.
+Mitigation of negatives: treat target dirs as machine-managed and pin the version;
+it is a weaker off-the-shelf per-project distributor than skills-mgr/omrikais-sm.
 
 ### 5. Adopt `VictorTomaili/skill-cli`
 
-The strongest per-project *activation* model in the set, and the leading day-one
-adopt — but with a delivery-model caveat and a maintenance caveat that keep it
-from being a clean winner.
+The strongest per-project *activation* model, and last round's lead — but with a
+delivery-model caveat and a maintenance caveat.
 
 - Good, because it does driver 1 cleanly: a project `skill.config` with
   `inherit`/`allow`/`deny` where `deny:["*"] + allow:[X]` yields "only X"
-  (`config.js:78-113`) — a re-flippable per-project subset over one central store,
-  not a copy.
-- Good, because Claude Code is supported out of the box (driver 2) and the store
-  itself is never clobbered (part of driver 4), with 227 tests and CI on 3 OS × 2
-  node versions.
+  (`config.js:78-113`).
+- Good, because Claude Code is supported out of the box (d2) and the store is
+  never clobbered (part of d4), with 227 tests and CI on 3 OS × 2 node versions.
 - **Bad (delivery caveat, affects d2 and d4), because it puts nothing in the
-  agent's skills directory.** It injects a bootstrap block into the agent's global
-  instruction file and relies on the model *pulling* skills at runtime via the
-  `skill` CLI — with no enforcement if the model ignores the bootstrap
-  (`agents-md.js:79-101`). So "Claude Code works" means "Claude Code is told to
-  pull," which is weaker and less verifiable than a native skills-dir load.
-- **Bad (health caveat, driver 5), because it is effectively unmaintained**: the
-  entire history is a single ~6-hour burst by one author, bus-factor 1, no
-  sustained activity. 227 tests indicate quality at that snapshot, not upkeep — a
-  real risk for a tool a solo developer must rely on long-term.
-- Bad, because of the wanted targets it has **only Claude Code**; OpenCode and
-  Copilot are absent (`paths.js:16-22`).
-- Mixed on driver 3: because delivery is instruction-file injection, **adding
-  OpenCode is plausibly cheap** — another instruction-file target entry
-  (`paths.js:16-22`), a spike hypothesis to verify — whereas the **file-based
-  Copilot / Copilot CLI need a new generation mechanism**. The earlier "rebuild the
-  whole delivery layer" framing overstated this; only Copilot does.
+  agent's skills directory.** It injects a bootstrap into the agent's instruction
+  file and relies on the model *pulling* skills at runtime, with no enforcement
+  (`agents-md.js:79-101`) — weaker and less verifiable than a native load. The
+  newly found skills-mgr and omrikais/sm avoid this by delivering into native dirs.
+- **Bad (health caveat, d5), because it is effectively unmaintained**: a single
+  ~6-hour burst by one author, bus-factor 1. 227 tests show quality at a snapshot,
+  not upkeep.
+- Bad, because of the wanted targets it has only Claude Code (`paths.js:16-22`).
+- Mixed on driver 3: OpenCode is plausibly a cheap injection-target add
+  (`paths.js:16-22`, a spike hypothesis); only the file-based Copilot / Copilot CLI
+  need a new generation mechanism.
 
-Mitigation of negatives: adopt it now for day-one per-project selection on Claude
-Code, pin/vendor the version to blunt the unmaintained risk, and confirm the pull
-behavior actually works (see [Confirmation](#confirmation)) rather than assuming
-it. If the pull-delivery model proves unreliable in practice, `lijianru` (native
-per-project copy) or a native+copy script (Option 2) are fallbacks.
+Mitigation of negatives: a day-one **fallback** (not a co-candidate) for its
+selection model, used only if the native-delivery tools (Option 6 or 7)
+disappoint; pin/vendor, and confirm the pull behavior actually works (see
+[Confirmation](#confirmation)).
 
-### 6. Adopt another surveyed tool (openhub / skill-factory)
+### 6. Adopt `Leonezz/skills-mgr`
 
-- **`24KaratAu/openhub`** — verification found only **OpenCode** is real (installs
-  via `opencode get`, `opencode-market_v2.py:171`); the Claude Code and Cursor
-  rows in its README have **no corresponding code**. It fails the day-one Claude
-  Code driver, has no per-project selection, and records fake "success" when the
-  target binary is absent. Poor fit.
-- **`lexler/skill-factory`** — supports per-project selection by local copy and
-  Claude Code (`skills:13-14`), but is Claude-Code-only with no extensibility
-  path; it is a skill-*authoring* factory.
+Rust CLI (plus Tauri GUI and MCP). Found in the landscape scan; source-verified at
+HEAD `fded9c6`. The best architectural fit on d1+d4, but with real health and
+toolchain caveats that stop it being an outright pick.
 
-Mitigation of negatives: neither closes the multi-agent gap without substantial
-work, so neither is a serious distributor choice — however, `skill-factory`'s
-authoring layer is worth harvesting *separately* as a complement to whichever
-distributor we pick, since creating good skills is a different problem from
-distributing them.
+- Good, because it does driver 1 richly: per-project **profiles** with transitive,
+  cycle-checked `includes` and a `base` (`profiles.rs:56-88`); `activate <profile>
+  <project>` places only the resolved subset, and the DB tracks per-project active
+  profiles (`placements.rs:229,306-308`), composable across profiles.
+- Good, because Claude Code works out of the box at **both** project and global
+  scopes (`presets.rs:9-13`) — d2.
+- Good, because agents are data-driven (`config.rs:145-157` `agents.toml`) with an
+  `agent add --project-path/--global-path` command (`main.rs:263-273`) — d3 by
+  configuration, not code (presets are convenience shortcuts only).
+- Good, because it has the **strongest safe delivery** of any candidate (d4):
+  SQLite-tracked placements, `doctor` (`main.rs:524`), `check-conflicts`,
+  ref-counted reversible deactivate that keeps shared skills
+  (`placements.rs:338-354`), conflict-bail unless `--force`, rollback on copy
+  failure (`:278-289`), and dry-run.
+- Bad, because delivery is directory **copy** (`placements.rs:278`), not symlink,
+  so every source edit needs a `refresh`/`replace` to propagate — added friction
+  for a developer iterating on skills, versus a symlink that updates live.
+- Bad (d5), because it is single-author, 1★, and **its HEAD `fded9c6` is dated
+  2026-04-15 — ~5 months before the scan, so it may be dormant**; MIT is declared
+  in `Cargo.toml:13` but there is **no LICENSE file** — confirm licensing before use.
+- Bad, because it is **Rust**: for a Node/Python-oriented developer, extending or
+  forking it later (Options 12–13) is a higher barrier than the TypeScript tools.
+- Bad, because it does not emit Copilot's `.instructions.md` (`presets.rs:30` maps
+  copilot to `.github/skills` only) — the file-based targets remain extension work.
 
-### 7. Buy a commercial product
+Mitigation of negatives: confirm the MIT license (add/verify a LICENSE file with
+upstream) and pin a commit; the copy-staleness is workable via `refresh`. It is a
+day-one **co-candidate**, not a settled pick — the spike weighs its d1+d4 strength
+against its staleness, licensing gap, and Rust toolchain.
 
-Correcting an earlier assumption in this ADR: a commercial market *does* exist
-(nascent, 2025–2026, no incumbent). Named products found:
+### 7. Adopt `omrikais/skill-manager` (sm)
+
+Node/TS CLI (`bin: sm`) plus MCP. Found in the landscape scan; source-verified at
+HEAD `970fb64`. A *different* author from `mode-io/skill-manager`.
+
+- **Partial on driver 1 — it fails the disable/re-select half.** It has per-project
+  `.skills.json` with named profiles (`manifest.ts:7-59`) and delivers by
+  **directory symlink into native agent dirs** (`src/fs/links.ts:19-66`) — d2
+  without skill-cli's pull caveat. But profile switching is **additive-only**:
+  `install --profile` deploys and never undeploys the prior set
+  (`install.ts:35-57`), so you can activate a subset but **cannot cleanly swap or
+  disable one** without a manual prune. Driver 1 explicitly requires per-repo
+  enable/disable, so this is a gap in the #1 driver, not a footnote — a spike
+  gating question.
+- Good, because safe delivery is the strongest of the symlink tools (d4): no
+  clobber (non-symlink targets are reported as conflicts and repair refuses to
+  overwrite, `src/fs/links.ts:94-96,132-135`), atomic temp+rename (`src/fs/links.ts:32-35`),
+  doctor, `sync --repair`, timestamped backups + restore, version history +
+  non-destructive rollback (`versioning.ts:45-116`).
+- Good on d5, and **fresher than skills-mgr**: HEAD `970fb64` dated 2026-09-03,
+  clean MIT LICENSE file, 4★, dependabot, 84 test files. Honest caveat: *sustained*
+  activity is unverifiable from a shallow clone — the verified claim is "recent
+  HEAD", not "actively maintained".
+- **Bad, because d3 is hardcoded**: deploy targets are a TypeScript `'cc' |
+  'codex'` union (`src/fs/paths.ts:85`), so only Claude Code and Codex exist and
+  adding OpenCode/Copilot is a source + type change, not configuration.
+- Bad, because it does not emit Copilot's `.instructions.md`.
+
+Mitigation of negatives: a good day-one choice *if* the additive-only prune gap on
+driver 1 is acceptable and extensibility can wait; the hardcoded target set makes
+it a poorer *base* for Options 12–13 than skills-mgr or mode-io. Day-one
+co-candidate: strongest on d5-freshness and delivery safety, weaker on the d1
+disable/swap gap and on d3.
+
+### 8. Adopt `Auran0s/sklm`
+
+Python CLI. Found in the landscape scan; source-verified at HEAD `0c29fb6`.
+
+- Good, because it does driver 1 (central store `~/.sklm/store`, per-project
+  `.sklm/sklm.yaml` tracking `resources` + activated `links`, re-flippable —
+  `workspace.py:67-113`, `linking.py:14-52`).
+- Good, because agents are the most **data-driven** of all: 30+ agents as YAML rows
+  and a `GenericAdapter` that serves any `.<dir>/skills/` layout with zero code
+  (`agents.yaml:1-63`, `generic.py:16-35`) — d3 by one YAML row for standard
+  layouts. MIT, 184 tests, CI (d5 signals).
+- **Bad, because delivery is unsafe (fails d4):** sync does `shutil.rmtree` on the
+  target and removes any dir in the agent's skills path not in the linked set
+  (`_sync.py:38-40,30-33`), destroying hand-authored skills and local edits, with
+  no backup or conflict detection.
+- Bad, because Claude Code is project-only (no user-level `~/.claude`), and Copilot
+  is `.github/skills`, not `.instructions.md` (`github_copilot.py:29-30`).
+
+Mitigation of negatives: the destructive sync is the disqualifier for a solo
+developer with hand-authored skills; its data-driven agent table is worth studying
+as a design reference for Options 12–13 even if the tool itself is not adopted.
+
+### 9. Adopt `rohitg00/skillkit`
+
+TypeScript monorepo CLI (`skillkit`/`sk`) on npm. Found in the landscape scan;
+source-verified at HEAD `d2e5c34`. The healthiest project found.
+
+- Good, because it is by far the most mature: Apache-2.0, ~1537 test assertions +
+  e2e, CI, 1470★ (d5), and the strongest d3 machinery — a real 46-agent data table
+  (`agent-config.ts`) plus a `translate` FormatTranslator that converts SKILL.md
+  into per-agent formats.
+- **Bad, because it is a package manager, not central-store subset selection
+  (d1 partial):** `install owner/repo` clones and `cpSync`-copies a chosen subset
+  into a project, and the `enabled` flag lives in each skill's own `.skillkit.json`
+  (`config.ts:122-134`), so a shared skill's enable-state is global, not per-repo.
+- Bad, because many of the 46 agents are config-only stubs rather than fully wired
+  adapters (`agents/index.ts` wires a subset; the table is broader than the
+  adapters).
+- Bad, because Copilot output is the legacy `.github/copilot-instructions.md` only
+  (`translator/formats/copilot.ts:198-207`), not `.instructions.md`.
+
+Mitigation of negatives: not a fit for the per-project-subset model, but its
+`translate` layer is the best existing reference for the file-based Copilot target;
+worth mining in Options 12–13.
+
+### 10. Adopt another surveyed tool
+
+- **`24KaratAu/openhub`** — only OpenCode is real (`opencode-market_v2.py:171`);
+  Claude Code/Cursor rows have no code; fake "success" when the binary is absent.
+  Fails the day-one Claude Code driver.
+- **`lexler/skill-factory`** — per-project by local copy, Claude-Code-only
+  (`skills:13-14`), no extensibility path; really a skill-*authoring* factory whose
+  authoring layer is worth harvesting separately.
+- **Desktop-GUI cluster (landscape scan):** `xingkongliang/skills-manager`
+  (4270★, MIT, 0 tests) and `jiweiyeah/Skills-Manager` (971★, 33 tests) are
+  **Tauri GUIs with no headless surface** — no CLI bin, no MCP server; delivery
+  logic lives in `src-tauri` commands invoked only from the webview. High stars
+  but unusable for an automated per-project pipeline. Excluded on that basis.
+
+Mitigation of negatives: none of these fits the headless per-project use case;
+skill-factory's authoring layer is the only reusable piece.
+
+### 11. Buy a commercial product
+
+A commercial market exists (nascent, 2025–2026, no incumbent):
 
 - **SkillReg** (skillreg.dev) — private SKILL.md registry across Claude Code,
-  Codex, Cursor, Copilot; versioning, permissions, scanning, audit. Paid SaaS
-  (Free / $29 / $99 per month).
-- **Packmind** (packmind.com) — "ContextOps" that *generates per-agent files*
-  (`.claude/rules`, `.cursor/rules`, `.github/instructions`, `AGENTS.md`, …) for
-  Claude Code, Cursor, Copilot, and others; OSS core plus paid enterprise.
-- **Tessl** (tessl.io) — enterprise "Agent Enablement Platform" with a skills
-  registry and governance; Claude Code, Cursor, Copilot, Gemini.
+  Codex, Cursor, Copilot; versioning, permissions, scanning. Paid SaaS.
+- **Packmind** (packmind.com) — generates per-agent files (`.claude/rules`,
+  `.cursor/rules`, `.github/instructions`, `AGENTS.md`) for several agents; OSS core
+  plus paid enterprise.
+- **Tessl** (tessl.io) — enterprise agent-enablement platform + skills registry.
 
-- Good, because a vendor carries maintenance, cross-platform correctness, and
-  governance we would otherwise build; Packmind in particular already emits the
-  file-based `.github/instructions` shape Copilot needs.
-- Bad, because **none of them lists OpenCode or Copilot CLI**, and none documents
-  a per-project subset model (driver 1), so our top requirements are unconfirmed
-  and may be unmet — now behind a paywall.
-- Bad, because they add cost, external dependency, and potential lock-in/data
-  governance concerns for a solo-developer workflow.
+- Good, because a vendor carries maintenance and cross-platform correctness;
+  Packmind already emits the file-based `.github/instructions` shape Copilot needs.
+- Bad, because none lists OpenCode or Copilot CLI, and none documents a per-project
+  subset model (d1) — our top requirements are unconfirmed, now behind a paywall.
+- Bad, because of cost, external dependency, and lock-in for a solo-dev workflow.
 
-Mitigation of negatives: a short trial of SkillReg and Packmind would cheaply
-confirm whether either does per-project selection and covers OpenCode + Copilot
-CLI; if one does, its maintenance/testing/support could beat both the OSS options
-and a self-owned fork. This is an actionable option, not a dead end.
+Mitigation of negatives: a short trial of SkillReg and Packmind would confirm
+per-project support and OpenCode + Copilot CLI coverage; their marketing lists
+neither, so temper expectations, but if one covers everything it removes the
+extend/fork work.
 
-### 8. Extend a base without forking
+### 12. Extend a base without forking
 
 Consume an existing tool as an unmodified dependency and add a thin per-project
-layer on top — distinct from a hard fork (Option 9, we own and modify the source)
-and from a from-scratch script (Option 2). Most credible with `mode-io`, whose
-targets are declarative data and whose delivery adapters are pluggable
-([evaluation](skill-manager-evaluation.md)), so a wrapper could add a per-project
-activation layer and new target profiles without patching upstream.
+layer on top — distinct from a hard fork (Option 13) and a from-scratch script
+(Option 2). Credible bases: `mode-io` (declarative targets, pluggable adapters) or
+`skills-mgr` (data-driven agents, already per-project).
 
-- Good, because it keeps upstream updates flowing (no rebase burden) while still
-  closing the per-project (d1) and further-target (d3) gaps.
-- Good, because the surface we own is small — a wrapper — lowering maintenance vs.
-  a fork.
-- Bad, because it depends on the base exposing stable extension points; `mode-io`
-  is pre-1.0 and private, so its API/frontmatter contracts may shift under us.
-- Bad, because if the needed hook does not exist (e.g. no way to inject a
-  per-project scope without touching internals), this collapses back into a fork.
+- Good, because it keeps upstream updates flowing (no rebase burden) while closing
+  the remaining gaps (per-project for mode-io; Copilot file-gen for skills-mgr).
+- Good, because the owned surface is small — a wrapper — lowering maintenance.
+- Bad, because it depends on the base exposing stable extension points; mode-io is
+  pre-1.0/private and skills-mgr is pre-1.0, so contracts may shift.
+- Bad, because if the needed hook is missing, this collapses into a fork.
 
-Mitigation of negatives: a spike confirms whether `mode-io` (or another base)
-exposes the hooks a wrapper needs; if it does, this is strictly cheaper than
-Option 9; if it does not, fall back to Option 9.
+Mitigation of negatives: a spike confirms whether the chosen base exposes the
+hooks a wrapper needs; if so, strictly cheaper than Option 13.
 
-### 9. Fork / build
+### 13. Fork / build
 
 Hard-fork the strongest base and extend it to satisfy all five drivers. Needed
-only if no off-the-shelf tool suffices and Option 8's wrapper approach proves
-infeasible. The open question is *which base to fork*:
+only if no off-the-shelf tool suffices and Option 12 proves infeasible. Candidate
+bases, by what they already solve:
 
-- **Fork `skill-cli`** — inherit its tested per-project `allow`/`deny` activation
-  engine (d1 — several tools do d1, but skill-cli's config model is the cleanest)
-  and Claude Code support; then build skills-directory + file-generating delivery
-  and add the OpenCode / Copilot / Copilot CLI targets. Cost centre: delivery.
-- **Fork `mode-io`** — inherit its data-driven target catalog, both delivery
-  shapes, OpenCode/Cursor/Codex targets, crash-safe delivery, and tests (drivers
-  2–5 largely solved); then add a per-project scope + activation layer. Cost
-  centre: building driver 1 onto a global-only model.
+- **`skills-mgr`** — already per-project + data-driven agents + safe delivery; the
+  fork adds Copilot `.instructions.md` generation and hardens health. Smallest gap
+  to the full driver set.
+- **`mode-io`** — best delivery/extensibility breadth and file codec; the fork adds
+  a per-project scope + activation layer.
+- **`skill-cli`** — best selection model; the fork rebuilds delivery into native
+  dirs + adds targets.
 
 - Good, because a fork covers all wanted targets *and* per-project selection by
-  design — the combination no off-the-shelf option offers.
-- Good, because it removes the third-party/private/pre-1.0 dependency risk — we
-  own the fork.
+  design.
+- Good, because it removes the third-party dependency risk — we own the fork.
 - Bad, because we take on long-term maintenance and must track upstream.
-- Bad, because whichever base we pick, the capability it lacks (delivery for
-  skill-cli; per-project scope for mode-io) is real design work, and Copilot's
-  file-based model may not map cleanly onto a skills-directory abstraction.
+- Bad, because whichever base we pick, its missing capability is real design work,
+  and Copilot's file-based model may not map cleanly onto a skills-directory
+  abstraction.
 
-Mitigation of negatives: prefer Option 8 (wrapper) first; fork only if it fails.
-Keep the fork minimal and rebase periodically; deliver Copilot via a generate-file
-adapter alongside a symlink adapter. Decide the base with the feasibility spike
-named in [Open questions](#open-questions) — building per-project onto mode-io vs.
-building delivery onto skill-cli.
+Mitigation of negatives: prefer Option 12 first; fork only if it fails. Decide the
+base with the spike named in [Open questions](#open-questions); `skills-mgr` now
+looks like the smallest-gap base.
 
 ## Consequences
 
 - Adopting a day-one tool now delivers per-project selection on Claude Code
-  immediately, with no forking — value first, commitment later.
-- **Migration/throwaway cost is real and must be accepted.** If we adopt skill-cli
-  and later base the extension on mode-io (incompatible models: config+injection
-  vs. catalog+symlink), the skill-cli `allow`/`deny` config investment is largely
-  discarded and there may be a period of **running two tools / two stores** during
-  the switch. Day-one value is modest and does *not* buy down this later cost.
-- Alternatively, staying on a skill-cli fork avoids migration but commits us to
-  building its entire delivery layer ourselves — the cost simply moves, it does not
-  vanish.
-- No single tool has both per-project selection (d1) and cheap extensibility (d3),
-  so an extension step is unavoidable eventually; adopting now sequences value
-  ahead of that cost rather than removing it.
-- The file-based Copilot/Copilot CLI targets need a generate strategy regardless
-  of base; symlink-based delivery requires care on non-symlink-friendly locations
-  (cloud-synced folders, Windows without junction support) — any solution must
-  handle both delivery shapes.
+  immediately. The landscape scan improved the options: native-delivery tools
+  (skills-mgr, omrikais/sm) avoid skill-cli's runtime-pull enforcement risk.
+- **Migration/throwaway cost is real.** The co-candidates use different
+  selection/delivery models, so if the day-one tool is later replaced by a
+  different extension base, its config investment is largely discarded and two
+  tools may run briefly. Day-one value does not buy down this later cost.
+- No candidate emits the file-based Copilot / Copilot CLI `.instructions.md` shape,
+  so an extension step (Option 12/13) is unavoidable eventually regardless of the
+  day-one pick.
+- Symlink delivery (omrikais/sm, mode-io) needs care on non-symlink-friendly
+  locations; copy delivery (skills-mgr, lijianru) needs a refresh step to avoid
+  stale copies. Any solution must handle both delivery shapes for the full target
+  set.
 - The chosen tool becomes the owner of the agent skill/instruction locations; we
   must stop hand-editing them and treat the central store as the source of truth.
-- If a spike shows the native+copy baseline (Option 2) covers the day-one need,
-  adopting any tool now may be premature — the cheapest honest path could be a
-  symlink script until the further agents force a real tool.
+- If a spike shows the native symlink baseline (Option 2) covers the day-one need,
+  adopting any tool now may be premature.
+- Health remains a solo-developer risk, and it is asymmetric between the two
+  co-candidates: `skills-mgr` has the better architecture (d1+d4) but a
+  ~5-months-stale HEAD, only a declared-not-filed MIT license, and 1★;
+  `omrikais/sm` is fresh (HEAD 2 days old), cleanly MIT-licensed, and 4★, but
+  weaker on d1 (additive-only) and d3 (hardcoded). The only high-health project
+  (skillkit) is the wrong shape. Pinning/vendoring is mandatory whichever is
+  chosen.
 - Deferring the whole decision (Option 1) leaves the duplication and
   per-project-drift problem unsolved and grows the eventual migration cost.
 
@@ -522,55 +585,68 @@ and no clobbered local edits.
 "Actually usable" must be checked against the delivery model, because it differs
 by tool:
 
-- For **skills-directory / file delivery** (native+copy, lijianru, mode-io,
-  Copilot file generation): inspect the agent's target location and confirm it
-  holds exactly the selected subset.
+- For **skills-directory / file delivery** (Option-2 native baseline, lijianru,
+  mode-io, skills-mgr, omrikais/sm, Copilot file generation): inspect the agent's
+  target
+  location and confirm it holds exactly the selected subset, and that a sync does
+  not delete unrelated skills (the sklm failure mode).
 - For **injection/pull delivery** (skill-cli): the skills directory stays empty by
-  design, so instead confirm end-to-end that a live agent session actually loads
-  the selected skills and none of the deselected ones — i.e. that the pull
-  bootstrap is honored in practice, not just written. A tool whose selection is
-  correct on disk but unreliable at runtime does **not** pass.
+  design, so confirm end-to-end that a live agent session actually loads the
+  selected skills and none of the deselected ones — selection correct on disk but
+  unreliable at runtime does **not** pass.
 
 Nice-to-have agents (Cursor, pi, Gemini/antigravity, Codex) are a bonus, not a
 pass/fail condition.
 
 ## Open questions
 
-The decision drivers and their priority are now confirmed (see
-[Decision Drivers](#decision-drivers)). The remaining open questions before a
-final decision are:
-
-- **Extend vs. fork, and which base (the pivotal question) — deferred until the
-  further agents are actually needed.** Does `mode-io` expose stable hooks for a
-  no-fork wrapper (Option 8) to add a per-project scope + new targets? If yes,
-  wrap it. If not, hard-fork (Option 9), and choose the base by two spikes: (a) how
-  hard to add a per-project `allow`/`deny` scope onto `mode-io`'s global-only
-  model? (b) how hard to add skills-directory + file (`*.instructions.md`) delivery
-  and the OpenCode/Copilot targets onto `skill-cli`'s injection model?
+- **Day-one spike (the immediate question).** Compare `skills-mgr` and `omrikais/sm`
+  hands-on against d1–d5 in a real repo, with the **Option-2 native symlink baseline
+  as a control arm** (does a tool beat a symlink into `.claude/skills/`?) and
+  `skill-cli` as a fallback if both native-delivery tools disappoint. Rather than a
+  fixed preference order, decide by resolvable gates, in driver priority — each is a
+  question the spike answers, sometimes via a workaround, not the tool's current
+  state alone:
+  - **d1 gate:** can you activate AND cleanly disable/swap a subset per repo,
+    including a small prune workaround if needed? (`skills-mgr` clears it natively;
+    `omrikais/sm` is additive-only today, so the spike must confirm a prune is
+    feasible.)
+  - **d4 gate:** does delivery avoid clobbering hand-authored/edited skills, and is
+    it reversible? (both clear it; sklm fails, hence excluded.)
+  - **health gate:** can the license be confirmed and is the project not
+    effectively dormant? (`skills-mgr` needs its declared MIT confirmed with
+    upstream and its ~5-month-stale HEAD weighed; `omrikais/sm` already has a clean
+    MIT LICENSE and a fresh HEAD.)
+  Pick whichever tool clears all three gates after the spike; if both do, prefer the
+  one whose weakest driver is least costly to live with. **If neither clears all
+  three** (e.g. no feasible prune AND license unconfirmable), fall through to the
+  `skill-cli` fallback if its runtime pull proves reliable, else the Option-2
+  native baseline. Do not pre-commit to a name here.
+- **License confirmation.** `Leonezz/skills-mgr` declares MIT in `Cargo.toml` but
+  ships no LICENSE file; confirm with upstream before adoption.
+- **Extend vs. fork, and which base (deferred until the further agents are
+  needed).** Does the chosen base expose stable hooks for a no-fork wrapper
+  (Option 12)? If not, fork (Option 13) — skills-mgr now looks the smallest-gap
+  base (already per-project + data-driven agents).
 - **Copilot delivery feasibility.** Can a file-generating adapter emit
   `*.instructions.md` into `.github/instructions/` and `~/.copilot/instructions/`
-  (honoring `COPILOT_CUSTOM_INSTRUCTIONS_DIRS`) cleanly? `mode-io` already has a
-  slash-command file codec to build on; `skill-cli` would start this from scratch.
-- **Commercial trial.** Do **SkillReg** or **Packmind** support per-project subset
-  selection and cover OpenCode + Copilot CLI? Their marketing lists neither
-  OpenCode nor Copilot CLI, so they likely fall short of d1+d3 as well — but a
-  brief hands-on trial is cheap and, if one does cover everything, would remove the
-  extend/fork work entirely.
-- **Verify, don't trust, `lijianru`'s extra targets.** If Option 4 is
-  reconsidered, confirm whether its Copilot/Gemini paths were corrected — as
-  verified, they are wrong and likely non-functional.
-- **Base licensing / stability.** `mode-io` is marked private and pre-1.0; confirm
-  licensing and a vendoring strategy before wrapping or forking it.
+  (honoring `COPILOT_CUSTOM_INSTRUCTIONS_DIRS`)? `mode-io`'s slash-command codec
+  and `skillkit`'s `translate` layer are the best references.
+- **Commercial trial.** Do SkillReg or Packmind do per-project subset selection and
+  cover OpenCode + Copilot CLI? Their marketing lists neither, so likely not — but
+  a cheap trial settles it.
 
 ## More Information
 
-- Full source-code evaluation of all five tools, with per-tool scorecards, a
-  verified comparison matrix, and the ranked recommendation:
+- Source-code evaluation of the original five tools:
   [skill-manager-evaluation.md](skill-manager-evaluation.md).
-- The evaluation prompt/method:
+- Evaluation prompt/method:
   [skill-manager-evaluation-prompt.md](skill-manager-evaluation-prompt.md).
 - Prior background survey:
   [llm_agent_skill_managers_research.md](llm_agent_skill_managers_research.md).
+- Landscape scan of six further tools, source-verified with pinned HEADs and
+  per-driver scorecards:
+  [skill-manager-landscape-scan-2026-09-05.md](skill-manager-landscape-scan-2026-09-05.md).
 - Method references: MADR (https://adr.github.io/madr/), Michael Nygard's ADRs
   (https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions),
   arc42 section 9 (https://docs.arc42.org/section-9/).
