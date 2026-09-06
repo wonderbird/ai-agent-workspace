@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1780285219341,
+  "lastScanned": 1788686937586,
   "projectRoot": "/home/galadriel/Documents/Cline/ai-agent-workspace",
   "techStack": {
     "languages": [],
@@ -39,23 +39,35 @@
       "path": "docs",
       "purpose": "Documentation",
       "fileCount": 1,
-      "lastAccessed": 1780285219336,
+      "lastAccessed": 1788686937578,
       "keyFiles": [
         "synchronize-repos-with-vm.md"
+      ]
+    },
+    "project-template": {
+      "path": "project-template",
+      "purpose": null,
+      "fileCount": 4,
+      "lastAccessed": 1788686937585,
+      "keyFiles": [
+        "AGENTS.md",
+        "CLAUDE.md",
+        "README.md",
+        "gitignore"
       ]
     },
     "rules-banks": {
       "path": "rules-banks",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1780285219337,
+      "lastAccessed": 1788686937585,
       "keyFiles": []
     },
     "scripts": {
       "path": "scripts",
       "purpose": "Build/utility scripts",
       "fileCount": 7,
-      "lastAccessed": 1780285219338,
+      "lastAccessed": 1788686937586,
       "keyFiles": [
         "clone-on-remote.sh",
         "configuration.sh",
@@ -65,6 +77,121 @@
       ]
     }
   },
-  "hotPaths": [],
+  "hotPaths": [
+    {
+      "path": "docs/architecture-decisions/002-skill-manager-tool-selection.md",
+      "accessCount": 163,
+      "lastAccessed": 1788707159926,
+      "type": "file"
+    },
+    {
+      "path": "docs/architecture-decisions/skill-manager-evaluation-prompt.md",
+      "accessCount": 16,
+      "lastAccessed": 1788536934873,
+      "type": "file"
+    },
+    {
+      "path": "docs/architecture-decisions/202609051821 Harness übergreifende Konfiguration von Skills.md",
+      "accessCount": 8,
+      "lastAccessed": 1788691318589,
+      "type": "file"
+    },
+    {
+      "path": "docs/architecture-decisions/skill-packaging-research.md",
+      "accessCount": 7,
+      "lastAccessed": 1788600954538,
+      "type": "file"
+    },
+    {
+      "path": "docs/research/skill-manager/hands-on-spike.md",
+      "accessCount": 4,
+      "lastAccessed": 1788692378506,
+      "type": "file"
+    },
+    {
+      "path": "docs/architecture-decisions/skill-manager-vercel-labs-scorecard-2026-09-05.md",
+      "accessCount": 3,
+      "lastAccessed": 1788600908676,
+      "type": "file"
+    },
+    {
+      "path": "docs/research/skill-manager/landscape-scan.md",
+      "accessCount": 3,
+      "lastAccessed": 1788691506206,
+      "type": "file"
+    },
+    {
+      "path": "docs/research/skill-manager/vercel-labs-scorecard.md",
+      "accessCount": 3,
+      "lastAccessed": 1788691511766,
+      "type": "file"
+    },
+    {
+      "path": "docs/research/skill-manager/packaging-standards.md",
+      "accessCount": 3,
+      "lastAccessed": 1788691516727,
+      "type": "file"
+    },
+    {
+      "path": "docs/architecture-decisions/skill-manager-landscape-scan-2026-09-05.md",
+      "accessCount": 2,
+      "lastAccessed": 1788600686438,
+      "type": "file"
+    },
+    {
+      "path": ".markdownlint.json",
+      "accessCount": 1,
+      "lastAccessed": 1788600186807,
+      "type": "file"
+    },
+    {
+      "path": "docs/architecture-decisions/skill-manager-evaluation.md",
+      "accessCount": 1,
+      "lastAccessed": 1788687027670,
+      "type": "file"
+    },
+    {
+      "path": "docs/research/skill-manager/initial-tool-survey.md",
+      "accessCount": 1,
+      "lastAccessed": 1788691490351,
+      "type": "file"
+    },
+    {
+      "path": "docs/research/skill-manager/evaluation-method.md",
+      "accessCount": 1,
+      "lastAccessed": 1788691495773,
+      "type": "file"
+    },
+    {
+      "path": "docs/research/skill-manager/source-code-evaluation.md",
+      "accessCount": 1,
+      "lastAccessed": 1788691500993,
+      "type": "file"
+    },
+    {
+      "path": "docs/research/skill-manager/README.md",
+      "accessCount": 1,
+      "lastAccessed": 1788691535462,
+      "type": "file"
+    },
+    {
+      "path": "scripts/restore-claude-skills-links.sh",
+      "accessCount": 1,
+      "lastAccessed": 1788691614264,
+      "type": "file"
+    },
+    {
+      "path": "project-template/docs/how-to-manage-skills.md",
+      "accessCount": 1,
+      "lastAccessed": 1788691668860,
+      "type": "file"
+    },
+    {
+      "path": "project-template/docs/manage-skills.md",
+      "accessCount": 1,
+      "lastAccessed": 1788704391851,
+      "type": "file"
+    }
+  ],
   "userDirectives": []
 }
