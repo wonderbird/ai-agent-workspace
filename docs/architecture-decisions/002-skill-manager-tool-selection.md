@@ -57,12 +57,9 @@ project level OpenCode, GitHub Copilot (incl. Copilot CLI), Antigravity, Cursor,
 Codex all read it; only **Claude Code (`.claude/skills`)** and **pi (`.pi/skills`)**
 use a dedicated project dir. So delivering a project's skills into `.agents/skills`
 *plus* `.claude/skills` covers every wanted agent with no file generation — exactly
-what `omrikais/sm` does. (Corrections vs. an earlier draft: Copilot is not a
-file-based `.instructions.md` target; Antigravity is `.agents/skills` /
-`~/.gemini/antigravity/skills`, not `~/.gemini/config/skills`; and Cursor and Codex
-are skills-directory agents via `.agents/skills`, not merely `.mdc`/`AGENTS.md`. The
-legacy Copilot `.github/instructions/*.instructions.md` and `.github/copilot-instructions.md`
-are a *separate custom-instructions* feature, not the skills mechanism —
+what `omrikais/sm` does. (Copilot's legacy `.github/instructions/*.instructions.md`
+and `.github/copilot-instructions.md` are a *separate custom-instructions* feature,
+not the skills mechanism —
 [GitHub docs](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills).)
 
 The wanted agents thus share **one delivery shape** a symlink can serve; what remains
