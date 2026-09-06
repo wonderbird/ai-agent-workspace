@@ -241,7 +241,7 @@ d1 gap and a hardcoded `cc|codex` target set. The spike changed both findings:
   stakeholder in the decision-session interview (2026-09-06), not yet pinned to a
   source line and not written up in the spike doc, so it is a citation gap to close;
   and (b) the spike doc's manual `rm -rv .claude/skills/*; .agents/skills/*` +
-  `sm install` (spike doc §"Bedienung") is a *different* operation — pruning
+  `sm install` (spike doc §"Usage") is a *different* operation — pruning
   globally-linked skills that are not in the project manifest, because `sm install`
   is additive. Driver 1's per-project activate+disable is met **via path (a)**; the
   residual open item is **manifest** add/remove granularity (see
