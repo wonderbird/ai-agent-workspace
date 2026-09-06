@@ -44,10 +44,13 @@ source-verified six further open-source tools. Key results:
   into native agent directories — removing the runtime-pull/enforcement caveat that
   limited `skill-cli`. (This "lead is contested between these two" framing is
   superseded below: a later review surfaced `vercel-labs/skills`.)
-- **The wanted targets span two delivery shapes.** Claude Code, OpenCode, pi, and
-  Antigravity use the SKILL.md **skills-directory** standard (symlink-friendly);
-  GitHub Copilot and Copilot CLI are **file-based** (`*.instructions.md`), needing
-  generation. No verified tool emits the modern Copilot `.instructions.md` shape.
+- **The wanted targets now share one delivery shape.** Claude Code, OpenCode, pi,
+  Antigravity, **and GitHub Copilot (including the Copilot CLI)** all use the SKILL.md
+  **skills-directory** standard (symlink-friendly). Copilot's agent-skills feature
+  reads `.github/skills`, `.claude/skills`, or `.agents/skills`
+  ([GitHub docs](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills)),
+  so it is served by the same `.agents/skills` delivery — the earlier "file-based
+  `.instructions.md`" framing is superseded, and no file generation is required.
 - **Commercial products exist** (SkillReg, Packmind, Tessl); none confirmed for
   per-project subset + OpenCode + Copilot CLI. See [Option 11](#11-buy-a-commercial-product).
 - **A later packaging-standards review reshaped the field.** A whitepaper on
@@ -97,32 +100,39 @@ its own conventions:
 
 - Claude Code: `~/.claude/skills/` — SKILL.md skills-directory standard.
 - OpenCode: `$XDG_CONFIG_HOME/opencode/skills/` — SKILL.md skills-directory.
-- GitHub Copilot: `.github/instructions/*.instructions.md` (repo) — a **file** per
-  instruction, YAML frontmatter with an `applyTo` glob; repo-wide
-  `.github/copilot-instructions.md`; personal `~/.copilot/instructions/`.
-- GitHub Copilot CLI: same `.github/...` plus user-global
-  `~/.copilot/instructions/`, extendable via the `COPILOT_CUSTOM_INSTRUCTIONS_DIRS`
-  environment variable; per-file toggling via its `/instructions` command.
+- GitHub Copilot: **agent-skills SKILL.md skills-directory** standard — project
+  `.github/skills`, `.claude/skills`, or `.agents/skills`; personal `~/.copilot/skills`
+  or `~/.agents/skills`
+  ([GitHub docs](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills)).
+  (The older `.github/instructions/*.instructions.md` with an `applyTo` glob and
+  `.github/copilot-instructions.md` are a *separate custom-instructions* feature, not
+  the skills mechanism.)
+- GitHub Copilot CLI: same agent-skills dirs — it is one of the surfaces
+  (Copilot cloud agent, code review, Copilot CLI, the Copilot app, and agent mode in
+  VS Code / JetBrains) that read the same skills directories.
 - (Nice-to-have) Cursor: `~/.cursor/` rules in `.mdc` format; pi and Antigravity
   both use the same SKILL.md skills-directory standard (`~/.pi/agent/skills/`,
   `~/.gemini/config/skills/`); Codex reads `AGENTS.md`.
 
-Two delivery shapes are in play. Claude Code, OpenCode, pi, and Antigravity share
-the **SKILL.md skills-directory** model, which a symlink can serve. GitHub Copilot
-and Copilot CLI are **file-based**: content must be emitted as `*.instructions.md`
-files, so they cannot be served by symlinking a skills directory — they require
-generating/translating files. They differ, in other words, not only in path but
-in schema and in delivery mechanism. Without a central mechanism, every skill is
-duplicated per agent, edits drift, and there is no single point of selection.
+The wanted agents now share **one delivery shape**: the SKILL.md skills-directory
+model that a symlink can serve. Claude Code, OpenCode, pi, Antigravity, **and GitHub
+Copilot (including the Copilot CLI)** all read a skills directory — and Copilot,
+like the others, reads the universal `.agents/skills`, so delivering there covers it
+without any file generation. The earlier assumption that Copilot was a *file-based*
+`.instructions.md` target is superseded by the agent-skills standard. What remains is
+that each agent looks in a *different* path; without a central mechanism, every skill
+is duplicated per agent, edits drift, and there is no single point of selection.
 
 The target set for this decision, elicited from the stakeholder over two
 interviews, is tiered by *when* each target must work:
 
 - **Required out of the box:** Claude Code.
-- **Added later by extension (not required day one):** OpenCode, GitHub Copilot,
-  GitHub Copilot CLI.
-- **Nice to have (same extensibility path):** Cursor, pi, Gemini (antigravity),
-  Codex.
+- **Not required day one:** OpenCode, GitHub Copilot, GitHub Copilot CLI. Note that
+  because all three read a SKILL.md skills directory (Copilot via its agent-skills
+  `.agents/skills`/`.claude/skills` path), a tool that delivers into `.agents/skills`
+  covers them for free — no per-agent extension work is needed for these.
+- **Nice to have (same skills-directory delivery):** Cursor (`.mdc`), pi, Gemini
+  (antigravity), Codex.
 
 This ADR is intended for the project stakeholder (the developer) and any future
 contributor.
@@ -258,12 +268,13 @@ different owners cannot silently shadow each other.
 | :--- | :--- |
 | d1 per-project subset | Met in practice. Activate per project + per-skill disable via the `sm` TUI (interview-attested 2026-09-06; source-pin + write-up is an open citation gap); `.skills.json` manifest. Residual to confirm: no direct manifest add/remove granularity — see open questions. |
 | d2 Claude Code OOTB | Met. Native delivery into `.claude/skills/`. |
-| d3 cheap extensibility | Deferred by design (not a day-one target; further agents via Option 12/13). `.agents/` appears to cover OpenCode + SKILL.md harnesses; coverage to be double-checked, file-based Copilot still future work. |
+| d3 cheap extensibility | Largely satisfied by `.agents/skills` delivery. OpenCode, GitHub Copilot (incl. Copilot CLI, via its agent-skills path), and other SKILL.md harnesses read that dir, so they are covered without per-agent work — no `.instructions.md` generation is required (the former file-based-Copilot gap is retired). Coverage to be double-checked; any non-skills-directory target would still be Option 12/13 work. |
 | d4 safe delivery | Met. Symlink into native dirs, no-clobber, backups, reversible (per landscape scan + spike). |
 | d5 health | Solo-maintainer risk accepted, mitigated by pin + vendor of `sm`; vercel `find` is non-critical. |
 
-Migration seam and the eventual file-based Copilot target (Option 12/13) are
-unchanged and deferred; see [Open questions](#open-questions).
+The migration seam (Option 12/13) is unchanged and deferred; see
+[Open questions](#open-questions). The previously separate "file-based Copilot
+target" is no longer a distinct concern — Copilot reads the agent-skills directory.
 
 ## Prior Recommendation (pre-spike analysis)
 
@@ -360,7 +371,10 @@ model without its delivery caveat. Same evidence base, evolving question.
 
 Coverage below is source-verified and reflects the **pre-spike** read; where the
 spike revised a verdict (notably the `omrikais/sm` d1 and d3 rows), the authoritative
-statement is the [Decision Outcome](#decision-outcome) scorecard. Driver columns
+statement is the [Decision Outcome](#decision-outcome) scorecard. Also note the d3
+cells mentioning "Copilot needs file-gen" / "no Copilot file-gen" are **obsolete**:
+Copilot now reads the agent-skills skills directory (`.agents/skills`), so no file
+generation is required for it. Driver columns
 follow the priority set.
 
 | Option | Per-project subset (d1) | Claude Code OOTB (d2) | Cheap extensibility (d3) | Safe delivery (d4) | Health (d5) |
@@ -386,13 +400,26 @@ matching or beating the others on d2/d4** (the activate/disable mechanics of d1,
 native symlink, guarded delete) — though on d1's literal single-store framing
 `skills-mgr` fit better; skills-mgr led d1+d4-architecture with data-driven d3;
 omrikais/sm led symlink-delivery safety but read as additive-only on d1 and weak on
-d3; skill-cli led the selection model but had the delivery caveat. No candidate
-solves the file-based Copilot targets, so an extension step (Option 12/13) remains
-eventual regardless. *(The spike overturned this ranking: vercel's restore path
-could not reconstruct into `.claude/`, and omrikais/sm's d1/d3 read improved on
-hands-on use — see [Decision Outcome](#decision-outcome).)*
+d3; skill-cli led the selection model but had the delivery caveat. *(Two later
+corrections apply to this pre-spike reading: the spike overturned the ranking —
+vercel's restore path could not reconstruct into `.claude/`, and omrikais/sm's d1/d3
+read improved on hands-on use; and the "file-based Copilot" premise is obsolete —
+Copilot reads the agent-skills skills directory, so it needs no file generation. See
+[Decision Outcome](#decision-outcome).)*
 
 ## Detailed Analysis of Options
+
+> **Correction (applies throughout this section):** several per-option notes below
+> treat GitHub Copilot as a *file-based* `.instructions.md` target and count a tool's
+> lack of `.instructions.md` generation — or its mapping of Copilot to `.github/skills`
+> — as a limitation. That premise is **obsolete**: Copilot's agent-skills feature
+> reads the SKILL.md skills-directory standard (`.github/skills`, `.claude/skills`, or
+> `.agents/skills`;
+> [GitHub docs](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills)).
+> So delivering into `.agents/skills` (or `.github/skills`) *covers* Copilot, and a
+> tool that targets those dirs is correct, not deficient. Only emitting the legacy
+> `.github/copilot-instructions.md` / `.github/instructions/*.instructions.md`
+> custom-instructions files is now the outdated shape.
 
 ### 1. Do nothing / status quo
 
@@ -528,8 +555,9 @@ toolchain caveats that stop it being an outright pick.
   in `Cargo.toml:13` but there is **no LICENSE file** — confirm licensing before use.
 - Bad, because it is **Rust**: for a Node/Python-oriented developer, extending or
   forking it later (Options 12–13) is a higher barrier than the TypeScript tools.
-- Bad, because it does not emit Copilot's `.instructions.md` (`presets.rs:30` maps
-  copilot to `.github/skills` only) — the file-based targets remain extension work.
+- Good for Copilot: it maps copilot to `.github/skills` (`presets.rs:30`), which is a
+  valid agent-skills directory Copilot reads — so it covers Copilot (an earlier draft
+  miscounted this as a file-based gap; see the section correction note).
 
 Mitigation of negatives: confirm the MIT license (add/verify a LICENSE file with
 upstream) and pin a commit; the copy-staleness is workable via `refresh`. It is a
@@ -573,7 +601,9 @@ HEAD `970fb64`. A *different* author from `mode-io/skill-manager`.
   resolving to `.agents/`, or a stale source read). This is unreconciled against the
   pinned-HEAD source line — confirm at the installed version before relying on it
   (see [Open questions](#open-questions)).
-- Bad, because it does not emit Copilot's `.instructions.md`.
+- Good for Copilot: by delivering into `.agents/skills` it feeds Copilot's agent-skills
+  path, so Copilot (incl. Copilot CLI) is covered with no `.instructions.md`
+  generation — retiring what an earlier draft listed here as a gap.
 
 Mitigation of negatives: a good day-one choice *if* the additive-only prune gap on
 driver 1 is acceptable and extensibility can wait; the hardcoded target set makes
@@ -767,15 +797,17 @@ symlink delivery the drivers favour, and leads the survey on health (d5).
   acceptable. Note the workflow cost: **editing the one central source repo requires
   a re-`add`/`sync` into every consuming project** — the same copy-staleness class
   this ADR penalized `skills-mgr` for, not a one-time reframing.
-- Bad, because it does **not** emit Copilot's `.instructions.md`: `github-copilot`
-  maps to a skills *directory* (`agents.ts:350-357`), so that entry is **nominal for
-  real Copilot** (file-based, like lijianru/sklm/skillkit) and the file-based Copilot
-  / Copilot CLI target remains extension work — the same gap every candidate has.
+- Good for Copilot: `github-copilot` maps to a skills *directory* (`agents.ts:350-357`),
+  which is exactly what Copilot's agent-skills feature reads — so this covers Copilot
+  rather than being "nominal". (An earlier draft treated Copilot as file-based and
+  called this a gap; that premise is obsolete — see the correction note at the top of
+  this section.)
 
 Mitigation of negatives: model the central store as a private git skills repo (or
 npm package) the projects `add` from; pin the version; accept the re-`add`/`sync`
-step on every central-store edit (the two costs — that distribution tax and the
-Copilot file-gen gap — are detailed above). It is the day-one **lead on d5
+step on every central-store edit (the distribution-tax cost is detailed above; the
+Copilot "file-gen gap" once listed here no longer applies — Copilot reads the
+agent-skills directory). It is the day-one **lead on d5
 (health)**, but because d5 is the lowest-priority driver and d1's store-shape gate
 is open, the lead is a spike hypothesis, not a settled pick.
 
@@ -788,9 +820,12 @@ is open, the lead is a spike hypothesis, not a settled pick.
   selection/delivery models, so if the day-one tool is later replaced by a
   different extension base, its config investment is largely discarded and two
   tools may run briefly. Day-one value does not buy down this later cost.
-- No candidate emits the file-based Copilot / Copilot CLI `.instructions.md` shape,
-  so an extension step (Option 12/13) is unavoidable eventually regardless of the
-  day-one pick.
+- The wanted agents (Claude Code, OpenCode, GitHub Copilot incl. Copilot CLI) all
+  read the SKILL.md skills-directory standard, and Copilot's agent-skills feature
+  reads `.agents/skills`, so `.agents/skills` delivery covers them with no file
+  generation. An extension step (Option 12/13) is therefore only needed for a future
+  target that is *not* a skills-directory agent — not for Copilot, as an earlier
+  draft assumed.
 - Symlink delivery (omrikais/sm, mode-io) needs care on non-symlink-friendly
   locations; copy delivery (skills-mgr, lijianru) needs a refresh step to avoid
   stale copies. Any solution must handle both delivery shapes for the full target
@@ -860,9 +895,10 @@ run, so the load-bearing checks are re-listed to be repeated deliberately):
    `~/.skill-manager/sources.json`. *Not yet exercised — prospective check.*
 
 Later targets (OpenCode, GitHub Copilot, Copilot CLI) reuse step 1's inspection at
-their own dirs when they are added; Copilot additionally needs `.instructions.md`
-generation, which no current tool provides (deferred). Nice-to-have agents (Cursor,
-pi, Gemini/antigravity, Codex) are a bonus, not a pass/fail condition.
+their own dirs when they are added; because Copilot's agent-skills feature reads
+`.agents/skills`, confirming that dir already exercises it — no `.instructions.md`
+generation is required. Nice-to-have agents (Cursor, pi, Gemini/antigravity, Codex)
+are a bonus, not a pass/fail condition.
 
 Superseded delivery models — vercel-labs/skills distribution/registry-pull and
 skill-cli injection/pull — are no longer the chosen path; their confirmation
@@ -927,10 +963,12 @@ recipes are archived in the git history of this file and omitted here.
   needed).** Does the chosen base expose stable hooks for a no-fork wrapper
   (Option 12)? If not, fork (Option 13) — skills-mgr now looks the smallest-gap
   base (already per-project + data-driven agents).
-- **Copilot delivery feasibility.** Can a file-generating adapter emit
-  `*.instructions.md` into `.github/instructions/` and `~/.copilot/instructions/`
-  (honoring `COPILOT_CUSTOM_INSTRUCTIONS_DIRS`)? `mode-io`'s slash-command codec
-  and `skillkit`'s `translate` layer are the best references.
+- **Copilot delivery — resolved (no longer a gap).** Copilot's agent-skills feature
+  reads the SKILL.md skills-directory standard, including `.agents/skills`
+  ([GitHub docs](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills)),
+  so `.agents/skills` delivery covers it with no `.instructions.md` generation. Only
+  confirm that Copilot picks up `.agents/skills` in practice; the legacy
+  file-generating-adapter question is dropped.
 - **Commercial trial (dormant, kept as a future option).** A working OSS solution
   (`sm` + vercel `find`) is now in hand, so no trial is planned. Kept on record in
   case per-project subset + OpenCode + Copilot CLI coverage is ever wanted from a
