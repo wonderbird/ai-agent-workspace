@@ -37,7 +37,8 @@ that repository needs, and nothing else. The central store is the single source
 of truth; each project declares its own view onto it.
 
 The obstacle is that each agent loads skills from its own target directory, though
-most now converge on the SKILL.md skills-directory standard. The authoritative
+most now converge on the [SKILL.md skills-directory standard](https://agentskills.io/).
+The authoritative
 per-agent paths (from `vercel-labs/skills` `src/agents.ts`, cross-checked with each
 vendor's docs) are:
 
