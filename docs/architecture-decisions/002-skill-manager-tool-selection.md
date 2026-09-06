@@ -26,8 +26,7 @@ script as the exit path.
 See [Decision Outcome](#decision-outcome) for the full rationale and scorecard, the
 [Detailed Analysis of Options](#detailed-analysis-of-options) for the alternatives
 weighed, and [docs/research/skill-manager/](../research/skill-manager/README.md) for
-the source-verified evidence (evaluation, landscape scan, vercel-labs scorecard,
-packaging standards, and the hands-on spike that settled the choice).
+the source-verified evidence.
 
 ## Context and Problem Statement
 
