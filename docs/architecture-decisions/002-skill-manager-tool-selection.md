@@ -95,33 +95,38 @@ project**: when starting a new repository, activate only the subset of skills
 that repository needs, and nothing else. The central store is the single source
 of truth; each project declares its own view onto it.
 
-The obstacle is that each agent loads skills from its own target directory with
-its own conventions:
+The obstacle is that each agent loads skills from its own target directory, though
+most now converge on the SKILL.md skills-directory standard. The authoritative
+per-agent paths (from `vercel-labs/skills` `src/agents.ts`, cross-checked with each
+vendor's docs) are:
 
-- Claude Code: `~/.claude/skills/` — SKILL.md skills-directory standard.
-- OpenCode: `$XDG_CONFIG_HOME/opencode/skills/` — SKILL.md skills-directory.
-- GitHub Copilot: **agent-skills SKILL.md skills-directory** standard — project
-  `.github/skills`, `.claude/skills`, or `.agents/skills`; personal `~/.copilot/skills`
-  or `~/.agents/skills`
-  ([GitHub docs](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills)).
-  (The older `.github/instructions/*.instructions.md` with an `applyTo` glob and
-  `.github/copilot-instructions.md` are a *separate custom-instructions* feature, not
-  the skills mechanism.)
-- GitHub Copilot CLI: same agent-skills dirs — it is one of the surfaces
-  (Copilot cloud agent, code review, Copilot CLI, the Copilot app, and agent mode in
-  VS Code / JetBrains) that read the same skills directories.
-- (Nice-to-have) Cursor: `~/.cursor/` rules in `.mdc` format; pi and Antigravity
-  both use the same SKILL.md skills-directory standard (`~/.pi/agent/skills/`,
-  `~/.gemini/config/skills/`); Codex reads `AGENTS.md`.
+| Agent | Project dir | Global/personal dir |
+| :--- | :--- | :--- |
+| Claude Code | `.claude/skills` | `~/.claude/skills` (or `$CLAUDE_CONFIG_DIR`) |
+| OpenCode | `.agents/skills` | `~/.config/opencode/skills` |
+| GitHub Copilot (+ Copilot CLI) | `.agents/skills` (also `.github/skills`, `.claude/skills`) | `~/.copilot/skills` (or `~/.agents/skills`) |
+| Antigravity (Gemini) | `.agents/skills` | `~/.gemini/antigravity/skills` |
+| Cursor | `.agents/skills` | `~/.cursor/skills` |
+| Codex | `.agents/skills` | `~/.codex/skills` (or `$CODEX_HOME`) |
+| pi | `.pi/skills` | `~/.pi/agent/skills` |
 
-The wanted agents now share **one delivery shape**: the SKILL.md skills-directory
-model that a symlink can serve. Claude Code, OpenCode, pi, Antigravity, **and GitHub
-Copilot (including the Copilot CLI)** all read a skills directory — and Copilot,
-like the others, reads the universal `.agents/skills`, so delivering there covers it
-without any file generation. The earlier assumption that Copilot was a *file-based*
-`.instructions.md` target is superseded by the agent-skills standard. What remains is
-that each agent looks in a *different* path; without a central mechanism, every skill
-is duplicated per agent, edits drift, and there is no single point of selection.
+The decisive fact is that **`.agents/skills` is a universal project directory**: at
+project level OpenCode, GitHub Copilot (incl. Copilot CLI), Antigravity, Cursor, and
+Codex all read it; only **Claude Code (`.claude/skills`)** and **pi (`.pi/skills`)**
+use a dedicated project dir. So delivering a project's skills into `.agents/skills`
+*plus* `.claude/skills` covers every wanted agent with no file generation — exactly
+what `omrikais/sm` does. (Corrections vs. an earlier draft: Copilot is not a
+file-based `.instructions.md` target; Antigravity is `.agents/skills` /
+`~/.gemini/antigravity/skills`, not `~/.gemini/config/skills`; and Cursor and Codex
+are skills-directory agents via `.agents/skills`, not merely `.mdc`/`AGENTS.md`. The
+legacy Copilot `.github/instructions/*.instructions.md` and `.github/copilot-instructions.md`
+are a *separate custom-instructions* feature, not the skills mechanism —
+[GitHub docs](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills).)
+
+The wanted agents thus share **one delivery shape** a symlink can serve; what remains
+is only that each looks in a slightly different path. Without a central mechanism,
+every skill is duplicated per agent, edits drift, and there is no single point of
+selection.
 
 The target set for this decision, elicited from the stakeholder over two
 interviews, is tiered by *when* each target must work:
@@ -131,8 +136,8 @@ interviews, is tiered by *when* each target must work:
   because all three read a SKILL.md skills directory (Copilot via its agent-skills
   `.agents/skills`/`.claude/skills` path), a tool that delivers into `.agents/skills`
   covers them for free — no per-agent extension work is needed for these.
-- **Nice to have (same skills-directory delivery):** Cursor (`.mdc`), pi, Gemini
-  (antigravity), Codex.
+- **Nice to have (same skills-directory delivery):** Cursor, Codex, and Antigravity
+  (all via `.agents/skills`), plus pi (`.pi/skills`).
 
 This ADR is intended for the project stakeholder (the developer) and any future
 contributor.
@@ -450,8 +455,10 @@ per-project mechanisms; this option just feeds them, so the day-one target
   pull caveat and no schema translation for skills-dir agents.
 - Bad, because we take on all maintenance, cross-platform edge cases (Windows
   junctions, synced folders), and correctness (collision handling, safe removal).
-- Bad, because the file-based Copilot / Copilot CLI schema (`.instructions.md`
-  with `applyTo`) and Cursor `.mdc` still have to be generated by us.
+- Neutral on the further agents: Copilot (incl. Copilot CLI), Cursor, Codex, and
+  Antigravity all read the `.agents/skills` skills directory, so a symlink into
+  `.agents/skills` serves them too — no schema generation needed (only pi's
+  `.pi/skills` and any future non-skills-directory agent would need extra handling).
 - Bad, because as it grows to cover the further agents it reinvents what the
   candidate tools already do.
 
