@@ -1,5 +1,11 @@
 # Prompt: Architectural Evaluation of Skill-Chooser Tools
 
+> **Frozen research** behind
+> [ADR 002](../../architecture-decisions/002-skill-manager-tool-selection.md). The
+> reusable prompt/rubric used to produce
+> [source-code-evaluation.md](source-code-evaluation.md). Point-in-time; not
+> maintained.
+
 > Paste everything below the line into a fresh **oh-my-claudecode (OMC)** agent
 > session on the dedicated evaluation machine. It is fully self-contained: it
 > clones all source itself, carries all data it needs inline, and depends on no

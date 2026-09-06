@@ -1,9 +1,14 @@
 # Scorecard — vercel-labs/skills (`npx skills`) (2026-09-05)
 
-Companion evidence for [002-skill-manager-tool-selection.md](002-skill-manager-tool-selection.md),
+> **Frozen research** behind
+> [ADR 002](../../architecture-decisions/002-skill-manager-tool-selection.md).
+> Point-in-time as of 2026-09-05; source-verified at pinned HEAD `435076e`, with
+> ★/issue counts web-observed that day. Not maintained.
+
+Companion evidence for [002-skill-manager-tool-selection.md](../../architecture-decisions/002-skill-manager-tool-selection.md),
 Option 14. This tool was missed by the earlier scans and was surfaced by the
 enterprise packaging-standards review
-([skill-packaging-research.md](skill-packaging-research.md)). It is scored against
+([packaging-standards.md](packaging-standards.md)). It is scored against
 the same decision drivers as the landscape scan: (1) per-project subset selection,
 (2) Claude Code out of the box, (3) cheap extensibility to further agents,
 (4) safe delivery, (5) long-term health.

@@ -1,8 +1,12 @@
 # Landscape Scan — Open-Source Skill Managers (2026-09-05)
 
-Companion evidence for [002-skill-manager-tool-selection.md](002-skill-manager-tool-selection.md).
+> **Frozen research** behind
+> [ADR 002](../../architecture-decisions/002-skill-manager-tool-selection.md).
+> Point-in-time as of 2026-09-05; pinned HEADs recorded inside. Not maintained.
+
+Companion evidence for [002-skill-manager-tool-selection.md](../../architecture-decisions/002-skill-manager-tool-selection.md).
 A second web-research round widened the search beyond the original five tools (see
-[skill-manager-evaluation.md](skill-manager-evaluation.md)) and source-verified six
+[source-code-evaluation.md](source-code-evaluation.md)) and source-verified six
 further candidates against the decision drivers: (1) per-project subset selection,
 (2) Claude Code out of the box, (3) cheap extensibility to further agents,
 (4) safe delivery, (5) long-term health.

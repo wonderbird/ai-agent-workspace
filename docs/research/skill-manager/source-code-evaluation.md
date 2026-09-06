@@ -1,5 +1,10 @@
 # Architectural Evaluation of Skill-Chooser Tools
 
+> **Frozen research** behind
+> [ADR 002](../../architecture-decisions/002-skill-manager-tool-selection.md).
+> Source-verified evaluation of the original five tools, pinned to the HEADs recorded
+> below. Point-in-time; not maintained.
+
 ## Context & method
 
 We want to centralize prompt rules, MCP configs, and skill definitions in one

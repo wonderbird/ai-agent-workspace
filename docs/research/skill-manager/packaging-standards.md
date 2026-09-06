@@ -1,5 +1,10 @@
 # Architectural Guide: Enterprise Packaging and Distribution of AI Agent Skills
 
+> **Frozen research** behind
+> [ADR 002](../../architecture-decisions/002-skill-manager-tool-selection.md).
+> Background standards review; its main contribution was surfacing
+> `vercel-labs/skills`. Point-in-time; not maintained.
+
 **Document Version:** 1.1  
 **Target Audience:** Chief Architects, Enterprise Software Architects, AI Platform Engineers, DevSecOps Leads  
 **Topic:** Architectural Evaluation of Protocols, Packaging Specifications, and Distribution Paradigms for Enterprise AI Agent Capabilities  
@@ -29,7 +34,7 @@ authoritatively but carry this same caveat; treat them as illustrative, not
 copy-pastable.
 
 **Two specific corrections where this whitepaper conflicts with source-verified
-findings in [ADR 002](002-skill-manager-tool-selection.md):**
+findings in [ADR 002](../../architecture-decisions/002-skill-manager-tool-selection.md):**
 
 - **GitHub Copilot compatibility is overstated.** This document's adoption tables
   and prose (§2.2, §3, §6) imply Copilot has "universal / instant" support for the
@@ -41,14 +46,14 @@ findings in [ADR 002](002-skill-manager-tool-selection.md):**
 - **`npx skills` command vocabulary differs from the verified set.** §5.2 shows
   `npx skills find/add/sync`; the source-verified command set at HEAD `435076e` is
   `add` / `--skill` / `remove` / `install` / `use` / `list` / `update` (see the
-  scorecard, [skill-manager-vercel-labs-scorecard-2026-09-05.md](skill-manager-vercel-labs-scorecard-2026-09-05.md)).
+  scorecard, [vercel-labs-scorecard.md](vercel-labs-scorecard.md)).
   Use the scorecard's set, not §5.2's, for exact commands.
 
 **Relevance to this project (a solo-developer, per-project skill-selection use
 case):** most of this document — APS registries, OCI+Cosign supply-chain signing,
 SBOMs, multi-tenant marketplaces, Kubernetes runners — is enterprise-scale and out
 of scope. Its concrete contribution was surfacing `vercel-labs/skills`, now
-evaluated as [Option 14 in ADR 002](002-skill-manager-tool-selection.md). The
+evaluated as [Option 14 in ADR 002](../../architecture-decisions/002-skill-manager-tool-selection.md). The
 distribution standards are scoped there under Consequences/Open questions as a
 future-only path, not adopted.
 

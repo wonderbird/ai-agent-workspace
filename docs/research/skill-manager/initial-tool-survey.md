@@ -1,5 +1,12 @@
 # Open-Source LLM Agent Skill Managers & TUI Tools: Architectural Brief
 
+> **Superseded** — frozen research behind
+> [ADR 002](../../architecture-decisions/002-skill-manager-tool-selection.md). This
+> was the first broad survey; its source-verified successors
+> [source-code-evaluation.md](source-code-evaluation.md) and
+> [landscape-scan.md](landscape-scan.md) correct this doc's metadata (stars, dates).
+> Kept for the record; not maintained.
+
 ## 1. Executive Summary
 
 This document provides a comparative analysis of open-source CLI and Textual User Interface (TUI) tools designed to manage, toggle, and deploy LLM coding agent skills globally across multiple projects.

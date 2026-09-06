@@ -17,12 +17,12 @@ tools, buying a product, or extending/forking a base. **The decision is now made
 **`omrikais/skill-manager` (`sm`)** as the day-one skill manager and uses
 **`vercel-labs/skills` (`npx skills find`)** only as a discovery aid. The spike
 that settled this is recorded in
-[202609051821 Harness übergreifende Konfiguration von Skills.md](202609051821%20Harness%20%C3%BCbergreifende%20Konfiguration%20von%20Skills.md);
+[hands-on-spike.md](../research/skill-manager/hands-on-spike.md);
 see [Decision Outcome](#decision-outcome). The body below preserves the full option
 analysis that led here.
 
 A source-code evaluation of five tools underpins the early analysis; see
-[skill-manager-evaluation.md](skill-manager-evaluation.md). The drivers were then
+[source-code-evaluation.md](../research/skill-manager/source-code-evaluation.md). The drivers were then
 reprioritized over two stakeholder interviews: top priority is **per-project skill
 selection** (a central store from which each repository activates a chosen subset),
 then **Claude Code out of the box**, with **OpenCode, GitHub Copilot, and Copilot
@@ -51,7 +51,7 @@ source-verified six further open-source tools. Key results:
 - **Commercial products exist** (SkillReg, Packmind, Tessl); none confirmed for
   per-project subset + OpenCode + Copilot CLI. See [Option 11](#11-buy-a-commercial-product).
 - **A later packaging-standards review reshaped the field.** A whitepaper on
-  enterprise skill packaging ([skill-packaging-research.md](skill-packaging-research.md))
+  enterprise skill packaging ([packaging-standards.md](../research/skill-manager/packaging-standards.md))
   surfaced **`vercel-labs/skills` (`npx skills`)**, missed by the earlier scans:
   per-project subset with both activate and disable *mechanics*, native symlink
   delivery, a data-driven 20+-agent table, and the strongest project health in the
@@ -64,7 +64,7 @@ source-verified six further open-source tools. Key results:
   in favour of `omrikais/sm` (see [Decision Outcome](#decision-outcome)). See
   [Option 14](#14-adopt-vercel-labsskills-npx-skills) and its
   source-verified scorecard
-  ([skill-manager-vercel-labs-scorecard-2026-09-05.md](skill-manager-vercel-labs-scorecard-2026-09-05.md)).
+  ([vercel-labs-scorecard.md](../research/skill-manager/vercel-labs-scorecard.md)).
   The same review confirmed
   three real distribution standards (the Agent Skills SKILL.md standard at
   `agentskills.io`, Agent Skills as OCI artifacts, and the Agent Packaging Standard);
@@ -194,7 +194,7 @@ most important), confirmed with the stakeholder through two short interviews.
 use `vercel-labs/skills` (`npx skills find`) only as a skill-discovery aid.** Pin
 and vendor `sm`; use `vercel-labs/skills` unpinned since it is non-critical
 (discovery only). This was decided on 2026-09-06 after the hands-on spike recorded
-in [202609051821 Harness übergreifende Konfiguration von Skills.md](202609051821%20Harness%20%C3%BCbergreifende%20Konfiguration%20von%20Skills.md).
+in [hands-on-spike.md](../research/skill-manager/hands-on-spike.md).
 
 **Pinned version:** record the exact `sm` commit vendored, once installed. The
 landscape scan pinned HEAD `970fb64` (2026-09-03) as the source-verified reference
@@ -276,7 +276,7 @@ gating question for one co-candidate (`omrikais/sm`). Deliberately, this ADR doe
 **not** crown a single winner — it presents day-one **co-candidates** and defers
 the choice to a hands-on spike:
 
-The packaging-standards research ([skill-packaging-research.md](skill-packaging-research.md))
+The packaging-standards research ([packaging-standards.md](../research/skill-manager/packaging-standards.md))
 then surfaced a candidate the earlier scans missed — **`vercel-labs/skills`
 (`npx skills`)** — which changes the shape of the field. It clears the
 **activate/disable mechanics of d1** (`--skill` to select, `remove` to
@@ -711,10 +711,10 @@ looks like the smallest-gap base.
 ### 14. Adopt `vercel-labs/skills` (`npx skills`)
 
 TypeScript CLI on npm (`npx skills`). Surfaced by the packaging-standards research
-([skill-packaging-research.md](skill-packaging-research.md)), which the earlier
+([packaging-standards.md](../research/skill-manager/packaging-standards.md)), which the earlier
 scans missed; source-verified at HEAD `435076e` (2026-08-18), with a companion
 scorecard
-([skill-manager-vercel-labs-scorecard-2026-09-05.md](skill-manager-vercel-labs-scorecard-2026-09-05.md))
+([vercel-labs-scorecard.md](../research/skill-manager/vercel-labs-scorecard.md))
 matching the landscape-scan evidence format. It uses the native canonical-store +
 symlink delivery the drivers favour, and leads the survey on health (d5).
 
@@ -945,23 +945,28 @@ recipes are archived in the git history of this file and omitted here.
 
 ## More Information
 
+All supporting research lives in
+[../research/skill-manager/](../research/skill-manager/README.md) (see that folder's
+README for reading order and freshness):
+
 - Hands-on spike that settled the decision (`sm` + vercel `find`):
-  [202609051821 Harness übergreifende Konfiguration von Skills.md](202609051821%20Harness%20%C3%BCbergreifende%20Konfiguration%20von%20Skills.md).
+  [hands-on-spike.md](../research/skill-manager/hands-on-spike.md).
 - Source-code evaluation of the original five tools:
-  [skill-manager-evaluation.md](skill-manager-evaluation.md).
+  [source-code-evaluation.md](../research/skill-manager/source-code-evaluation.md).
 - Evaluation prompt/method:
-  [skill-manager-evaluation-prompt.md](skill-manager-evaluation-prompt.md).
-- Prior background survey:
-  [llm_agent_skill_managers_research.md](llm_agent_skill_managers_research.md).
+  [evaluation-method.md](../research/skill-manager/evaluation-method.md).
+- Prior background survey (superseded):
+  [initial-tool-survey.md](../research/skill-manager/initial-tool-survey.md).
 - Landscape scan of six further tools, source-verified with pinned HEADs and
   per-driver scorecards:
-  [skill-manager-landscape-scan-2026-09-05.md](skill-manager-landscape-scan-2026-09-05.md).
+  [landscape-scan.md](../research/skill-manager/landscape-scan.md).
 - Source-verified scorecard for the pre-spike day-one lead `vercel-labs/skills`
   (pinned HEAD
   `435076e`, evidence split into source-verified vs web-observed):
-  [skill-manager-vercel-labs-scorecard-2026-09-05.md](skill-manager-vercel-labs-scorecard-2026-09-05.md).
+  [vercel-labs-scorecard.md](../research/skill-manager/vercel-labs-scorecard.md).
 - Enterprise packaging & distribution standards review (background; surfaced
-  `vercel-labs/skills`): [skill-packaging-research.md](skill-packaging-research.md).
+  `vercel-labs/skills`):
+  [packaging-standards.md](../research/skill-manager/packaging-standards.md).
   Referenced standards, verified to exist: Agent Skills SKILL.md standard
   (https://agentskills.io), Agent Skills as OCI artifacts
   (https://github.com/ThomasVitale/agents-skills-oci-artifacts-spec), Agent
