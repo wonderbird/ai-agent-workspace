@@ -990,33 +990,12 @@ recipes are archived in the git history of this file and omitted here.
 
 ## More Information
 
-All supporting research lives in
-[../research/skill-manager/](../research/skill-manager/README.md) (see that folder's
-README for reading order and freshness):
+All supporting research (the spike, the source-code evaluation, the landscape scan,
+the vercel-labs scorecard, the packaging-standards review, and the superseded initial
+survey) lives in
+[docs/research/skill-manager/](../research/skill-manager/README.md) — that folder's
+README is the index, with reading order, per-document status, and freshness.
 
-- Hands-on spike that settled the decision (`sm` + vercel `find`):
-  [hands-on-spike.md](../research/skill-manager/hands-on-spike.md).
-- Source-code evaluation of the original five tools:
-  [source-code-evaluation.md](../research/skill-manager/source-code-evaluation.md).
-- Evaluation prompt/method:
-  [evaluation-method.md](../research/skill-manager/evaluation-method.md).
-- Prior background survey (superseded):
-  [initial-tool-survey.md](../research/skill-manager/initial-tool-survey.md).
-- Landscape scan of six further tools, source-verified with pinned HEADs and
-  per-driver scorecards:
-  [landscape-scan.md](../research/skill-manager/landscape-scan.md).
-- Source-verified scorecard for the pre-spike day-one lead `vercel-labs/skills`
-  (pinned HEAD
-  `435076e`, evidence split into source-verified vs web-observed):
-  [vercel-labs-scorecard.md](../research/skill-manager/vercel-labs-scorecard.md).
-- Enterprise packaging & distribution standards review (background; surfaced
-  `vercel-labs/skills`):
-  [packaging-standards.md](../research/skill-manager/packaging-standards.md).
-  Referenced standards, verified to exist: Agent Skills SKILL.md standard
-  (https://agentskills.io), Agent Skills as OCI artifacts
-  (https://github.com/ThomasVitale/agents-skills-oci-artifacts-spec), Agent
-  Packaging Standard (https://agentpackaging.org), `vercel-labs/skills`
-  (https://github.com/vercel-labs/skills).
 - Method references: MADR (https://adr.github.io/madr/), Michael Nygard's ADRs
   (https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions),
   arc42 section 9 (https://docs.arc42.org/section-9/).
