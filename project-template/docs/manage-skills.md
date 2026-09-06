@@ -8,8 +8,9 @@ Skills for coding agents (Claude Code, OpenCode, and other harnesses that read
 - **[vercel-labs/skills](https://github.com/vercel-labs/skills) (`npx skills`)** —
   used only to *discover* skills.
 
-The rationale is recorded in ADR 002 of the `ai-agent-workspace` repository
-(`docs/architecture-decisions/002-skill-manager-tool-selection.md`).
+The rationale is recorded in
+[ADR 002: Centralizing Skills Across Coding Agents](https://github.com/wonderbird/ai-agent-workspace/blob/main/docs/architecture-decisions/002-skill-manager-tool-selection.md)
+of the `ai-agent-workspace` repository.
 
 ## Prerequisites
 
