@@ -156,10 +156,9 @@ landscape scan pinned HEAD `970fb64` (2026-09-03) as the source-verified referen
 
 ### Why this over the pre-spike lead
 
-The pre-spike analysis (see [Prior Recommendation](#prior-recommendation-pre-spike-analysis))
-made `vercel-labs/skills` the day-one lead on health (d5) with `omrikais/sm` a
-challenger weakened by an assumed additive-only d1 gap and a hardcoded `cc|codex`
-target set. The spike changed both findings:
+An earlier draft made `vercel-labs/skills` the day-one lead on health (d5) with
+`omrikais/sm` a challenger weakened by an assumed additive-only d1 gap and a hardcoded
+`cc|codex` target set. The spike changed both findings:
 
 - **`vercel-labs/skills` fails the reconstruction/restore path the chosen workflow
   depends on (d1/d4).** A fresh `npx skills add` *does* install into `.claude/`, so
@@ -220,18 +219,6 @@ different owners cannot silently shadow each other.
 The migration seam (Option 12/13) is unchanged and deferred; see
 [Open questions](#open-questions). The previously separate "file-based Copilot
 target" is no longer a distinct concern — Copilot reads the agent-skills directory.
-
-## Prior Recommendation (pre-spike analysis)
-
-Superseded by the [Decision Outcome](#decision-outcome). Before the hands-on spike,
-this ADR did not crown a winner: it treated `vercel-labs/skills` as the day-one
-health leader, with `Leonezz/skills-mgr` and `omrikais/sm` as challengers and a
-hand-rolled symlink script (Option 2) as the control. The spike reversed that —
-`vercel-labs/skills` cannot reconstruct project skills into `.claude/` — and selected
-`omrikais/sm`. The per-option driver comparison that informed the pre-spike view
-lives in [Detailed Analysis of Options](#detailed-analysis-of-options) and the
-source-verified [research docs](../research/skill-manager/README.md); the full
-pre-spike prose and driver matrix remain in this file's git history.
 
 ## Detailed Analysis of Options
 
