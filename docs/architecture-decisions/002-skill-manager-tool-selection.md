@@ -225,134 +225,15 @@ target" is no longer a distinct concern — Copilot reads the agent-skills direc
 
 ## Prior Recommendation (pre-spike analysis)
 
-*Retained for the record; superseded by [Decision Outcome](#decision-outcome).*
-
-Under the drivers (1 per-project subset, 2 Claude Code out-of-the-box, 3 cheap
-extensibility, 4 safe delivery, 5 health), d2 and at least the *activate* half of
-d1 are met off the shelf by several tools; the *disable/swap* half of d1 is a live
-gating question for one co-candidate (`omrikais/sm`). Deliberately, this ADR does
-**not** crown a single winner — it presents day-one **co-candidates** and defers
-the choice to a hands-on spike:
-
-The packaging-standards research ([packaging-standards.md](../research/skill-manager/packaging-standards.md))
-then surfaced a candidate the earlier scans missed — **`vercel-labs/skills`
-(`npx skills`)** — which changes the shape of the field. It clears the
-**activate/disable mechanics of d1** (`--skill` to select, `remove` to
-disable/swap, with a mass-delete guard), Claude Code out of the box (d2), native
-canonical-store + symlink delivery (d4), a data-driven 20+-agent table (d3), and —
-decisively — **the strongest health (d5)**: MIT with a filed LICENSE, 58 test
-files, CI, and active multi-author cadence (30 commits in 2026-07, 17 in 2026-08),
-all source-verified at HEAD `435076e`; its ~30k★ is web-observed (2026-09-05), not
-clone-derived, and would make it the most-starred tool in the survey by far — hence
-stated as an observation, not folded into the source-verified bundle. That health
-largely retires the solo-developer risk that shadowed the two prior co-candidates.
-Two genuine reservations temper the lead: (i) the "central store" is a
-*distribution* model (install *from* a source repo/registry into each project), so
-it does **not** match d1's literal single-store framing — on that framing
-`skills-mgr` fits d1 better, and editing the one central source still requires a
-re-sync into each project (the same staleness class flagged for `skills-mgr`); and
-(ii) it too fails to emit Copilot's `.instructions.md`. So it leads on **d5, the
-lowest-priority driver**, while carrying an open question on d1's own premise — a
-priority inversion the spike must resolve, not a clean win. On the pre-spike
-evidence it *was* the **day-one lead**, with the two tools below as challengers —
-but the spike reversed this (`vercel-labs/skills`'s restore path could not
-reconstruct into `.claude/`), so `omrikais/sm` was chosen; see
-[Decision Outcome](#decision-outcome).
-
-The two prior day-one co-candidates trade off cleanly — one leads
-d1+d4-architecture but is stale/unlicensed; the other leads d5-freshness but has a
-narrower d1 and d3 — so neither is crowned; the spike decides on live criteria.
-
-- **`Leonezz/skills-mgr`** — per-project profiles with `includes` inheritance
-  (`profiles.rs:56-88`), Claude Code at both scopes (`presets.rs:9-13`),
-  data-driven agents (`config.rs:145-157`), and the richest safe-delivery design:
-  SQLite-tracked placements, `doctor`, conflict-bail, ref-counted reversible
-  deactivate (`placements.rs:338-354`), rollback on failure (`:278-289`).
-  **Against it:** HEAD is `fded9c6` dated **2026-04-15 — ~5 months stale** at scan
-  time (possibly dormant); single author, 1★; MIT declared in `Cargo.toml` but
-  **no LICENSE file**; delivery is copy (not symlink), so edited sources need a
-  `refresh`; Rust, a higher extension barrier for a Node/Python developer; no
-  Copilot `.instructions.md` transform.
-- **`omrikais/sm`** — symlink into native agent dirs (`src/fs/links.ts:19-66`),
-  per-project profiles, and a strong safe-delivery surface (no-clobber via
-  conflict-refusal, atomic temp+rename, doctor, backups, non-destructive rollback).
-  **On d5 it strictly beats skills-mgr:** HEAD `970fb64` dated **2026-09-03 (fresh)**,
-  clean MIT LICENSE file, 4★, dependabot, 84 test files — though *sustained*
-  activity is unverifiable (shallow clone), so "recent HEAD" is the honest claim,
-  not "actively maintained". **Against it:** profile switching is **additive-only**
-  — it deploys but never undeploys the prior set (`install.ts:35-57`), so it
-  **fails the disable/re-select half of driver 1** until a prune exists (a spike
-  gating question, not a footnote); and targets are hardcoded to Claude Code +
-  Codex (`src/fs/paths.ts:85`), so adding agents (d3) is a source edit.
-
-`skill-cli` is now a **fallback**, not a co-candidate: its `allow`/`deny` selection
-model (`config.js:78-113`) is the cleanest, but it delivers by runtime pull with no
-enforcement and is effectively unmaintained (single ~6h burst) — the two tools
-above remove the reason to accept its delivery caveat. `lijianru` (copy, clobbers)
-and `sklm` (destructive `rmtree` sync, `_sync.py:38-40`) are weaker still. `mode-io`
-remains the best *extensibility* base (data catalog + file codec) but fails d1.
-`skillkit` is the healthiest project (1470★, Apache-2.0, ~1537 test assertions) but
-is a package manager, not central-store subset selection. Desktop GUIs
-(xingkongliang 4270★, jiweiyeah 971★) are **GUI-only, not headless**, unusable for
-an automated pipeline.
-
-Staged path, unchanged in shape:
-
-1. **Adopt a day-one tool now** — decided by the spike below (lead
-   `vercel-labs/skills`, co-candidates skills-mgr and omrikais/sm, with the native
-   symlink baseline of Option 2 as a control arm, and skill-cli only as a fallback).
-2. **Extend when the further agents are needed** — Option 12 (wrapper) or Option
-   13 (fork), base chosen then.
-
-The migration seam still applies: the selection/delivery models differ across
-these tools, so "extend later" may mean discarding the day-one tool's config and
-running two tools briefly. Adopting now is justified by early value, not by making
-extension cheaper. **Commercial products** (Option 11) deserve a trial in case one
-covers everything. *(Superseded: this was the proposal-only stance; the decision was
-taken 2026-09-06 — see [Decision Outcome](#decision-outcome).)*
-
-A note on reversals: skill-cli scored Fit = 2 in the source evaluation (which
-judged global three-agent coverage); the per-project-first drivers promoted it to
-last round's lead; the landscape scan now shows tools that match its selection
-model without its delivery caveat. Same evidence base, evolving question.
-
-Coverage below is source-verified and reflects the **pre-spike** read; where the
-spike revised a verdict (notably the `omrikais/sm` d1 and d3 rows), the authoritative
-statement is the [Decision Outcome](#decision-outcome) scorecard. Also note the d3
-cells mentioning "Copilot needs file-gen" / "no Copilot file-gen" are **obsolete**:
-Copilot now reads the agent-skills skills directory (`.agents/skills`), so no file
-generation is required for it. Driver columns
-follow the priority set.
-
-| Option | Per-project subset (d1) | Claude Code OOTB (d2) | Cheap extensibility (d3) | Safe delivery (d4) | Health (d5) |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 Do nothing | none (manual) | manual | n/a | manual, error-prone | n/a |
-| 2 Hand-rolled script | you build it | you build it (trivial) | you own it | native loads, no clobber | you own it |
-| 3 mode-io/skill-manager | **no (global-only)** | yes (+ OpenCode) | **best** (data catalog + symlink & file codec) | crash-safe, reversible | CI + 61 tests, pre-1.0/private |
-| 4 lijianru/skills-manager | yes (copy subset) | yes (native dir) | poor (hardcoded switch) | copy overwrites edits | no tests, bus-factor 1 |
-| 5 skill-cli | best (`allow`/`deny`) | yes, via injection/pull (no enforcement) | OpenCode likely cheap; Copilot needs file-gen | store safe, delivery prompt-dependent | 227 tests but ~6h burst, unmaintained |
-| 6 skills-mgr (Leonezz) | **yes (profiles + includes)** | yes (both scopes) | data-driven (`agents.toml`); Rust | **strongest** (SQLite, doctor, reversible, rollback) | 80 tests / CI / 1★ / HEAD ~5mo stale / no LICENSE file |
-| 7 omrikais/sm *(pre-spike read; superseded — see Decision scorecard)* | partial — deploys but no clean disable/swap (additive-only) | yes (symlink native) | poor (hardcoded cc\|codex) | **strong** (no-clobber, atomic, doctor, backups, rollback) | MIT / 84 tests / 4★ / HEAD fresh (2026-09-03); sustained activity unverified |
-| 8 sklm | yes (config) | yes (project-only) | **data-driven (30 YAML)** | **unsafe (rmtree clobbers foreign)** | MIT / 184 tests / CI |
-| 9 skillkit (rohitg00) | partial (pkg-mgr) | yes | data-driven 46 + `translate` | decent (skip-existing, scan) | Apache-2.0 / ~1537 tests / 1470★ |
-| 10 openhub / skill-factory / GUIs | mixed | mixed | poor | mixed | see analysis |
-| 11 Commercial product | unknown (trial) | yes (SkillReg/Packmind) | vendor-controlled | product feature | vendor-supported |
-| 12 Extend a base (no fork) | add via wrapper | inherit | inherit | inherit | shared with upstream |
-| 13 Fork/build | by design | inherit | by design | inherit | you co-own it |
-| 14 vercel-labs/skills | mechanics yes (`--skill` + `remove`); but store is a distribution model, not d1's single local store | yes (native) | data-driven (20+ agents); no Copilot file-gen | **strong** (canonical + ref-counted symlink, guarded delete) | **strongest**: MIT+LICENSE / 58 test files / CI / active cadence (verified); ~30k★ (web-observed 2026-09-05) |
-
-The decisive columns are d1 (per-project), d4 (safe delivery), and d3 (cheap
-extensibility). On the pre-spike reading, **vercel-labs/skills led on d5 while
-matching or beating the others on d2/d4** (the activate/disable mechanics of d1,
-native symlink, guarded delete) — though on d1's literal single-store framing
-`skills-mgr` fit better; skills-mgr led d1+d4-architecture with data-driven d3;
-omrikais/sm led symlink-delivery safety but read as additive-only on d1 and weak on
-d3; skill-cli led the selection model but had the delivery caveat. *(Two later
-corrections apply to this pre-spike reading: the spike overturned the ranking —
-vercel's restore path could not reconstruct into `.claude/`, and omrikais/sm's d1/d3
-read improved on hands-on use; and the "file-based Copilot" premise is obsolete —
-Copilot reads the agent-skills skills directory, so it needs no file generation. See
-[Decision Outcome](#decision-outcome).)*
+Superseded by the [Decision Outcome](#decision-outcome). Before the hands-on spike,
+this ADR did not crown a winner: it treated `vercel-labs/skills` as the day-one
+health leader, with `Leonezz/skills-mgr` and `omrikais/sm` as challengers and a
+hand-rolled symlink script (Option 2) as the control. The spike reversed that —
+`vercel-labs/skills` cannot reconstruct project skills into `.claude/` — and selected
+`omrikais/sm`. The per-option driver comparison that informed the pre-spike view
+lives in [Detailed Analysis of Options](#detailed-analysis-of-options) and the
+source-verified [research docs](../research/skill-manager/README.md); the full
+pre-spike prose and driver matrix remain in this file's git history.
 
 ## Detailed Analysis of Options
 
