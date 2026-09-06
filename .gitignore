@@ -1,5 +1,8 @@
 # New entries are added to the top
 
+# bv (beads viewer) local config and caches
+.bv/
+
 # Oh My Claude Code state - block all, then carve out what to share
 !.omc/
 .omc/*
@@ -391,3 +394,4 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/linux,macos,python,windows,pycharm+all,visualstudiocode,vim
+
