@@ -5,87 +5,29 @@
 
 ## Executive Summary
 
-This document records how to centralize skill definitions, prompt rules, and MCP
-configuration in one store and select a per-project subset of them across our
-coding agents. Each agent loads skills from a different directory with a different
-schema, so a skill has to be maintained several times and there is no single place
-from which a project can pick the subset it needs. This ADR frames the problem,
-sets the decision drivers, and evaluates the realistic options — from doing
-nothing, through a hand-rolled script, to adopting one of the surveyed open-source
-tools, buying a product, or extending/forking a base. **The decision is now made
-(2026-09-06), after a hands-on spike.** The stakeholder adopted
-**`omrikais/skill-manager` (`sm`)** as the day-one skill manager and uses
-**`vercel-labs/skills` (`npx skills find`)** only as a discovery aid. The spike
-that settled this is recorded in
-[hands-on-spike.md](../research/skill-manager/hands-on-spike.md);
-see [Decision Outcome](#decision-outcome). The body below preserves the full option
-analysis that led here.
+**Problem.** We maintain skills, prompt rules, and MCP configs that each coding agent
+loads from its own directory, so every skill is duplicated per agent and there is no
+single place from which a project activates the subset it needs.
 
-A source-code evaluation of five tools underpins the early analysis; see
-[source-code-evaluation.md](../research/skill-manager/source-code-evaluation.md). The drivers were then
-reprioritized over two stakeholder interviews: top priority is **per-project skill
-selection** (a central store from which each repository activates a chosen subset),
-then **Claude Code out of the box**, with **OpenCode, GitHub Copilot, and Copilot
-CLI added later** rather than day-one requirements. A verification round checked
-the clones (source-verified) and each agent's real instruction mechanism
-(web-verified). Finally, a **landscape scan (2026-09-05)** widened the search and
-source-verified six further open-source tools. Key results:
+**Decision (2026-09-06).** Adopt **`omrikais/skill-manager` (`sm`)** as the skill
+manager — it installs a per-project subset from a central store into both
+`.claude/skills` and the universal `.agents/skills`, covering every wanted agent
+(Claude Code, OpenCode, GitHub Copilot incl. Copilot CLI, and others) with no file
+generation. Use **`vercel-labs/skills` (`npx skills find`)** only to *discover*
+skills. Pin and vendor `sm`.
 
-- **Per-project selection is common; safe native delivery + extensibility is
-  rare.** Off the shelf, `skill-cli`, `lijianru`, `skill-factory`, and the newly
-  found `skills-mgr`, `omrikais/sm` (partial/additive), and `sklm` all do
-  per-project subsets; `mode-io` does not (global-only). The differentiators are
-  *how* they deliver
-  (symlink vs. copy vs. runtime-pull) and how safely.
-- **The landscape scan found stronger day-one candidates than the original five.**
-  `Leonezz/skills-mgr` (per-project profiles with inheritance, data-driven agent
-  table, SQLite-tracked reversible delivery) and `omrikais/sm` (symlink into native
-  dirs, doctor/backups, recent HEAD — sustained activity unverified) both deliver
-  into native agent directories — removing the runtime-pull/enforcement caveat that
-  limited `skill-cli`. (This "lead is contested between these two" framing is
-  superseded below: a later review surfaced `vercel-labs/skills`.)
-- **The wanted targets now share one delivery shape.** Claude Code, OpenCode, pi,
-  Antigravity, **and GitHub Copilot (including the Copilot CLI)** all use the SKILL.md
-  **skills-directory** standard (symlink-friendly). Copilot's agent-skills feature
-  reads `.github/skills`, `.claude/skills`, or `.agents/skills`
-  ([GitHub docs](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills)),
-  so it is served by the same `.agents/skills` delivery — the earlier "file-based
-  `.instructions.md`" framing is superseded, and no file generation is required.
-- **Commercial products exist** (SkillReg, Packmind, Tessl); none confirmed for
-  per-project subset + OpenCode + Copilot CLI. See [Option 11](#11-buy-a-commercial-product).
-- **A later packaging-standards review reshaped the field.** A whitepaper on
-  enterprise skill packaging ([packaging-standards.md](../research/skill-manager/packaging-standards.md))
-  surfaced **`vercel-labs/skills` (`npx skills`)**, missed by the earlier scans:
-  per-project subset with both activate and disable *mechanics*, native symlink
-  delivery, a data-driven 20+-agent table, and the strongest project health in the
-  survey. Source-verified at HEAD `435076e` (code paths, MIT LICENSE, 58 test files,
-  CI, and — after deepening the clone — active multi-author commit cadence); its
-  ~30k★ is **web-observed** (2026-09-05), not clone-derived. It is now the day-one
-  **lead on health (d5)**, but that is the lowest-priority driver and its "central
-  store" is a distribution/registry model that does **not** match d1's literal
-  single-store framing — a driver-priority inversion the spike weighed and resolved
-  in favour of `omrikais/sm` (see [Decision Outcome](#decision-outcome)). See
-  [Option 14](#14-adopt-vercel-labsskills-npx-skills) and its
-  source-verified scorecard
-  ([vercel-labs-scorecard.md](../research/skill-manager/vercel-labs-scorecard.md)).
-  The same review confirmed
-  three real distribution standards (the Agent Skills SKILL.md standard at
-  `agentskills.io`, Agent Skills as OCI artifacts, and the Agent Packaging Standard);
-  their relevance is scoped in [Consequences](#consequences) and
-  [Open questions](#open-questions), not folded in as tool evidence.
+**Why it fits the drivers** (priority order): it does **per-project activate/disable**
+(`.skills.json` manifest + TUI); **Claude Code works out of the box**; **further
+agents come for free** because they read `.agents/skills`; **delivery is safe and
+reversible** (no-clobber symlinks, backups); the only real cost is `sm`'s
+**solo-maintainer health**, mitigated by pin + vendor with a hand-rolled symlink
+script as the exit path.
 
-Because the field had a clear health leader but an unresolved model-fit question,
-the earlier draft presented `vercel-labs/skills` as the day-one **lead** with
-`skills-mgr` and `omrikais/sm` as **challengers** (with `skill-cli` as a fallback
-and Option 2's native script as a control), to be settled by a spike. **The spike
-reversed that lead.** `vercel-labs/skills` searches skills excellently but its
-project-skill *restore* is experimental and incomplete — it re-links only into
-`.agents/`, not `.claude/`, and cannot restore global skills — so it fails the
-delivery half of the day-one need. `omrikais/sm` delivered into both `.claude/` and
-`.agents/` (the latter covering OpenCode and the other SKILL.md harnesses), managed
-local and global skills, and supported per-project disable via its TUI. The
-decision (below) therefore adopts `sm` as the manager and keeps `vercel-labs/skills`
-purely for discovery.
+See [Decision Outcome](#decision-outcome) for the full rationale and scorecard, the
+[Detailed Analysis of Options](#detailed-analysis-of-options) for the alternatives
+weighed, and [docs/research/skill-manager/](../research/skill-manager/README.md) for
+the source-verified evidence (evaluation, landscape scan, vercel-labs scorecard,
+packaging standards, and the hands-on spike that settled the choice).
 
 ## Context and Problem Statement
 
