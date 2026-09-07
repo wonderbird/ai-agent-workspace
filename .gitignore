@@ -1,5 +1,13 @@
 # New entries are added to the top
 
+# Agent Skills are managed by omrikais/skill-manager.
+# Thus, the skills folders are excluded. They are restored from
+# the .skills.json file in the project root.
+#
+# Further details: https://github.com/omrikais/skill-manager
+.claude/skills/
+.agents/skills/
+
 # bv (beads viewer) local config and caches
 .bv/
 

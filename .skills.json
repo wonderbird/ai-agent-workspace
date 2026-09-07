@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "skills": [
+    {
+      "name": "commit",
+      "tools": [
+        "cc",
+        "codex"
+      ],
+      "scope": "project"
+    },
+    {
+      "name": "commit-message",
+      "tools": [
+        "cc",
+        "codex"
+      ],
+      "scope": "project"
+    },
+    {
+      "name": "create-adr",
+      "tools": [
+        "cc",
+        "codex"
+      ],
+      "scope": "project"
+    },
+    {
+      "name": "format-markdown",
+      "tools": [
+        "cc",
+        "codex"
+      ],
+      "scope": "project"
+    },
+    {
+      "name": "record-findings",
+      "tools": [
+        "cc",
+        "codex"
+      ],
+      "scope": "project"
+    }
+  ],
+  "profiles": {}
+}
