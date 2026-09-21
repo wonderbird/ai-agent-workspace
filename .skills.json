@@ -7,7 +7,7 @@
         "cc",
         "codex"
       ],
-      "scope": "project"
+      "scope": "user"
     },
     {
       "name": "commit-message",
@@ -15,7 +15,7 @@
         "cc",
         "codex"
       ],
-      "scope": "project"
+      "scope": "user"
     },
     {
       "name": "create-adr",
@@ -23,7 +23,31 @@
         "cc",
         "codex"
       ],
-      "scope": "project"
+      "scope": "user"
+    },
+    {
+      "name": "create-skill",
+      "tools": [
+        "cc",
+        "codex"
+      ],
+      "scope": "user"
+    },
+    {
+      "name": "fix-problem",
+      "tools": [
+        "cc",
+        "codex"
+      ],
+      "scope": "user"
+    },
+    {
+      "name": "format-docs",
+      "tools": [
+        "cc",
+        "codex"
+      ],
+      "scope": "user"
     },
     {
       "name": "format-markdown",
@@ -31,7 +55,15 @@
         "cc",
         "codex"
       ],
-      "scope": "project"
+      "scope": "user"
+    },
+    {
+      "name": "omo-configure-models",
+      "tools": [
+        "cc",
+        "codex"
+      ],
+      "scope": "user"
     },
     {
       "name": "record-findings",
@@ -39,7 +71,39 @@
         "cc",
         "codex"
       ],
-      "scope": "project"
+      "scope": "user"
+    },
+    {
+      "name": "refactoring-step",
+      "tools": [
+        "cc",
+        "codex"
+      ],
+      "scope": "user"
+    },
+    {
+      "name": "review-documentation",
+      "tools": [
+        "cc",
+        "codex"
+      ],
+      "scope": "user"
+    },
+    {
+      "name": "review-rules",
+      "tools": [
+        "cc",
+        "codex"
+      ],
+      "scope": "user"
+    },
+    {
+      "name": "review-single-rule",
+      "tools": [
+        "cc",
+        "codex"
+      ],
+      "scope": "user"
     }
   ],
   "profiles": {}
