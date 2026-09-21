@@ -1,20 +1,24 @@
 ---
 name: create-skill
 description: >
-  Author a new skill in the sboos-skills source repo, deploy it with Skill Manager (sm), verify it,
+  Author a new skill in a Skill Manager source repo, deploy it with Skill Manager (sm), verify it,
   and commit it. Use when the user says "create a skill", "make this a skill", "turn these
-  instructions into a skill", "add a new skill", wants repeated instructions or a section of
-  AGENTS.md persisted as a reusable procedure, or invokes /create-skill.
+  instructions into a skill", "add a new skill", "update a skill", wants repeated instructions or a
+  section of AGENTS.md persisted as a reusable procedure, or invokes /create-skill.
 argument-hint: "[skill-name]"
 ---
 
-Skills live in a git source repo and are deployed as symlinks by Skill Manager. Author in the
-source repo — never edit the deployed copy under `~/.skill-manager/skills/`, which `sm import`
-overwrites.
+Skills live in a git source repo. Skill Manager keeps its own copy under `~/.skill-manager/skills/`
+and links that copy into each tool. Author in the source repo — never edit the copy, which the next
+import overwrites.
 
 ## 1. Author
 
-Path: `~/.skill-manager/sources/sboos-skills/skills/<name>/SKILL.md`
+Path: `~/.skill-manager/sources/<source-repo>/skills/<name>/SKILL.md`
+
+Pick the source repo the skill belongs to; several are configured, `sm source ls` lists them. For an
+existing skill, `~/.skill-manager/skills/<name>/.sm-meta.json` names its `originalPath` and `repo` —
+read it instead of guessing, the deployed path is never the one to edit.
 
 Name the directory after what the skill does, lowercase with hyphens; it becomes the `/<name>`
 command. Read a sibling skill first and match its register.
@@ -48,9 +52,24 @@ Body rules:
 
 ## 2. Deploy
 
+A new skill goes straight into the store:
+
 ```bash
-sm import ~/.skill-manager/sources/sboos-skills/skills/<name>
+sm import ~/.skill-manager/sources/<source-repo>/skills/<name>
 ```
+
+**An existing skill takes the opposite route: commit and push first (section 4), then deploy.**
+`sm import` refuses it with `SKILL_EXISTS`, and `sm source sync <source>` only pulls the repo
+checkout — it leaves the store copy untouched, so the old version stays active and `sm info` keeps
+reporting it. What updates the store is:
+
+```bash
+sm install -f <owner>/<repo>    # e.g. stefanboos/sboos-skills
+```
+
+It fetches from the remote, so an unpushed commit is invisible to it. Files added to a skill
+directory only reach the tools through this step. Deploy links and version history survive it —
+do not `sm remove` a skill just to re-import it.
 
 `import` deploys to **user** scope for both tools right away. Keep that for general-purpose
 skills. For a skill bound to one organization, project or repo, move it to project scope:
@@ -67,12 +86,14 @@ updates the manifest, and `sm init --from-current` refuses to overwrite an exist
 { "name": "<name>", "tools": ["codex"], "scope": "project" }
 ```
 
-## 3. Verify before committing
+## 3. Verify the deployed copy
 
 - `sm info <name>` — a rendered description and the expected Active Links prove the frontmatter
-  parsed and the symlink resolved. Silence about the description means broken frontmatter.
-- Run the skill's own commands once. A skill documenting commands that do not execute is worse
-  than no skill.
+  parsed and the link resolved. Silence about the description means broken frontmatter. Check the
+  **Files** list too: a missing script means the store copy is stale, not that the file is lost.
+- Run the skill's own commands once, from the deployed path (`~/.agents/skills/<name>/`), not from
+  the source repo. A skill documenting commands that do not execute is worse than no skill, and
+  only the deployed path proves the update landed.
 
 ## 4. Commit
 
@@ -83,6 +104,6 @@ or `chore:`. The headline states the capability the agent gains, not the file th
 History there is linear. When the remote has moved on, `git rebase origin/main` before pushing;
 never force-push a branch that is already shared.
 
-Deploying is separate from publishing: `sm import` copies into `~/.skill-manager/skills/`, so the
-skill works locally before the commit exists, and other machines only see it after the push plus
-a source sync (`sm` TUI → `r` → select source → `I`).
+For a new skill, deploying is separate from publishing: the store copy works locally before the
+commit exists, and other machines only see it after the push. For an update, the order is fixed —
+commit, push, then `sm install -f`, because the store is refreshed from the remote.
