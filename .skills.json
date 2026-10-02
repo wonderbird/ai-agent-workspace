@@ -2,6 +2,22 @@
   "version": 1,
   "skills": [
     {
+      "name": "changelog-entry",
+      "tools": [
+        "cc",
+        "codex"
+      ],
+      "scope": "user"
+    },
+    {
+      "name": "conductor",
+      "tools": [
+        "cc",
+        "codex"
+      ],
+      "scope": "user"
+    },
+    {
       "name": "commit",
       "tools": [
         "cc",
