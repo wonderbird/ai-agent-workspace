@@ -91,10 +91,9 @@ optional scope MAY be added to narrow the area, e.g. `ai(skills):`,
 `ai(rules):`.
 
 The headline of a `chore:` commit describes routine maintenance with no
-production-code or documentation effect, e.g. exporting/syncing an issue
+production-code or documentation effect. Only exporting/syncing an issue
 tracker's data file (beads `.beads/issues.jsonl`) after claiming, updating,
-or closing issues. You MUST always confirm the use of `chore:` with the user
-before committing — never choose it unprompted.
+or closing issues MAY use `chore:`.
 
 A commit changing only documentation files is always a `docs:` commit, never
 a `refactor:` commit.
