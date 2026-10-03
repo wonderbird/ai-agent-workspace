@@ -34,14 +34,6 @@
       "scope": "user"
     },
     {
-      "name": "create-skill",
-      "tools": [
-        "cc",
-        "codex"
-      ],
-      "scope": "user"
-    },
-    {
       "name": "fix-problem",
       "tools": [
         "cc",
