@@ -100,6 +100,18 @@ a `refactor:` commit.
 
 The brief description of a commit body shall not exceed 50 words.
 
+## Stage explicit paths
+
+You MUST stage files by explicit path only, e.g. `git add path/to/file.md`.
+NEVER use `git add -A`, `git add .`, `git add -u`, `git add --all`,
+`git commit -a`, or `git add <directory>`. Several agent sessions may share
+one working tree, so a wildcard can sweep another session's untracked or
+modified files into your commit.
+
+Run `git status` before staging and stage only the files your task changed.
+Run `git status` again before committing and verify that only those files are
+staged.
+
 ## Git command line tool usage
 
 If you request git history information, you MUST ALWAYS use the `--no-pager`
