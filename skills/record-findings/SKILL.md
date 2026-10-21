@@ -77,13 +77,14 @@ you understand the scope and the corresponding beads issue.
      agent, and MUST NOT be closed by an AI agent."
    - "Review procedure — derive everything live; trust no pre-baked list or
      order:"
-     1. List the gate's children (open **and** closed) via `bd show <gate-id>`,
-        then **exclude any already labeled `human-reviewed`** and this review
-        task itself. What remains is the unreviewed set. This is what keeps
-        review rounds from overlapping: findings accepted in an earlier round
-        carry the label and drop out, while findings filed *during* that
-        earlier round are still unlabeled and surface now — so no finding is
-        reviewed twice and none is missed.
+     1. List the gate's children (open **and** closed) via `bd show <gate-id>`
+        or `br show <gate-id>`, respectively, then **exclude any already
+        labeled `human-reviewed`** and this review task itself. What remains
+        is the unreviewed set. This is what keeps review rounds from
+        overlapping: findings accepted in an earlier round carry the label
+        and drop out, while findings filed *during* that earlier round are
+        still unlabeled and surface now — so no finding is reviewed twice and
+        none is missed.
      2. For each finding in the unreviewed set, locate its fixing commit(s) with
         `git log --no-pager --grep=<finding-id>` (the `commit` skill mandates a
         `Refs: <finding-id>` trailer, so every fix is discoverable). A finding
