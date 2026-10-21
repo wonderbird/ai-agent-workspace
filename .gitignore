@@ -16,7 +16,6 @@
 .omc/*
 !.omc/skills/
 !.omc/skills/**
-!.omc/project-memory.json
 
 # Aider - https://aider.chat
 .aider*
