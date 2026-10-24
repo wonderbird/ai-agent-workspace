@@ -353,3 +353,9 @@ session to pick up the wrong work.
 - **Hidden files**: the LS tool does not show hidden files; use
   `ls -la <path>` via Bash to check for hidden files or directories.
 
+## Documentation
+
+- **No version history in documents**: never add version or author history
+  to documents, e.g. revision tables, "last updated" dates, or change logs
+  of a document's edits. Git is the trusted source of this information.
+
