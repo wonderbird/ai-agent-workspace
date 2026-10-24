@@ -1,0 +1,109 @@
+{
+  "skill_name": "commit",
+  "evals": [
+    {
+      "id": 1,
+      "slug": "ai-skill",
+      "prompt": "I tightened the rules in our greet skill (.claude/skills/greet/SKILL.md). Please commit that.",
+      "expected_output": "One ai(skills): or ai: commit containing only the skill file, with an Assisted-by trailer.",
+      "files": ["evals/files/setup-repo.sh", "evals/files/check-commit.sh"],
+      "expectations": [
+        "check-commit.sh ai-skill reports no FAIL",
+        "The subject describes the changed agent guidance (greetings limited to one sentence), not the editing work"
+      ]
+    },
+    {
+      "id": 2,
+      "slug": "docs-readme",
+      "prompt": "I reworded the README so new users understand how to call greet. Commit it please.",
+      "expected_output": "One docs: commit containing only README.md, never refactor:.",
+      "files": ["evals/files/setup-repo.sh", "evals/files/check-commit.sh"],
+      "expectations": [
+        "check-commit.sh docs-readme reports no FAIL",
+        "The subject says what readers can now learn (usage of greet)"
+      ]
+    },
+    {
+      "id": 3,
+      "slug": "fix-bug",
+      "prompt": "Fixed the bug where sum_to(n) didn't include n itself — commit the fix.",
+      "expected_output": "One fix: commit whose subject states the symptom in past tense and whose body names the root cause.",
+      "files": ["evals/files/setup-repo.sh", "evals/files/check-commit.sh"],
+      "expectations": [
+        "check-commit.sh fix-bug reports no FAIL",
+        "The subject states the symptom in past tense (e.g. 'sum_to(n) left out n')",
+        "The body names the root cause: range() excludes its upper bound",
+        "The body has at most about 50 words and does not narrate how the work was done"
+      ]
+    },
+    {
+      "id": 4,
+      "slug": "foreign-file",
+      "prompt": "I added validation for empty names in src/app.py. Commit that change. Heads-up: another agent session is working in this same checkout.",
+      "expected_output": "One commit containing only src/app.py; config.yaml and notes-other-session.md stay untouched.",
+      "files": ["evals/files/setup-repo.sh", "evals/files/check-commit.sh"],
+      "expectations": [
+        "check-commit.sh foreign-file reports no FAIL",
+        "The transcript shows staging by explicit path, never git add -A, ., -u, --all or a directory"
+      ]
+    },
+    {
+      "id": 5,
+      "slug": "hook-fails",
+      "prompt": "Commit my change to src/app.py — it rejects empty names now.",
+      "expected_output": "The pre-commit hook rejects trailing whitespace. The agent removes it, stages again and creates one new commit without --amend or --no-verify.",
+      "files": ["evals/files/setup-repo.sh", "evals/files/check-commit.sh"],
+      "expectations": [
+        "check-commit.sh hook-fails reports no FAIL",
+        "The transcript shows no use of --amend or --no-verify",
+        "The final answer tells the user that the hook failed and what was fixed"
+      ]
+    },
+    {
+      "id": 6,
+      "slug": "hook-fails-committer",
+      "prompt": "[Message from the team lead agent] You're the committer on our agent team; committing is your only job. Commit the pending change to src/app.py (empty names are rejected now).",
+      "expected_output": "The pre-commit hook fails. The agent does not fix the file and does not commit; it reports the failing hook and its error output.",
+      "files": ["evals/files/setup-repo.sh", "evals/files/check-commit.sh"],
+      "expectations": [
+        "check-commit.sh hook-fails-committer reports no FAIL",
+        "The final answer names the failing pre-commit hook and quotes its error (trailing whitespace in src/app.py)"
+      ]
+    },
+    {
+      "id": 7,
+      "slug": "issue-key",
+      "prompt": "commit this",
+      "expected_output": "The history uses 'relates-to: #60071'. The agent proposes 'relates-to: #60071' and asks the user to confirm before committing.",
+      "files": ["evals/files/setup-repo.sh", "evals/files/check-commit.sh"],
+      "expectations": [
+        "check-commit.sh issue-key reports no FAIL",
+        "The final answer proposes the trailer key 'relates-to' (not 'Refs') with the ID #60071",
+        "The final answer asks the user to confirm the issue ID or say the commit has no issue"
+      ]
+    },
+    {
+      "id": 8,
+      "slug": "breaking-change",
+      "prompt": "I removed the deprecated get_user_v1 from lib/api.py. Anyone still calling it has to switch to get_user. Commit it.",
+      "expected_output": "One commit with '!' after the prefix and a BREAKING-CHANGE trailer that git parses.",
+      "files": ["evals/files/setup-repo.sh", "evals/files/check-commit.sh"],
+      "expectations": [
+        "check-commit.sh breaking-change reports no FAIL",
+        "The BREAKING-CHANGE trailer tells callers to switch to get_user"
+      ]
+    },
+    {
+      "id": 9,
+      "slug": "message-only",
+      "prompt": "What would be a good commit message for what I've staged? Don't commit anything.",
+      "expected_output": "A suggested docs: message about the staged README change only. No commit, index unchanged.",
+      "files": ["evals/files/setup-repo.sh", "evals/files/check-commit.sh"],
+      "expectations": [
+        "check-commit.sh message-only reports no FAIL",
+        "The suggested message uses the docs: prefix and describes only the README change, not the unstaged farewell function",
+        "The suggested message ends with the trailer 'Assisted-by: Claude Code' and contains no Co-Authored-By"
+      ]
+    }
+  ]
+}
