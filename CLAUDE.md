@@ -29,13 +29,13 @@ in this folder.
 
 ## Beads Workflow Integration
 
-This project uses [beads_rust](https://github.com/Dicklesworthstone/beads_rust) (`br`/`bd`) for issue tracking. Issues are stored in `.beads/` and tracked in git.
+This project uses [beads_rust](https://github.com/Dicklesworthstone/beads_rust) (`br`) for issue tracking. Issues are stored in `.beads/` and tracked in git.
 
 ### Essential Commands
 
 ```bash
 # View ready issues (open, unblocked, not deferred)
-br ready              # or: bd ready
+br ready
 
 # List and search
 br list --status=open # All open issues
