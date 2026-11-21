@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "skills": [
+    {
+      "name": "commit",
+      "tools": [
+        "cc",
+        "codex"
+      ],
+      "scope": "user"
+    },
+    {
+      "name": "record-findings",
+      "tools": [
+        "cc",
+        "codex"
+      ],
+      "scope": "user"
+    },
+    {
+      "name": "fix-problem",
+      "tools": [
+        "cc",
+        "codex"
+      ],
+      "scope": "project"
+    },
+    {
+      "name": "flow-consultant",
+      "tools": [
+        "cc",
+        "codex"
+      ],
+      "scope": "project"
+    },
+    {
+      "name": "format-markdown",
+      "tools": [
+        "cc",
+        "codex"
+      ],
+      "scope": "user"
+    }
+  ],
+  "profiles": {}
+}
